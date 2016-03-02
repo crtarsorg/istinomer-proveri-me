@@ -26,9 +26,11 @@ def create_app():
     #Import blueprint modules
     from app.mod_main.views import mod_main
     from app.mod_api.views import mod_api
+    from app.mod_admin.views import mod_admin
 
     app.register_blueprint(mod_main)
     app.register_blueprint(mod_api)
+    app.register_blueprint(mod_admin)
 
     #Initialize the app to work with MongoDB
     mongo.init_app(app, config_prefix='MONGO')
@@ -54,6 +56,7 @@ def load_config(app):
     config.read(config_filepath)
 
     app.config['SERVER_PORT'] = config.get('Application', 'SERVER_PORT')
+    app.config['SECRET_KEY'] = config.get('Application', 'SECRET_KEY')
     app.config['MONGO_DBNAME'] = config.get('Mongo', 'DB_NAME')
 
     # Logging path might be relative or starts from the root.

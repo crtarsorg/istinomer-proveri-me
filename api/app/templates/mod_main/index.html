@@ -9,25 +9,51 @@
         .list-group-factcheckr li:nth-child(odd) { background: #E8E8EE; }
     </style>
 {% endblock %}
+{% block script %}
+<script type="text/javascript">
+    $(document).ready(function(){
+
+         $(".editParam").click(function(){
+              var row_id = $(this).attr('id');
+             $('#doc_id', "#editModal").val(row_id);
+             $('#classification', "#editModal").val($('#classification', "#" + row_id).text().trim());
+             $('#grade', "#editModal").val($('#grade', "#" + row_id).text().trim());
+             $('#evaluation_mark', "#editModal").val($('#factChecked', "#" + row_id).text().trim());
+         });
+    });
+</script>
+{% endblock %}
 
 {% block content %}
-<section lass="container content-section text-center">
+<section class="container content-section text-center">
     <div class="row">
         <div class="col-lg-12" style="padding-left:15%;padding-right:15%">
             <ul class="list-group list-group-factcheckr">
             {% for req in factcheck_requests %}
-                <li class="list-group-item" style="padding-bottom:0.6em;">
+                <li id="{{ req._id }}" class="list-group-item" style="padding-bottom:0.6em;">
                     {{ req.text }}
                     <div style="margin-top:0.5em" align="right">
-                        {% with %}
-                            {% set rando = [['unverified','warning'],['true','success'],['false','danger']]|random %}
-                            <span class="label label-{{ rando[1] }}">
-                                {{ rando[0]}}
+                        <span id="factChecked" class="label label-{% if req.factChecked == "True" %}success{% elif req.factChecked == "False" %}danger{% else %}warning{% endif %}">
+                            {{ req.factChecked }}
+                        </span>
+                        {% if req.classification is defined %}
+                            <span id="classification" class="label label-primary" style="margin: 2px;">
+                                {{ req.classification }}
                             </span>
-                        {% endwith %}
+                        {% endif %}
+                        {% if req.grade is defined %}
+                            <span id="grade" class="label label-primary" style="margin: 2px;">
+                                {{ req.grade }}
+                            </span>
+                        {% endif %}
                         <span class="label label-default" style="margin-left:2px;">
                             <a class="source-url" href="{{ req.url }}" targ="_blank">{{ req.domain }}</a>
                         </span>
+                        {% if session.logged_in is defined %}
+                            <span class="" style="margin-left:2px;">
+                                <a class="btn btn-sm btn-success editParam" id="{{ req._id }}" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-pencil"></i></a>
+                            </span>
+                        {% endif %}
                     </div>
                 </li>
             {% endfor %}
@@ -35,4 +61,85 @@
         </div>
     </div>
 </section>
+<div id="loginModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Login as Admin</h4>
+          </div>
+          <div class="modal-body">
+              <form class="form-horizontal" method="post" action="{{ url_for("admin.login") }}">
+                  <div class="row form-group">
+                      <div class=" col-xs-5">
+                          {{ form.username.label(class="control-label pull-right") }}
+                      </div>
+                      <div class=" col-xs-5">
+                          {{ form.username(class="form-control pull-left") }}
+                      </div>
+                  </div>
+                  <div class="row form-group">
+                      <div class=" col-xs-5">
+                          {{ form.password.label(class="control-label pull-right") }}
+                      </div>
+                      <div class=" col-xs-5">
+                          {{ form.password(class="form-control pull-left") }}
+                      </div>
+                  </div>
+                   <div class="row form-group">
+                    <button type="submit" class="btn btn-default col-xs-offset-8">Sign in</button>
+                   </div>
+              </form>
+
+          </div>
+        </div>
+      </div>
+</div>
+
+    <div id="editModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Edit Parameters</h4>
+          </div>
+          <div class="modal-body">
+              <form class="form-horizontal" method="post" action="{{ url_for("main.edit_params") }}">
+                  <div class="row form-group">
+                          {{ form.doc_id() }}
+                      <div class=" col-xs-5">
+                          {{ form.classification.label(class="control-label pull-right") }}
+                      </div>
+                      <div class=" col-xs-5">
+                          {{ form.classification(class="form-control pull-left") }}
+                      </div>
+                  </div>
+                  <div class="row form-group">
+                      <div class=" col-xs-5">
+                          {{ form.evaluation_mark.label(class="control-label pull-right") }}
+                      </div>
+                      <div class=" col-xs-5">
+                          {{ form.evaluation_mark(class="form-control pull-left") }}
+                      </div>
+                  </div>
+                  <div class="row form-group">
+                      <div class=" col-xs-5">
+                          {{ form.grade.label(class="control-label pull-right") }}
+                      </div>
+                      <div class=" col-xs-5">
+                          {{ form.grade(class="form-control pull-left") }}
+                      </div>
+                  </div>
+                   <div class="row form-group">
+                    <button type="submit" class="btn btn-default col-xs-offset-8">Submit</button>
+                   </div>
+              </form>
+          </div>
+        </div>
+      </div>
+</div>
 {% endblock %}

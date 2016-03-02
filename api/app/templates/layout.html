@@ -71,6 +71,14 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="{{ url_for('main.index') }}">Istinomer FactCheckr</a>
+
+            </div>
+            <div class="col-xs-2 pull-right" style="margin-top: 10px;">
+                {% if session.logged_in is not defined %}
+                    <a class="btn btn-sm btn-default pull-right" href="#loginModal" data-toggle="modal" data-target="#loginModal">Login</a>
+                {% else %}
+                    <a class="btn btn-sm btn-default pull-right" href="{{ url_for('admin.logout') }}">Logout</a>
+                {% endif %}
             </div>
         </div>
     </nav>

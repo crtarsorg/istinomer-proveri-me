@@ -1,13 +1,14 @@
 // The onClicked callback function.
 function onClickHandler(info, tab) {
-  data = {
+  var data = {
+    date: Date.now(),
   	url: tab.url,
   	text: info.selectionText
-  }
+  };
 
   $.ajax({
     type: "POST",
-    url: "http://opendatakosovo.org/app/istinomer-factcheckr/api/factcheck/request",
+    url: "http://0.0.0.0:5000/api/factcheck/request",
     data: JSON.stringify(data),
     contentType: "application/json"
   }).done(function(data) {
@@ -20,14 +21,14 @@ function onClickHandler(info, tab) {
 // Notification Options.
 var success_notification_opt = {
   type: "basic",
-  title: "Hold Tight!",
-  message: "We're fact checking that puppy for you.",
+  title: "Wait for us!",
+  message: "We're fact checking that request for you.",
   iconUrl: "icons/icon-128.png"
 }
 
 var fail_notification_opt = {
   type: "basic",
-  title: "Uh Oh!",
+  title: "Oh!",
   message: "We're broken, please try again later.",
   iconUrl: "icons/icon-128.png"
 }
