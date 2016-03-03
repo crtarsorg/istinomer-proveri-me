@@ -2,8 +2,6 @@ from flask import Blueprint, Response, request
 from flask import render_template
 from app import mongo_utils
 import tldextract
-import random
-import json
 from bson import json_util
 from datetime import datetime
 
@@ -21,14 +19,13 @@ def factcheck_request():
 
     extracted = tldextract.extract(req['url'])
     domain = "{}.{}".format(extracted.domain, extracted.suffix)
-    choices = ["False", "True", "Unverified"]
 
     doc = {
         'url': req['url'],
         'domain': domain,
         'text': req['text'],
         "date": datetime.fromtimestamp(req['date'] / 1e3),
-        'factChecked': random.choice(choices)
+        'factChecked': "False"
     }
     mongo_utils.insert(doc)
     return Response(status=200)

@@ -44,5 +44,3 @@ def logout():
 
     else:
         return redirect(url_for('main.index'))
-
-

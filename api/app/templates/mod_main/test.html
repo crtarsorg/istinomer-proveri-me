@@ -68,6 +68,75 @@
     <script>
 
     $(document).ready(function(){
+
+        //Shorten long text for every story entry
+        entriesTextToggle();
+
+        $('.classificationsType').change(function(){
+            var filter_opt = [];
+            $('.classificationsType').each(function(){
+                if ($(this).prop('checked') == true){
+                    filter_opt.push($(this).attr('id'));
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "http://0.0.0.0:5000/api/fact-check/classifications",
+                data: JSON.stringify({classifications: filter_opt}),
+                contentType: "application/json"
+            }).done(function(respData) {
+
+                // empty previous stories
+                $('.MyStories').empty();
+
+                // construct stories' html, and populate with data
+                if (respData.length > 0){
+                    for (var index in respData){
+                        if(respData[index]['grade']){
+                            var grade = respData[index]['grade'];
+                        }
+                        else{
+                            var grade = "N/A";
+                        }
+
+                        $('.MyStories').append(
+                            "<div class='stories' style='height: 50% !important;text-align:left !important;display:inline !important;margin:auto;'>" +
+                                "<p class='itemText'>"+ respData[index]['text'] + "</p>" +
+                                "<div style='display: inline-block;float: right;margin-right:7px;'>"+
+                                    "<a class='spanLink' style='padding: 5px' href="+ respData[index]['url'] + "' target='_blank'>" + respData[index]['domain'] + "<i class='fa fa-angle-double-right'></i></a>" +
+                                    "<span class='evalMark' style='padding: 5px; margin:3px'>" + respData[index]['factChecked'] + "</span>" +
+                                    "<span class='spanGrade' style='padding: 5px; margin:3px'>" + grade + "</span>" +
+                                "</div>" +
+                            "</div><br>"
+                        );
+                    }
+
+                }
+                else{
+                    $('.MyStories').append(
+                        "<div class='stories' style='padding: 2%'>" +
+                            "<p class='itemText'>"+ "No results Found!" + "</p>" +
+                        "</div>"
+                    );
+                }
+
+                $('.MyStories').css({
+                    "margin": "2px",
+                    'height': "215px",
+                    'padding': "2px"
+                });
+
+                //Shorten long text for every story entry
+                entriesTextToggle();
+
+            }).fail(function(err) {
+                alert(err.toString());
+            });
+        });
+    });
+
+    //Shorten long text for every story entry
+    function entriesTextToggle(){
         var show_max_char = 100;
         var ellipses_text = "...";
         var more_text = "[more]";
@@ -87,6 +156,7 @@
             }
 
         });
+
         $(".morelink").click(function(){
             if($(this).hasClass("less")) {
                 $(this).removeClass("less");
@@ -99,17 +169,8 @@
             $(this).prev().toggle();
             return false;
         });
-    });
 
-{#        var classifications = [];#}
-{#        $.getJSON(#}
-{#            "http://0.0.0.0:5000/api/fact-check/classifications",#}
-{#            {classifications: classifications},#}
-{#            function(resp){#}
-{#                alert(resp.toString());#}
-{#            }#}
-{#        );#}
-
+    }
     </script>
 {% endblock %}
 {% block content %}
@@ -118,13 +179,13 @@
         <div class="mainBox">
             <div class="selectOptions">
                 <div class="classifications">
-                    <input type="checkbox"  class="classificationsType" id="promise" checked/><label class="classiLabels" for="promise" >Promise</label>
+                    <input type="checkbox"  class="classificationsType" id="Promise" checked="checked"/><label class="classiLabels" for="promise" >Promise</label>
                 </div>
                 <div class="classifications">
-                    <input type="checkbox" class="classificationsType" id="truthfulness" checked/><label class="classiLabels" for="truthfulness" >Truthfulness</label>
+                    <input type="checkbox" class="classificationsType" id="Truthfulness" checked="checked"/><label class="classiLabels" for="truthfulness" >Truthfulness</label>
                 </div>
                 <div class="classifications">
-                    <input type="checkbox" class="classificationsType" id="consistency" checked/><label class="classiLabels" for="consistency" >Consistency</label>
+                    <input type="checkbox" class="classificationsType" id="Consistency" checked="checked"/><label class="classiLabels" for="consistency" >Consistency</label>
                 </div>
             </div>
             <hr>
