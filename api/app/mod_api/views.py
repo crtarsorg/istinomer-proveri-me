@@ -37,17 +37,19 @@ def factcheck_request():
 @mod_api.route('/fact-check/classifications', methods=["POST"])
 def query_classification():
 
-    classifications = request.args.get('classifications')
-
+    # validate filtering params before applying the query
     if len(request.json) > 1:
-        return Response(400)
+        return Response(status=400)
+
     elif 'classifications' not in request.json:
-        return Response(400)
-    elif not set(request.json['classifications']).issubset(['promise', 'truthfulness', 'consistency']):
-        return Response(400)
+        return Response(status=400)
+
+    elif not set(request.json['classifications']).issubset(['Promise', 'Truthfulness', 'Consistency']):
+        return Response(status=400)
+
     else:
         # retrieve data from database, based on classification params
-        result = mongo_utils.get_entries_for_classifications(classifications)
+        result = mongo_utils.get_entries_for_classifications(request.json['classifications'])
         return Response(response=json_util.dumps(result), status=200, mimetype="application/json")
 
 
