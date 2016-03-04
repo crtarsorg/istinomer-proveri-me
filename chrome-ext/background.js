@@ -3,9 +3,10 @@ function onClickHandler(info, tab) {
 
   chrome.storage.local.get('user_id', function (items) {
 
+    // Get user Id from local storage if it exists, otherwise generate one
     var user_id = items.user_id;
-    console.debug('result: ', items.user_id);
     if (user_id) {
+      // Execute request to API server
       executeRequestWithUserToken(user_id, info, tab);
     }
     else {
@@ -13,6 +14,7 @@ function onClickHandler(info, tab) {
       chrome.storage.local.set(
           {user_id: user_id},
           function () {
+            // Execute request to API server
             executeRequestWithUserToken(user_id, info, tab);
           }
       );
@@ -20,6 +22,7 @@ function onClickHandler(info, tab) {
 
   });
 }
+
 function executeRequestWithUserToken(user_id, info, tab) {
 
       // Notification Options.
@@ -64,6 +67,7 @@ function executeRequestWithUserToken(user_id, info, tab) {
 // Context Menu.
 chrome.contextMenus.onClicked.addListener(onClickHandler);
 
+// Set chrome extension params and config
 chrome.runtime.onInstalled.addListener(function() {
   var id = chrome.contextMenus.create({
     "title": "Istina?",
@@ -73,13 +77,16 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 function getRandomToken() {
-    // E.g. 8 * 32 = 256 bits token
+    // Use chrome crypto method to generate a random value
     var randomPool = new Uint8Array(32);
     crypto.getRandomValues(randomPool);
-    var hex = '';
+    var token = '';
     for (var i = 0; i < randomPool.length; ++i) {
-        hex += randomPool[i].toString(16);
+        token += randomPool[i].toString(16);
     }
     // Return generated user ID
-    return hex;
+    return token;
 }
+
+//chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+//chrome.browserAction.setBadgeText({text: 'your text'});
