@@ -23,6 +23,7 @@ def factcheck_request():
     doc = {
         'url': req['url'],
         'domain': domain,
+        'chrome_user_id': req['chrome_user_id'],
         'text': req['text'],
         "date": datetime.fromtimestamp(req['date'] / 1e3),
         'factChecked': "False"
@@ -34,7 +35,7 @@ def factcheck_request():
 @mod_api.route('/fact-check/classifications', methods=["POST"])
 def query_classification():
 
-    # validate filtering params before applying the query
+    # validate filtering params before applying the query to DB
     if len(request.json) > 1:
         return Response(status=400)
 

@@ -16,6 +16,7 @@
   "permissions": [
     "notifications",
     "contextMenus",
+    "storage",
     "http://*.opendatakosovo.org/",
     "http://localhost:5000/"
   ],

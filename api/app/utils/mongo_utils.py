@@ -21,8 +21,12 @@ class MongoUtils():
 
         return list(docs)
 
-    def get_last_entries(self, query={}):
-
+    def get_last_entries(self):
+        query = {
+            "classification": {
+                "$in": ['Promise', 'Truthfulness', 'Consistency']
+            }
+        }
         docs = self.mongo.db[self.collection_name].find(query).limit(20)
 
         return docs
