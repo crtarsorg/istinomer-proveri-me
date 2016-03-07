@@ -190,17 +190,7 @@
             </div>
             <hr>
             <div class="MyStories">
-                {% for item in factcheck_requests %}
-                    <div class="stories" style="padding: 2%">
-                        <p class="itemText">{{ item.text }}</p>
 
-                        <div style="display: inline-block;float: right">
-                            <a class="spanLink" style="padding: 5px" href="{{ item.url }}" target="_blank">{{ item.domain }}<i class="fa fa-angle-double-right"></i></a>
-                            <span class="evalMark" style="padding: 5px">{{ item.factChecked }}</span>
-                            <span class="spanGrade" style="padding: 5px">{% if item.grade is defined %}{{ item.grade }}{% else %} N/A {% endif %}</span>
-                        </div>
-                    </div>
-                {% endfor %}
             </div>
         </div>
     </div>

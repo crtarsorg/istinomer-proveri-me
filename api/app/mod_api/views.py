@@ -1,5 +1,4 @@
-from flask import Blueprint, Response, request
-from flask import render_template
+from flask import Blueprint, Response, request, render_template
 from app import mongo_utils
 import tldextract
 from bson import json_util
@@ -26,7 +25,7 @@ def factcheck_request():
         'chrome_user_id': req['chrome_user_id'],
         'text': req['text'],
         "date": datetime.fromtimestamp(req['date'] / 1e3),
-        'factChecked': "False"
+        'factChecked': "Unverified"
     }
     mongo_utils.insert(doc)
     return Response(status=200)
@@ -51,4 +50,18 @@ def query_classification():
         return Response(response=json_util.dumps(result), status=200, mimetype="application/json")
 
 
+@mod_api.route('/fact-check/status-provider', methods=['POST'])
+def send_data_and_status():
 
+    # validate filtering params before applying the query to DB
+    if len(request.json) > 1:
+        return Response(status=400)
+
+    elif 'chrome_user_id' not in request.json:
+        return Response(status=400)
+
+    else:
+        # retrieve data from database, based on classification params
+        result = mongo_utils.find({'chrome_user_id': request.json['chrome_user_id']})
+
+        return Response(response=json_util.dumps(result), status=200, mimetype="application/json")

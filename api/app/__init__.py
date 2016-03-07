@@ -6,6 +6,10 @@ from logging.handlers import RotatingFileHandler
 from flask.ext.cors import CORS
 from utils.utils import Utils
 from utils.mongo_utils import MongoUtils
+from flask.ext.cache import Cache
+
+# create cache instance
+cache = Cache(config={'CACHE_TYPE': 'simple'})
 
 # Create MongoDB database object.
 mongo = PyMongo()
@@ -17,10 +21,13 @@ def create_app():
     #Here we  create flask app
     app = Flask(__name__)
 
-    #We load configurations
+    # Initialize cache instance to work with app
+    cache.init_app(app)
+
+    # We load configurations
     load_config(app)
 
-    #Configure logging
+    # Configure logging
     configure_logging(app)
 
     #Import blueprint modules
