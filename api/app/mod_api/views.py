@@ -65,3 +65,9 @@ def send_data_and_status():
         result = mongo_utils.find({'chrome_user_id': request.json['chrome_user_id']})
 
         return Response(response=json_util.dumps(result), status=200, mimetype="application/json")
+
+
+@mod_api.route('/latest-fact-checks', methods=['POST'])
+def get_latest_results():
+    result = mongo_utils.find()
+    return Response(response=json_util.dumps(result[:50]), status=200, mimetype="application/json")

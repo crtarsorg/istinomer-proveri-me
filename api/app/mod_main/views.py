@@ -14,14 +14,16 @@ def index():
 
 @mod_main.route('/test', methods=['GET'])
 def result():
-    factcheck_requests = mongo_utils.get_last_entries()
-    return render_template('mod_main/test.html', factcheck_requests=factcheck_requests)
+    return render_template('mod_main/test.html')
 
 
 @mod_main.route('/edit', methods=['POST'])
 def edit_params():
     form = AdminForm(request.form)
 
-    mongo_utils.update_doc(form.data)
+    if form.data['inappropriate'] != "":
+        mongo_utils.flag_entry_as_inappropriate(form.data)
+    else:
+        mongo_utils.edit_entry_doc(form.data)
 
     return redirect(url_for('main.index'))

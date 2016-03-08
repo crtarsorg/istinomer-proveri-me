@@ -17,37 +17,45 @@ class MongoUtils():
                 "$in": classifications
             }
         }
-        docs = self.mongo.db[self.collection_name].find(query).sort("date", pymongo.DESCENDING)
+        docs = self.mongo.db[self.collection_name].find(query).sort("date", pymongo.DESCENDING).limit(20)
 
         return list(docs)
 
-    def get_last_entries(self):
-        query = {
-            "classification": {
-                "$in": ['Promise', 'Truthfulness', 'Consistency']
-            }
+    def edit_entry_doc(self, query=None):
+
+        query_param = {
+            "_id": ObjectId(query['doc_id'])
         }
-        docs = self.mongo.db[self.collection_name].find(query).limit(20)
 
-        return docs
+        update_fields = {
+            "factChecked": query['evaluation_mark'],
+            'grade': query['grade'],
+            'classification': query['classification']
+        }
 
-    def update_doc(self, query=None):
+        # Call the function to update fields based on query params
+        self._update(query_param, update_fields)
 
-        self.mongo.db[self.collection_name].update(
-                {
-                    "_id": ObjectId(query['doc_id'])
-                },
-                {
-                    "$set": {
-                        "factChecked": query['evaluation_mark'],
-                        'grade': query['grade'],
-                        'classification': query['classification']
-                    }
-                }
-        )
+    def flag_entry_as_inappropriate(self, query):
+
+        query_param = {
+            "_id": ObjectId(query['doc_id'])
+        }
+
+        update_fields = {
+            "flg_inappropriate": True,
+            'inappropriate_rsn': query['inappropriate']
+        }
+
+        # Call the function to update fields based on query params
+        self._update(query_param, update_fields)
+
+    def _update(self, query_param, update_fields):
+
+        self.mongo.db[self.collection_name].update(query_param, {"$set": update_fields})
 
     def find(self, query={}):
 
-        docs = self.mongo.db[self.collection_name].find(query)
+        docs = self.mongo.db[self.collection_name].find(query).sort("date", pymongo.DESCENDING)
 
         return docs

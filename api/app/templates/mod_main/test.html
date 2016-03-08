@@ -69,8 +69,8 @@
 
     $(document).ready(function(){
 
-        //Shorten long text for every story entry
-        entriesTextToggle();
+        // Construct HTML elements for each entry
+        ajaxCallToApi(['Promise', 'Truthfulness', 'Consistency']);
 
         $('.classificationsType').change(function(){
             var filter_opt = [];
@@ -79,61 +79,31 @@
                     filter_opt.push($(this).attr('id'));
                 }
             });
-            $.ajax({
-                type: "POST",
-                url: "http://0.0.0.0:5000/api/fact-check/classifications",
-                data: JSON.stringify({classifications: filter_opt}),
-                contentType: "application/json"
-            }).done(function(respData) {
 
-                // empty previous stories
-                $('.MyStories').empty();
-
-                // construct stories' html, and populate with data
-                if (respData.length > 0){
-                    for (var index in respData){
-                        if(respData[index]['grade']){
-                            var grade = respData[index]['grade'];
-                        }
-                        else{
-                            var grade = "N/A";
-                        }
-
-                        $('.MyStories').append(
-                            "<div class='stories' style='height: 50% !important;text-align:left !important;display:inline !important;margin:auto;'>" +
-                                "<p class='itemText'>"+ respData[index]['text'] + "</p>" +
-                                "<div style='display: inline-block;float: right;margin-right:7px;'>"+
-                                    "<a class='spanLink' style='padding: 5px' href="+ respData[index]['url'] + "' target='_blank'>" + respData[index]['domain'] + "<i class='fa fa-angle-double-right'></i></a>" +
-                                    "<span class='evalMark' style='padding: 5px; margin:3px'>" + respData[index]['factChecked'] + "</span>" +
-                                    "<span class='spanGrade' style='padding: 5px; margin:3px'>" + grade + "</span>" +
-                                "</div>" +
-                            "</div><br>"
-                        );
-                    }
-
-                }
-                else{
-                    $('.MyStories').append(
-                        "<div class='stories' style='padding: 2%'>" +
-                            "<p class='itemText'>"+ "No results Found!" + "</p>" +
-                        "</div>"
-                    );
-                }
-
-                $('.MyStories').css({
-                    "margin": "2px",
-                    'height': "215px",
-                    'padding': "2px"
-                });
-
-                //Shorten long text for every story entry
-                entriesTextToggle();
-
-            }).fail(function(err) {
-                alert(err.toString());
-            });
+            // Execute API call
+            ajaxCallToApi(filter_opt);
         });
     });
+
+    // Ajax Call to retrieve data from API server
+    function ajaxCallToApi(filtering_opt){
+        $.ajax({
+            type: "POST",
+            url: "http://0.0.0.0:5000/api/fact-check/classifications",
+            data: JSON.stringify({classifications: filtering_opt}),
+            contentType: "application/json"
+        }).done(function(respData) {
+
+            // Construct HTML elements for each entry
+            constructHtmlElementForEntries(respData);
+
+            // Shorten long text for every story entry
+            entriesTextToggle();
+
+        }).fail(function(err) {
+            alert(err.toString());
+        });
+    }
 
     //Shorten long text for every story entry
     function entriesTextToggle(){
@@ -171,6 +141,48 @@
         });
 
     }
+
+    function constructHtmlElementForEntries(respData){
+        // empty previous stories
+        $('.MyStories').empty();
+
+        // construct stories' html, and populate with data
+        if (respData.length > 0){
+            for (var index in respData){
+                if(respData[index]['grade']){
+                    var grade = respData[index]['grade'];
+                }
+                else{
+                    var grade = "N/A";
+                }
+
+                $('.MyStories').append(
+                    "<div class='stories' style='height: 50% !important;text-align:left !important;display:inline !important;margin:auto;'>" +
+                        "<p class='itemText'>"+ respData[index]['text'] + "</p>" +
+                        "<div style='display: inline-block;float: right;margin-right:7px;'>"+
+                            "<a class='spanLink' style='padding: 5px' href="+ respData[index]['url'] + "' target='_blank'>" + respData[index]['domain'] + "<i class='fa fa-angle-double-right'></i></a>" +
+                            "<span class='evalMark' style='padding: 5px; margin:3px'>" + respData[index]['factChecked'] + "</span>" +
+                            "<span class='spanGrade' style='padding: 5px; margin:3px'>" + grade + "</span>" +
+                        "</div>" +
+                    "</div><br>"
+                );
+            }
+
+            $('.MyStories').css({
+                "margin": "2px",
+                'height': "215px",
+                'padding': "2px"
+            });
+
+        }
+        else{
+            $('.MyStories').append(
+                "<div class='stories' style='padding: 2%'>" +
+                    "<p class='itemText'>"+ "No results Found!" + "</p>" +
+                "</div>"
+            );
+        }
+    }
     </script>
 {% endblock %}
 {% block content %}
@@ -190,7 +202,7 @@
             </div>
             <hr>
             <div class="MyStories">
-
+                <!-- Here will be placed 20 latest fackchecked verified from the admin-->
             </div>
         </div>
     </div>

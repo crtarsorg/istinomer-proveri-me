@@ -1,6 +1,6 @@
 # coding=utf-8
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, SelectField, HiddenField
+from wtforms import StringField, PasswordField, SelectField, HiddenField, TextAreaField
 
 
 class AdminForm(Form):
@@ -26,3 +26,5 @@ class AdminForm(Form):
             ('Unverified', 'Unverified')
         ]
     )
+
+    inappropriate = TextAreaField('Provide a reason')
