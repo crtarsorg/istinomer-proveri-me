@@ -4,7 +4,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 
 ## Save Entry
 ### POST  /api/entry/save
-#### Sample JSON Payload
+#### Sample JSON Payload - Consistency
 ```json 
 {
   "classification": "Consistency",
@@ -19,6 +19,28 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
     "author": "Richard Nixon",
     "politician": true,
     "date": "16/01/2016"
+  }
+}
+```
+
+#### Sample JSON Payload - Promise
+```json 
+{
+  "classification": "Promise",
+  "grade": "XXX",
+  "mark": true,
+  "category": "Politics",
+  "article": {
+    "author": "Carl Bernstein",
+    "date": "18/04/1973"
+  },
+  "quote": {
+    "author": "Richard Nixon",
+    "politician": true,
+    "date": "17/04/1973"
+  },
+  "promise": {
+    "due": 01/05/1973"
   }
 }
 ``` 
@@ -72,13 +94,15 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 | marks             | List\<String\>| The evaluation marks.                                         |
 | categories        | List\<String\>| The categories.                                               |
 | article.authors   | List\<String\>| The article authors.                                          |
-| article.from      | Date          | The publication _from date_.                                  |
-| article.to        | Date          | The publication _to date_.                                    |
+| article.from      | Date          | The publication _from_ date.                                  |
+| article.to        | Date          | The publication _to_ date.                                    |
 | quote.authors     | List\<String\>| The quote authors.                                            |
 | quote.politician  | Boolean       | Indication whether the quote author is a politician or not.   |
 | quote.affiliations| List\<String\>| The quote authors' affiliations.                              |
-| quote.from        | Date          | The quote _from date_.                                        |
-| quote.to          | Date          | The quote _to date_.                                          |
+| quote.from        | Date          | The quote _from_ date.                                        |
+| quote.to          | Date          | The quote _to_ date.                                          |
+| promise.dueFrom   | Date          | The promise _due from_ date.                                  |
+| promise.dueTo     | Date          | The promise _due to_ date.                                    |
 
 
 #### Sample JSON Payload
@@ -105,3 +129,5 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
   }
 }
 ``` 
+
+**Note:** Can only apply _promise.dueFrom_ and _promise.dueTo_ filters when classification only contains _"Promise"_ (i.e. `"classifications": ["Promise"]`.
