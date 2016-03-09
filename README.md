@@ -7,9 +7,9 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 #### Sample JSON Payload - Consistency
 ```json 
 {
+  "mark": true,
   "classification": "Consistency",
   "grade": "XXX",
-  "mark": true,
   "category": "Politics",
   "article": {
     "author": "Carl Bernstein",
@@ -26,9 +26,9 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 #### Sample JSON Payload - Promise
 ```json 
 {
+  "mark": true,
   "classification": "Promise",
   "grade": "XXX",
-  "mark": true,
   "category": "Politics",
   "article": {
     "author": "Carl Bernstein",
@@ -89,9 +89,9 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 
 | Property          | Data Type     | Description                                                   |
 |-------------------|---------------|---------------------------------------------------------------|
+| marks             | List\<String\>| The evaluation marks.                                         |
 | classifications   | List\<String\>| The classifications.                                          |
 | grades            | List\<String\>| The grades.                                                   |
-| marks             | List\<String\>| The evaluation marks.                                         |
 | categories        | List\<String\>| The categories.                                               |
 | article.authors   | List\<String\>| The article authors.                                          |
 | article.from      | Date          | The publication _from_ date.                                  |
@@ -108,9 +108,9 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 #### Sample JSON Payload
 ```json 
 {
+  "marks": [true],
   "classifications": ["Truthfulness", "Promise", "Consistency"],
   "grades": "",
-  "marks": [true],
   "categories": ["Politics"],
   "article": {
     "authors": ["Carl Bernstein", "Bob Woodward"],
