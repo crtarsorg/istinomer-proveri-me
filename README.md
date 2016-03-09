@@ -40,7 +40,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
     "date": "17/04/1973"
   },
   "promise": {
-    "due": 01/05/1973"
+    "due": "01/05/1973"
   }
 }
 ``` 
