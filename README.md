@@ -9,7 +9,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 {
   "mark": true,
   "classification": "Consistency",
-  "grade": "XXX",
+  "grade": "Dosledno",
   "category": "Politics",
   "article": {
     "author": "Carl Bernstein",
@@ -28,7 +28,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 {
   "mark": true,
   "classification": "Promise",
-  "grade": "XXX",
+  "grade": "Krenuli pas stali",
   "category": "Politics",
   "article": {
     "author": "Carl Bernstein",
@@ -53,22 +53,25 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 
 ##### grade 
 ###### Truthfulness
- - TTTT
- - TTTT
- - TTTT
- - TTTT
+ - Istina
+ - Kratke noge
+ - Neistina
+ - Poluistina
+ - Skoro istina
+ - Skoro neistina
 
 ###### Promise
- - PPPP
- - PPPP
- - PPPP
- - PPPP
+ - Ispunjeno
+ - Krenuli pas stali
+ - Neispunjeno
+ - Ni započeto
+ - Radi se na tome
+ - Skoro ispunjeno
  
 ###### Consistency
- - CCCC
- - CCCC
- - CCCC
- - CCCC
+ - Dosledno
+ - Nedosledno
+ - Nešto između
  
 ##### mark 
  - Unverified (String)
@@ -110,7 +113,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 {
   "marks": [true],
   "classifications": ["Truthfulness", "Promise", "Consistency"],
-  "grades": "",
+  "grades": ["Istina", "Ispunjeno", "Dosledno"],
   "categories": ["Politics"],
   "article": {
     "authors": ["Carl Bernstein", "Bob Woodward"],
