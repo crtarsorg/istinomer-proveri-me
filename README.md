@@ -4,21 +4,26 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 
 ## Save Entry
 ### POST  /api/entry/save
-#### Sample JSON Payload - Consistency
+#### Sample JSON Payload - Truthfulness
 ```json 
 {
+  "domain" : "washingtonpost.com",
+	"url" : "https://www.washingtonpost.com/opinions/nixon-both-lofty-and-criminal/2015/07/24/5e3ee074-2b1a-11e5-bd33-395c05608059_story.html",
+	"text" : "I ordered that they use any means necessary, including illegal means, to accomplish this goal.... The president of the United States can never admit that.",
+	"chrome_user_id" : "xzy",
+	
   "mark": true,
-  "classification": "Consistency",
-  "grade": "Dosledno",
+  "classification": "Truthfulness",
+  "grade": "Istina",
   "category": "Politics",
   "article": {
     "author": "Carl Bernstein",
-    "date": "17/01/2016"
+    "date": "24/07/2015"
   },
   "quote": {
     "author": "Richard Nixon",
     "politician": true,
-    "date": "16/01/2016"
+    "date": "01/01/1973"
   }
 }
 ```
