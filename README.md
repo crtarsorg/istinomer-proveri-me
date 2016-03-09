@@ -89,7 +89,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
   "marks": [true],
   "categories": ["Politics"],
   "article": {
-    "authors": ["Carl Bernstein", "Bob Woodward"]
+    "authors": ["Carl Bernstein", "Bob Woodward"],
     "date": {
       "from": "01/06/1972",
       "to": "01/01/1975"
