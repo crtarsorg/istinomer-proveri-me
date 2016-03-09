@@ -2,8 +2,68 @@
 A chrome extension to have the people over at istinomer.rs fact check highlighted text on a website.
 
 
+## Save Entry
+### POST  /api/entry/save
+#### Sample JSON Payload
+```json 
+{
+  "classification": "Consistency",
+  "grade": "XXX",
+  "mark": "True",
+  "category: "Politics",
+  "article":{
+    "author": "Carl Bernstein",
+    "date": "17/01/2016"
+  },
+  "quote":{
+    "author": "Richard Nixon",
+    "politician": True,
+    "date": "16/01/2016"
+  }
+}
+``` 
+
+#### Parameter Options
+##### classification 
+ - Truthfulness
+ - Promise
+ - Consistency
+
+##### grade 
+###### Truthfulness
+ - TTTT
+ - TTTT
+ - TTTT
+ - TTTT
+
+###### Promise
+ - PPPP
+ - PPPP
+ - PPPP
+ - PPPP
+ 
+###### Consistency
+ - CCCC
+ - CCCC
+ - CCCC
+ - CCCC
+ 
+##### mark 
+ - Unverified
+ - True
+ - False
+
+##### category 
+ - Culture
+ - Politics
+ - Economy
+ - Healthcare
+ - Society
+
+ 
 ## Fetch Entries
-##### JSON Payload - Filter Parameters 
+### POST  /api/entry/get
+#### JSON Payload - Filter Parameters 
 
 | Property          | Data Type     | Description                                                   |
 |-------------------|---------------|---------------------------------------------------------------|
@@ -20,3 +80,28 @@ A chrome extension to have the people over at istinomer.rs fact check highlighte
 | quote.from        | Date          | The quote _from date_.                                        |
 | quote.to          | Date          | The quote _to date_.                                          |
 
+
+#### Sample JSON Payload
+```json 
+{
+  "classifications": ["Truthfulness", Promise", "Consistency"],
+  "grades": "",
+  "marks": [True],
+  "categories: ["Politics"],
+  "article":{
+    "authors": ["Carl Bernstein", "Bob Woodward"]
+    "date": {
+      "from: "01/06/1972",
+      "to": "01/01/1975"
+    }
+  },
+  "quote":{
+    "author": "Richard Nixon",
+    "politician": True,
+    "date": {
+      "from: "01/06/1972",
+      "to": "01/01/1975"
+    }
+  }
+}
+``` 
