@@ -7,11 +7,10 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 #### Sample JSON Payload - Truthfulness
 ```json 
 {
-  "domain" : "washingtonpost.com",
-	"url" : "https://www.washingtonpost.com/opinions/nixon-both-lofty-and-criminal/2015/07/24/5e3ee074-2b1a-11e5-bd33-395c05608059_story.html",
-	"text" : "I ordered that they use any means necessary, including illegal means, to accomplish this goal.... The president of the United States can never admit that.",
-	"chrome_user_id" : "xzy",
-	
+  "domain": "washingtonpost.com",
+  "url": "https://www.washingtonpost.com/opinions/nixon-both-lofty-and-criminal/2015/07/24/5e3ee074-2b1a-11e5-bd33-395c05608059_story.html",
+  "text": "I ordered that they use any means necessary, including illegal means, to accomplish this goal.... The president of the United States can never admit that.",
+  "chrome_user_id": "xzy",
   "mark": true,
   "classification": "Truthfulness",
   "grade": "Istina",
