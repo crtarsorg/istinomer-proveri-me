@@ -9,7 +9,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 {
   "classification": "Consistency",
   "grade": "XXX",
-  "mark": "True",
+  "mark": true,
   "category": "Politics",
   "article": {
     "author": "Carl Bernstein",
@@ -17,7 +17,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
   },
   "quote": {
     "author": "Richard Nixon",
-    "politician": True,
+    "politician": true,
     "date": "16/01/2016"
   }
 }
@@ -49,9 +49,9 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
  - CCCC
  
 ##### mark 
- - Unverified
- - True
- - False
+ - Unverified (String)
+ - true (Boolean)
+ - false (Boolean)
 
 ##### category 
  - Culture
@@ -86,20 +86,20 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 {
   "classifications": ["Truthfulness", Promise", "Consistency"],
   "grades": "",
-  "marks": [True],
+  "marks": [true],
   "categories": ["Politics"],
   "article": {
     "authors": ["Carl Bernstein", "Bob Woodward"]
     "date": {
-      "from: "01/06/1972",
+      "from": "01/06/1972",
       "to": "01/01/1975"
     }
   },
   "quote": {
     "author": "Richard Nixon",
-    "politician": True,
+    "politician": true,
     "date": {
-      "from: "01/06/1972",
+      "from": "01/06/1972",
       "to": "01/01/1975"
     }
   }
