@@ -84,7 +84,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 #### Sample JSON Payload
 ```json 
 {
-  "classifications": ["Truthfulness", Promise", "Consistency"],
+  "classifications": ["Truthfulness", "Promise", "Consistency"],
   "grades": "",
   "marks": [true],
   "categories": ["Politics"],
