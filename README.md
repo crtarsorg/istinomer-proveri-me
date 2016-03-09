@@ -1,5 +1,5 @@
-# istinomer-factcheckr
-A chrome extension to have the people over at istinomer.rs fact check highlighted text on a website.
+# Istinomer Fact Checker
+A chrome extension to have the people over at istinomer.rs fact check text that has been highlighted on a website.
 
 
 ## Save Entry
@@ -10,12 +10,12 @@ A chrome extension to have the people over at istinomer.rs fact check highlighte
   "classification": "Consistency",
   "grade": "XXX",
   "mark": "True",
-  "category: "Politics",
-  "article":{
+  "category": "Politics",
+  "article": {
     "author": "Carl Bernstein",
     "date": "17/01/2016"
   },
-  "quote":{
+  "quote": {
     "author": "Richard Nixon",
     "politician": True,
     "date": "16/01/2016"
@@ -87,15 +87,15 @@ A chrome extension to have the people over at istinomer.rs fact check highlighte
   "classifications": ["Truthfulness", Promise", "Consistency"],
   "grades": "",
   "marks": [True],
-  "categories: ["Politics"],
-  "article":{
+  "categories": ["Politics"],
+  "article": {
     "authors": ["Carl Bernstein", "Bob Woodward"]
     "date": {
       "from: "01/06/1972",
       "to": "01/01/1975"
     }
   },
-  "quote":{
+  "quote": {
     "author": "Richard Nixon",
     "politician": True,
     "date": {
