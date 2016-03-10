@@ -65,7 +65,7 @@ function executeRequestWithUserToken(user_id, info, tab) {
 
       $.ajax({
         type: "POST",
-        url: "http://0.0.0.0:5000/api/factcheck/request",
+        url: "http://opendatakosovo.org/app/istinomer-factcheckr/api/factcheck/request",
         data: JSON.stringify(data),
         contentType: "application/json"
       }).done(function () {

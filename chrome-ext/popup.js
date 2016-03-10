@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         else{
             // get all user notification
-            updateNotificationBox()
+            updateNotificationBox();
         }
     });
   });
@@ -46,7 +46,7 @@ function retrieveDataWithUserToken(user_id){
 
     $.ajax({
         type: "POST",
-        url: "http://0.0.0.0:5000/api/fact-check/status-provider",
+        url: "http://opendatakosovo.org/app/istinomer-factcheckr/api/fact-check/status-provider",
         data: JSON.stringify({chrome_user_id: user_id}),
         contentType: "application/json"
       }).done(function (respData) {
@@ -113,7 +113,7 @@ function buildHTML(respData){
                         "<p class='itemTxt'>"+ item['text'] + "</p>" +
                         "<div style='display: inline-block;float: right;margin-right:7px;'>"+
                             "<a class='spanLink' style='padding: 5px' href='"+ item['url'] + "' target='_blank'>" + item['domain'] + "</a>" +
-                            "<span class='evalMark' style='padding: 5px; margin:3px'>" + item['factChecked'] + "</span>" +
+                            "<span class='evalMark' style='padding: 5px; margin:3px'>" + item['mark'] + "</span>" +
                             "<span class='spanGrade' style='padding: 5px; margin:3px'>" + grade + "</span>" +
                         "</div>" +
                     "</div><br>" +
@@ -131,9 +131,6 @@ function buildHTML(respData){
             var tmp_cnt = notification_cnt - ntf_number;
             if(tmp_cnt > 0) {
                 ntf_txt = tmp_cnt.toString();
-            }
-            else {
-                ntf_txt = '';
             }
         }
         else{
@@ -157,4 +154,4 @@ function buildHTML(respData){
 }
 
 // Run this request every 1 min
-//window.setInterval(updateNotificationBox, 10000);
+window.setInterval(updateNotificationBox, 10000);

@@ -5,8 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chrome-ext/background.js" afterPath="$PROJECT_DIR$/chrome-ext/background.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chrome-ext/manifest.json" afterPath="$PROJECT_DIR$/chrome-ext/manifest.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chrome-ext/popup.html" afterPath="$PROJECT_DIR$/chrome-ext/popup.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chrome-ext/popup.js" afterPath="$PROJECT_DIR$/chrome-ext/popup.js" />
     </list>
     <ignored path="istinomer-factcheckr.iws" />
@@ -36,23 +34,9 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/app/templates/mod_main/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-48.75">
-              <caret line="78" column="65" selection-start-line="78" selection-start-column="65" selection-end-line="78" selection-end-column="65" />
-              <folding>
-                <element signature="e#7203#7245#0#HTML" expanded="true" />
-                <element signature="e#7416#7445#0#HTML" expanded="true" />
-                <element signature="e#7591#7615#0#HTML" expanded="true" />
-                <element signature="e#8134#8154#0#HTML" expanded="true" />
-                <element signature="e#8412#8432#0#HTML" expanded="true" />
-                <element signature="e#8612#8636#0#HTML" expanded="true" />
-                <element signature="e#8965#8989#0#HTML" expanded="true" />
-                <element signature="e#9270#9294#0#HTML" expanded="true" />
-                <element signature="e#9648#9672#0#HTML" expanded="true" />
-                <element signature="e#9912#9933#0#HTML" expanded="true" />
-                <element signature="e#15114#15136#0#HTML" expanded="true" />
-                <element signature="e#15536#15558#0#HTML" expanded="true" />
-                <element signature="e#19535#19568#0#HTML" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-44.375">
+              <caret line="155" column="12" selection-start-line="155" selection-start-column="12" selection-end-line="155" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -60,8 +44,50 @@
       <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/app/templates/mod_main/test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-40.041668">
-              <caret line="182" column="14" selection-start-line="182" selection-start-column="14" selection-end-line="182" selection-end-column="14" />
+            <state vertical-scroll-proportion="11.142858">
+              <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/app/templates/mod_api/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.25">
+              <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/api/app/mod_api/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="2.7543423">
+              <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/app/mod_admin/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -79,13 +105,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/app/mod_api/views.py">
+      <file leaf-file-name="popup.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chrome-ext/popup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
               <folding>
-                <element signature="e#0#63#0" expanded="true" />
+                <marker date="1457582023000" expanded="true" signature="2848:3542" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="2848:3572" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="2898:3389" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="3011:3063" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="3064:3358" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="3124:3136" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="3269:3293" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="3423:3542" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="3845:3897" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="3958:3970" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="4103:4127" placeholder="..." />
+                <marker date="1457582023000" expanded="true" signature="4220:4244" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -95,54 +132,9 @@
         <entry file="file://$PROJECT_DIR$/api/app/mod_main/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+              <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
               <folding>
                 <element signature="e#0#82#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mongo_utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/app/utils/mongo_utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="96" column="19" selection-start-line="96" selection-start-column="19" selection-end-line="96" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.8774374">
-              <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="popup.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chrome-ext/popup.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-43.814816">
-              <caret line="159" column="26" selection-start-line="159" selection-start-column="26" selection-end-line="159" selection-end-column="26" />
-              <folding>
-                <marker date="1457534645000" expanded="true" signature="2816:3510" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="2816:3540" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="2866:3357" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="2979:3031" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="3032:3326" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="3092:3104" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="3237:3261" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="3391:3510" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="3813:3865" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="3926:3938" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="4071:4095" placeholder="..." />
-                <marker date="1457534645000" expanded="true" signature="4195:4219" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -151,8 +143,8 @@
       <file leaf-file-name="background.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chrome-ext/background.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+            <state vertical-scroll-proportion="-1.6981132">
+              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -179,21 +171,21 @@
         <option value="$PROJECT_DIR$/api/config.cfg" />
         <option value="$PROJECT_DIR$/api/create_user.py" />
         <option value="$PROJECT_DIR$/api/app/mod_admin/views.py" />
-        <option value="$PROJECT_DIR$/chrome-ext/background.js" />
         <option value="$PROJECT_DIR$/chrome-ext/manifest.json" />
-        <option value="$PROJECT_DIR$/api/requirements.txt" />
         <option value="$PROJECT_DIR$/api/app/__init__.py" />
         <option value="$PROJECT_DIR$/chrome-ext/popup.html" />
         <option value="$PROJECT_DIR$/api/app/utils/people_utils.py" />
         <option value="$PROJECT_DIR$/api/app/templates/layout.html" />
-        <option value="$PROJECT_DIR$/chrome-ext/popup.js" />
-        <option value="$PROJECT_DIR$/api/app/mod_main/views.py" />
-        <option value="$PROJECT_DIR$/api/app/templates/mod_main/index.html" />
-        <option value="$PROJECT_DIR$/api/app/templates/mod_main/test.html" />
         <option value="$PROJECT_DIR$/api/app/mod_api/views.py" />
         <option value="$PROJECT_DIR$/api/app/forms/form.py" />
         <option value="$PROJECT_DIR$/api/app/utils/mongo_utils.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/api/app/mod_main/views.py" />
+        <option value="$PROJECT_DIR$/api/app/templates/mod_main/index.html" />
+        <option value="$PROJECT_DIR$/chrome-ext/popup.js" />
+        <option value="$PROJECT_DIR$/api/app/templates/mod_main/test.html" />
+        <option value="$PROJECT_DIR$/api/requirements.txt" />
+        <option value="$PROJECT_DIR$/chrome-ext/background.js" />
       </list>
     </option>
   </component>
@@ -262,24 +254,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="chrome-ext" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="istinomer-factcheckr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="istinomer-factcheckr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chrome-ext" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -382,6 +356,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="mod_main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="istinomer-factcheckr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="istinomer-factcheckr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mod_api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -860,8 +860,8 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25769854" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25769854" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1012,14 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30523255">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chrome-ext/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.039408866">
@@ -1032,14 +1024,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27906978">
           <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/app/mod_admin/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24418604">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -1076,42 +1060,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chrome-ext/background.js">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+        <state vertical-scroll-proportion="-2.5905292">
+          <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chrome-ext/popup.js">
+    <entry file="file://$PROJECT_DIR$/api/app/utils/mongo_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-43.814816">
-          <caret line="159" column="26" selection-start-line="159" selection-start-column="26" selection-end-line="159" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
           <folding>
-            <marker date="1457534645000" expanded="true" signature="2816:3510" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="2816:3540" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="2866:3357" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="2979:3031" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="3032:3326" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="3092:3104" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="3237:3261" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="3391:3510" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="3813:3865" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="3926:3938" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="4071:4095" placeholder="..." />
-            <marker date="1457534645000" expanded="true" signature="4195:4219" placeholder="..." />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/app/mod_api/views.py">
+    <entry file="file://$PROJECT_DIR$/api/app/templates/mod_main/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-44.375">
+          <caret line="155" column="12" selection-start-line="155" selection-start-column="12" selection-end-line="155" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/app/templates/mod_main/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="11.142858">
+          <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/app/templates/mod_api/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.25">
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-          </folding>
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1125,32 +1120,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/app/templates/mod_main/index.html">
+    <entry file="file://$PROJECT_DIR$/chrome-ext/background.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-48.75">
-          <caret line="78" column="65" selection-start-line="78" selection-start-column="65" selection-end-line="78" selection-end-column="65" />
-          <folding>
-            <element signature="e#7203#7245#0#HTML" expanded="true" />
-            <element signature="e#7416#7445#0#HTML" expanded="true" />
-            <element signature="e#7591#7615#0#HTML" expanded="true" />
-            <element signature="e#8134#8154#0#HTML" expanded="true" />
-            <element signature="e#8412#8432#0#HTML" expanded="true" />
-            <element signature="e#8612#8636#0#HTML" expanded="true" />
-            <element signature="e#8965#8989#0#HTML" expanded="true" />
-            <element signature="e#9270#9294#0#HTML" expanded="true" />
-            <element signature="e#9648#9672#0#HTML" expanded="true" />
-            <element signature="e#9912#9933#0#HTML" expanded="true" />
-            <element signature="e#15114#15136#0#HTML" expanded="true" />
-            <element signature="e#15536#15558#0#HTML" expanded="true" />
-            <element signature="e#19535#19568#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/app/templates/mod_main/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-40.041668">
-          <caret line="182" column="14" selection-start-line="182" selection-start-column="14" selection-end-line="182" selection-end-column="14" />
+        <state vertical-scroll-proportion="-1.6981132">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1158,28 +1131,49 @@
     <entry file="file://$PROJECT_DIR$/api/app/mod_main/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
           <folding>
             <element signature="e#0#82#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/app/utils/mongo_utils.py">
+    <entry file="file://$PROJECT_DIR$/chrome-ext/popup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="96" column="19" selection-start-line="96" selection-start-column="19" selection-end-line="96" selection-end-column="19" />
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <marker date="1457582023000" expanded="true" signature="2848:3542" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="2848:3572" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="2898:3389" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="3011:3063" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="3064:3358" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="3124:3136" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="3269:3293" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="3423:3542" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="3845:3897" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="3958:3970" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="4103:4127" placeholder="..." />
+            <marker date="1457582023000" expanded="true" signature="4220:4244" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/api/app/mod_admin/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8774374">
-          <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/app/mod_api/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.7543423">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -30,7 +30,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 #### Sample JSON Payload - Promise
 ```json 
 {
-  "mark": true,
+  "mark": "True",
   "classification": "Promise",
   "grade": "Krenuli pas stali",
   "category": "Politics",
