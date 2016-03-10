@@ -41,16 +41,23 @@ class MongoUtils():
             'classification': query['classification'],
             'category': query['category'],
             'article': {
-                'author': query['author_of_article'],
-                'date': self.convert_str_to_date(query['date_of_article_pub'])
+                'author': query['author_of_article']
             },
             'quote': {
                 'politician': query['politician'],
                 'author': query['quote_author'],
-                'affiliation': query['quote_author_affiliation'],
-                'date': self.convert_str_to_date(query['date_of_statement'])
+                'affiliation': query['quote_author_affiliation']
             }
         }
+
+        if 'date_of_article_pub' in query:
+            if query['article']['date_of_article_pub'] != "":
+                update_fields['article']['date'] = self.convert_str_to_date(query['date_of_article_pub'])
+
+        if 'date_of_statement' in query:
+            if query['quote']['date_of_statement'] != "":
+                update_fields['quote']['date'] = self.convert_str_to_date(query['date_of_statement'])
+
 
         if 'promise_due_date' in query:
             
