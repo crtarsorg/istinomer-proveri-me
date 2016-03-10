@@ -42,14 +42,12 @@ class MongoUtils():
             'category': query['category'],
             'article': {
                 'author': query['author_of_article'],
-                'dateString': query['date_of_article_pub'],
                 'date': self.convert_str_to_date(query['date_of_article_pub'])
             },
             'quote': {
                 'politician': query['politician'],
                 'author': query['quote_author'],
                 'affiliation': query['quote_author_affiliation'],
-                'dateString': query['date_of_statement'],
                 'date': self.convert_str_to_date(query['date_of_statement'])
             }
         }
@@ -57,7 +55,6 @@ class MongoUtils():
         if 'promise_due_date' in query:
             
             update_fields['promise'] = {
-                'dueString': query['promise_due_date'],
                 'due': self.convert_str_to_date(query['promise_due_date'])
             }
 
@@ -90,6 +87,13 @@ class MongoUtils():
     def get(self, query=None, chrome_user_id=None):
 
         query_params = {}
+        project = {
+            "domain": True,
+            "url": True,
+            "text": True,
+            'mark': True,
+            'timestamp': {'$dateToString': {'format': "%d/%m/%Y %H:%M:%S", "date": "$timestamp"}}
+        }
 
         if 'marks' in query:
             if query['marks']:
@@ -99,6 +103,8 @@ class MongoUtils():
 
         if 'classifications' in query:
             query_params["classification"] = {"$in": query['classifications']}
+
+            project['classification'] = True
 
             if "Promise" in query["classifications"]:
 
@@ -111,19 +117,28 @@ class MongoUtils():
                         query_params['promise.due']['$gte'] = \
                             self.convert_str_to_date(query['promise']['dueFrom'])
 
+                        project['promise'] = {
+                            "due": {'$dateToString;': {'format': "%d/%m/%Y", "date": "$promise.due"}}
+                        }
+
                     if query['promise']['dueTo'] and query['promise']['dueTo'] != '':
 
                         if 'due' not in query_params['promise']:
                             query_params['promise.due'] = {}
 
+                            project['promise'] = {
+                                "due": {'$dateToString;': {'format': "%d/%m/%Y", "date": "$promise.due"}}
+                            }
+
                         query_params['promise.due']['$gte'] = \
                             self.convert_str_to_date(query['promise']['dueTo'])
 
-        if 'query' in query:
+        if 'grades' in query:
             if query['grades']:
                 query_params = {
                     "grade": {"$in": query['grades']}
                 }
+                project['grade'] = True
 
         if 'categories' in query:
 
@@ -131,12 +146,15 @@ class MongoUtils():
                 query_params = {
                     "category": {"$in": query['categories']}
                 }
+                project['category'] = True
 
         if 'article' in query:
 
             if 'authors' in query['article']:
                 if query['article']['authors']:
-                    query_params['article.authors'] = {"$in": query['article']['authors']}
+                    query_params['article.author'] = {"$in": query['article']['authors']}
+
+                    project['article.author'] = True
 
             if 'date' in query['article']:
                 if query['article']['date']:
@@ -148,6 +166,7 @@ class MongoUtils():
                     if query['article']['date']['to'] and query['article']['date']['to'] != '':
                         query_params['article.date']['$lte'] = self.convert_str_to_date(query['article']['date']['to'])
 
+                project['article.date'] = {'$dateToString': {'format': "%d/%m/%Y", "date": "$article.date"}}
         # Build the quote query params
         if 'quote' in query:
 
@@ -155,9 +174,13 @@ class MongoUtils():
                 if query['quote']['politician']:
                     query_params['quote.politician'] = query['quote']['politician']
 
+                    project['quote.politician'] = True
+
             if 'author' in query['quote']:
                 if query['quote']['author']:
                     query_params['quote.author'] = query['quote']['author']
+
+                    project['quote.author'] = True
 
             if 'date' in query['quote']:
                 if query['quote']['date']:
@@ -169,18 +192,32 @@ class MongoUtils():
                     if query['quote']['date']['to'] and query['quote']['date']['to'] != '':
                         query_params['quote.date']['$lte'] = self.convert_str_to_date(query['quote']['date']['to'])
 
+                    project['quote.date'] = {'$dateToString': {'format': "%d/%m/%Y", "date": "$quote.date"}}
+
         # Make sure we only get for given chrome user, if chrome user id is specified:
         if chrome_user_id:
             query_params['chromeUserId'] = chrome_user_id
+            project['chromeUserId'] = True
 
         else:
             # Let's make sure we don't return entries that have been flagged as inappropriate:
             query_params['inappropriate'] = {'$exists': False}
 
-        # Execute query
-        docs = self.find(query_params)
+        pipeline = [
+            {"$match": query_params}
+        ]
 
-        return docs
+        if project:
+            project_stage = {
+                "$project": project
+            }
+            pipeline.append(project_stage)
+
+        print pipeline
+        # Execute query
+        docs = self.mongo.db[self.collection_name].aggregate(pipeline)
+
+        return docs['result']
 
     @staticmethod
     def convert_str_to_date(date_str):
