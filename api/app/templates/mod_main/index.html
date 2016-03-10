@@ -209,13 +209,13 @@
                     <input type="hidden" id="gradeContainer" value="{{ req.grade }}">
                     <input type="hidden" id="quoteAffiliationContainer" value="{{ req.quote.affiliation}}">
                     <input type="hidden" id="quotePoliticianContainer" value="{{ req.quote.politician}}">
-                    <input type="hidden" id="quoteDateStringContainer" value="{{ req.quote.date.strftime('%d/%m/%Y')}}">
+                    <input type="hidden" id="quoteDateStringContainer" value="{%  req.quote.date.strftime('%d/%m/%Y') if req.quote.date else ''%}">
                     <input type="hidden" id="quoteAuthorContainer" value="{{ req.quote.author}}">
                     {% if req.promise is defined %}
-                     <input type="hidden" id="promiseDueContainer" value="{{ req.promise.due.strftime('%d/%m/%Y')}}">
+                     <input type="hidden" id="promiseDueContainer" value="{% req.promise.due.strftime('%d/%m/%Y') if req.promise.due else '' %}">
                     {% endif %}
                     <input type="hidden" id="articleAuthorContainer" value="{{ req.article.author}}">
-                    <input type="hidden" id="articleDateStringContainer" value="{{ req.article.date.strftime('%d/%m/%Y')}}">
+                    <input type="hidden" id="articleDateStringContainer" value="{% req.article.date.strftime('%d/%m/%Y') if req.article.date else '' %}">
                     {% endif %}
                     {{ req.text }}
                     <div style="margin-top:0.5em" align="right">
