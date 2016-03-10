@@ -38,13 +38,16 @@ class MongoUtils():
             'category': query['category'],
             'article': {
                 'author': query['author_of_article'],
+                 # FIXME: Why are we storing a date String?
                 'dateString': query['date_of_article_pub'],
                 'date': self.convert_date(query['date_of_article_pub'])
             },
             'quote': {
+                 # FIXME: Is this stored as a boolean?
                 'politician': query['politician'],
                 'author': query['quote_author'],
                 'affiliation': query['quote_author_affiliation'],
+                 # FIXME: Why are we storing a date String?
                 'dateString': query['date_of_statement'],
                 'date': self.convert_date(query['date_of_statement'])
             }
