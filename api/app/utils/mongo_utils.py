@@ -176,7 +176,7 @@ class MongoUtils():
         else:
             # Let's make sure we don't return entries that have been flagged as inappropriate:
             query_params['inappropriate'] = {'$exists': False}
-        print query_params
+
         # Execute query
         docs = self.find(query_params)
 
