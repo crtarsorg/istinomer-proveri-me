@@ -1,5 +1,5 @@
 import pymongo
-from bson import ObjectId
+from bson import ObjectId, SON
 from datetime import datetime
 
 
@@ -207,7 +207,8 @@ class MongoUtils():
             query_params['inappropriate'] = {'$exists': False}
 
         pipeline = [
-            {"$match": query_params}
+            {"$match": query_params},
+            {"$sort": SON([('timestamp', 1)])}
         ]
 
         if project:

@@ -35,3 +35,4 @@ def get_entries():
         result = mongo_utils.get(request.json, None)
 
     return Response(response=json_util.dumps(result), status=200, mimetype="application/json")
+

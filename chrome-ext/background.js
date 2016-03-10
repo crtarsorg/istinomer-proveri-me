@@ -1,5 +1,7 @@
 /** Context menu and factcheck logic implementation. **/
 
+var API_URL_SUBMIT = "http://opendatakosovo.org/app/istinomer-factcheckr/api/entry/submit";
+
 // Set chrome extension params and config
 chrome.runtime.onInstalled.addListener(function() {
   var id = chrome.contextMenus.create({
@@ -65,7 +67,7 @@ function executeRequestWithUserToken(user_id, info, tab) {
 
       $.ajax({
         type: "POST",
-        url: "http://opendatakosovo.org/app/istinomer-factcheckr/api/entry/submit",
+        url: API_URL_SUBMIT,
         data: JSON.stringify(data),
         contentType: "application/json"
       }).done(function () {

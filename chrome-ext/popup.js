@@ -1,5 +1,7 @@
 /** Popup content provider logic. **/
 
+var API_URL_FETCH = "http://opendatakosovo.org/app/istinomer-factcheckr/api/entry/get";
+
 document.addEventListener("DOMContentLoaded", function () {
 
     // Retrieve data from local storage, otherwise retrieve them from database
@@ -46,7 +48,7 @@ function retrieveDataWithUserToken(user_id){
 
     $.ajax({
         type: "POST",
-        url: "http://opendatakosovo.org/app/istinomer-factcheckr/api/entry/get",
+        url: API_URL_FETCH,
         data: JSON.stringify({chrome_user_id: user_id}),
         contentType: "application/json"
       }).done(function (respData) {
@@ -154,4 +156,4 @@ function buildHTML(respData){
 }
 
 // Run this request every 1 min
-//window.setInterval(updateNotificationBox, 10000);
+window.setInterval(updateNotificationBox, 10000);
