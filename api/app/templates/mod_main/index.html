@@ -48,7 +48,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{ url_for("main.submit_data") }}",
+                url: "{{ url_for("main.edit") }}",
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8"
               }).done(function () {
@@ -433,7 +433,7 @@
             <h4 class="modal-title">Why this entry is inappropriate?</h4>
           </div>
           <div class="modal-body">
-              <form class="form-horizontal" method="post" action="{{ url_for("main.edit_params") }}">
+              <form class="form-horizontal" method="post" action="{{ url_for("main.inappropriate") }}">
                   <div class="row form-group">
                     {{ form.doc_id(id="reason_id") }}
                     <div class="col-xs-5">

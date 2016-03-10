@@ -1,15 +1,10 @@
-from flask import Blueprint, Response, request, render_template
+from flask import Blueprint, Response, request
 from app import mongo_utils
 import tldextract
 from bson import json_util
 from datetime import datetime
 
 mod_api = Blueprint('api', __name__, url_prefix='/api')
-
-
-@mod_api.route('/', methods=['GET'])
-def index():
-    return render_template('mod_api/index.html')
 
 
 @mod_api.route('/entry/create', methods=['POST'])

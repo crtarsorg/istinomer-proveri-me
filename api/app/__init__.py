@@ -36,11 +36,11 @@ def create_app():
     #Import blueprint modules
     from app.mod_main.views import mod_main
     from app.mod_api.views import mod_api
-    from app.mod_admin.views import mod_admin
+    from app.mod_auth.views import mod_auth
 
     app.register_blueprint(mod_main)
     app.register_blueprint(mod_api)
-    app.register_blueprint(mod_admin)
+    app.register_blueprint(mod_auth)
 
     #Initialize the app to work with MongoDB
     mongo.init_app(app, config_prefix='MONGO')

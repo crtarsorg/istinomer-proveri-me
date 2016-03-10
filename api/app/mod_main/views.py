@@ -7,24 +7,25 @@ mod_main = Blueprint('main', __name__)
 
 @mod_main.route('/', methods=['GET'])
 def index():
-    factcheck_requests = mongo_utils.find()
+    entries = mongo_utils.find()
     form = AdminForm()
-    return render_template('mod_main/index.html', factcheck_requests=factcheck_requests, form=form)
+    return render_template('mod_main/index.html', factcheck_requests=entries, form=form)
 
 
-@mod_main.route('/test', methods=['GET'])
-def result():
-    return render_template('mod_main/test.html')
+@mod_main.route('/feed-module', methods=['GET'])
+def feed_module():
+    return render_template('mod_main/feed_module.html')
 
 
-@mod_main.route('/edit', methods=['POST'])
-def edit_params():
+@mod_main.route('/entry/inappropriate', methods=['POST'])
+def inappropriate():
     form = AdminForm(request.form)
     mongo_utils.flag_entry_as_inappropriate(form.data)
     return redirect(url_for('main.index'))
 
 
-@mod_main.route('/entry/save', methods=['POST'])
-def submit_data():
+@mod_main.route('/entry/edit', methods=['POST'])
+def edit():
     mongo_utils.edit_entry_doc(request.json)
     return Response(status=200)
+
