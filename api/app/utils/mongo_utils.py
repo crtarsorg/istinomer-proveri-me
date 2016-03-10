@@ -7,6 +7,7 @@ class MongoUtils():
 
     def __init__(self, mongo):
         self.mongo = mongo
+        # FIXME: Let's change the collection name to entries.
         self.collection_name = 'factchecks'
 
     def insert(self, doc):
@@ -18,6 +19,8 @@ class MongoUtils():
                 "$in": classifications
             }
         }
+
+        # FIXME: Is the date parameter still associate to a key in the root of the doc? I don't think so. This should be article.date.
         docs = self.mongo.db[self.collection_name].find(query).sort("date", pymongo.DESCENDING).limit(20)
 
         return list(docs)
@@ -48,6 +51,8 @@ class MongoUtils():
         }
 
         if 'promise_due_date' in query:
+            # FIXME: why are you story a date String? We only need ISODate
+            # FIXME: You have user_chrome_id key and dateString key. Please stick with one standard. JSON standard is camelCase
             update_fields['promise'] = {
                 'dateString': query['promise_due_date'],
                 'due': self.convert_date(query['promise_due_date'])
@@ -63,6 +68,9 @@ class MongoUtils():
         }
 
         update_fields = {
+            # FIXME: What is the point of flg_inappropriate if it's always going to be set to True?
+            # FIXME: What is inappropriate_rsn?
+            # FIXME: You only need one key, use "inappropriate"
             "flg_inappropriate": True,
             'inappropriate_rsn': query['inappropriate']
         }
@@ -76,6 +84,7 @@ class MongoUtils():
 
     def find(self, query={}):
 
+        # FIXME: Is the date parameter still associate to a key in the root of the doc? I don't think so. This should be article.date.
         docs = self.mongo.db[self.collection_name].find(query).sort("date", pymongo.DESCENDING)
 
         return docs
@@ -94,6 +103,9 @@ class MongoUtils():
                 "classification": {"$in": query['classifications']}
             }
             if "Promise" in query["classifications"]:
+                # FIXME: What if the user hasn't provided dueFrom date but provided dueTo date?
+                # FIXME: What if the user hasn't provided dueTo date but provided dueFrom date?
+                # FIXME: What if the usern hasn't provided dueTo nor dueFrom dates?
                 query_params['promise.due'] = {
                     '$gte': self.convert_date(query['promise']['dueFrom']),
                     '$lte': self.convert_date(query['promise']['dueTo'])
@@ -112,6 +124,9 @@ class MongoUtils():
         if query['article']['authors']:
             query_params = {
                 "article.author": {"$in": query['article']['authors']},
+                # FIXME: What if the user hasn't provided from date but provided to date?
+                # FIXME: What if the user hasn't provided to date but provided from date?
+                # FIXME: What if the user hasn't provided to nor from dates?
                 'article.date': {
                     '$gte': self.convert_date(query['article']['date']['from']),
                     '$lte': self.convert_date(query['article']['date']['to'])
@@ -122,6 +137,9 @@ class MongoUtils():
             query_params = {
                 "quote.author": query['quote']['author'],
                 'quote.politician': query['quote']['politician'],
+                # FIXME: What if the user hasn't provided from date but provided to date?
+                # FIXME: What if the user hasn't provided to date but provided from date?
+                # FIXME: What if the user hasn't provided to nor from dates?
                 'quote.date': {
                     '$gte': self.convert_date(query['quote']['date']['from']),
                     '$lte': self.convert_date(query['quote']['date']['to']),
@@ -136,5 +154,6 @@ class MongoUtils():
         if inputs.strip() != '':
             date = datetime.strptime(inputs, "%d/%m/%Y")
         else:
+             # FIXME: Why this date? Why is this hardcoded?
             date = datetime.strptime("01/01/2015", "%d/%m/%Y")
         return date
