@@ -50,7 +50,7 @@ class MongoUtils():
         if 'promise_due_date' in query:
             update_fields['promise'] = {
                 'dateString': query['promise_due_date'],
-                'date': self.convert_date(query['promise_due_date'])
+                'due': self.convert_date(query['promise_due_date'])
             }
 
         # Call the function to update fields based on query params
@@ -94,7 +94,7 @@ class MongoUtils():
                 "classification": {"$in": query['classifications']}
             }
             if "Promise" in query["classifications"]:
-                query_params['promise.date'] = {
+                query_params['promise.due'] = {
                     '$gte': self.convert_date(query['promise']['dueFrom']),
                     '$lte': self.convert_date(query['promise']['dueTo'])
                 }
