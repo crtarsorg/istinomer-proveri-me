@@ -135,29 +135,12 @@
             }
         });
 
-        if($('#classification').val() == "Promise"){
-            $('#dueness_promise').addClass('datepicker');
-            $('#dueness_promise').removeAttr("disabled");
 
-        }
-        else if($('#classification').val() == "Truthfulness"){
-            $('#dueness_promise').prop("disabled", true);
-            $('#dueness_promise').addClass('datepicker');
-        }
-        else if($('#classification').val() == "Consistency"){
-            $('#dueness_promise').prop("disabled", true);
-            $('#dueness_promise').addClass('datepicker');
-        }
-        else{
-            $('#dueness_promise').prop("disabled", true);
-            $('#dueness_promise').addClass('datepicker');
-        }
-
-        $('#classification').change(function(){
+        $('#classification', "#editModal").change(function(){
 
            if($(this).val() == "Promise"){
-                $('#dueness_promise').addClass('datepicker');
-                $('#dueness_promise').removeAttr("disabled");
+                $('#dueness_promise', "#editModal").addClass('datepicker');
+                $('#dueness_promise', "#editModal").removeAttr("disabled");
                 $('.gradeDiv #grade option').remove();
 
                var promises_array = [
@@ -167,38 +150,38 @@
                 ];
 
                $.each(promises_array, function(idx, value){
-                  $(".gradeDiv #grade").append($("<option></option>").val(value).html(value));
+                  $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
                });
 
            }
             else if($(this).val() == "Truthfulness"){
-                $('#dueness_promise').prop("disabled", true);
-                $('#dueness_promise').addClass('datepicker');
-               $('.gradeDiv #grade option').remove();
+                $('#dueness_promise', "#editModal").prop("disabled", true);
+                $('#dueness_promise', "#editModal").addClass('datepicker');
+               $('.gradeDiv #grade option', "#editModal").remove();
 
                var truthfulness_array = [
                    'Istina', 'Skoro istina', 'Poluistina',
                    'Skoro neistina', 'Neistina', 'Kratke noge'
                ];
                $.each(truthfulness_array, function(idx, value){
-                  $(".gradeDiv #grade").append($("<option></option>").val(value).html(value));
+                  $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
                });
 
             }
             else if($(this).val() == "Consistency"){
-                $('#dueness_promise').prop("disabled", true);
-                $('#dueness_promise').addClass('datepicker');
-               $('.gradeDiv #grade option').remove();
+                $('#dueness_promise', "#editModal").prop("disabled", true);
+                $('#dueness_promise', "#editModal").addClass('datepicker');
+               $('.gradeDiv #grade option', "#editModal").remove();
 
                var consistency_array = ['Dosledno', 'Nedosledno', 'Nešto između'];
 
                $.each(consistency_array, function(idx, value){
-                  $(".gradeDiv #grade").append($("<option></option>").val(value).html(value));
+                  $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
                });
             }
             else{
-                $('#dueness_promise').prop("disabled", true);
-                $('#dueness_promise').addClass('datepicker');
+                $('#dueness_promise', "#editModal").prop("disabled", true);
+                $('#dueness_promise', "#editModal").addClass('datepicker');
 
             }
         });
