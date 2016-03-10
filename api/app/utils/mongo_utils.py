@@ -92,7 +92,10 @@ class MongoUtils():
             "url": True,
             "text": True,
             'mark': True,
-            'timestamp': {'$dateToString': {'format': "%d/%m/%Y %H:%M:%S", "date": "$timestamp"}}
+            'timestamp': {'$dateToString': {'format': "%d/%m/%Y %H:%M:%S", "date": "$timestamp"}},
+            'quote.author': True,
+            'quote.affiliation': True,
+            
         }
 
         if 'marks' in query:
