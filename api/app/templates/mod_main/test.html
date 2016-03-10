@@ -89,7 +89,7 @@
     function ajaxCallToApi(filtering_opt){
         $.ajax({
             type: "POST",
-            url: "http://opendatakosovo.org/app/istinomer-factcheckr/fact-check/classifications",
+            url: "http://0.0.0.0:5000/api/entry/get",
             data: JSON.stringify({classifications: filtering_opt}),
             contentType: "application/json"
         }).done(function(respData) {
@@ -101,7 +101,7 @@
             entriesTextToggle();
 
         }).fail(function(err) {
-            alert(err.toString());
+            alert(JSON.stringify(err));
         });
     }
 

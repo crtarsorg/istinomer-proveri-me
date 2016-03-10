@@ -7,23 +7,27 @@ class MongoUtils():
 
     def __init__(self, mongo):
         self.mongo = mongo
-        # FIXME: Let's change the collection name to entries.
-        self.collection_name = 'factchecks'
+        self.collection_name = 'entries'
 
     def insert(self, doc):
         self.mongo.db[self.collection_name].insert(doc)
 
-    def get_entries_for_classifications(self, classifications):
+    def get_by_classifications(self, classifications):
         query = {
             "classification": {
                 "$in": classifications
             }
         }
 
-        # FIXME: Is the date parameter still associate to a key in the root of the doc? I don't think so. This should be article.date.
-        docs = self.mongo.db[self.collection_name].find(query).sort("date", pymongo.DESCENDING).limit(20)
+        docs = self.mongo.db[self.collection_name]\
+            .find(query)\
+            .sort("timestamp", pymongo.DESCENDING)\
+            .limit(20)
 
         return list(docs)
+
+    def create(self):
+        pass
 
     def edit_entry_doc(self, query=None):
 
@@ -38,27 +42,23 @@ class MongoUtils():
             'category': query['category'],
             'article': {
                 'author': query['author_of_article'],
-                 # FIXME: Why are we storing a date String?
                 'dateString': query['date_of_article_pub'],
-                'date': self.convert_date(query['date_of_article_pub'])
+                'date': self.convert_str_to_date(query['date_of_article_pub'])
             },
             'quote': {
-                 # FIXME: Is this stored as a boolean?
                 'politician': query['politician'],
                 'author': query['quote_author'],
                 'affiliation': query['quote_author_affiliation'],
-                 # FIXME: Why are we storing a date String?
                 'dateString': query['date_of_statement'],
-                'date': self.convert_date(query['date_of_statement'])
+                'date': self.convert_str_to_date(query['date_of_statement'])
             }
         }
 
         if 'promise_due_date' in query:
-            # FIXME: why are you story a date String? We only need ISODate
-            # FIXME: You have user_chrome_id key and dateString key. Please stick with one standard. JSON standard is camelCase
+            
             update_fields['promise'] = {
-                'dateString': query['promise_due_date'],
-                'due': self.convert_date(query['promise_due_date'])
+                'dueString': query['promise_due_date'],
+                'due': self.convert_str_to_date(query['promise_due_date'])
             }
 
         # Call the function to update fields based on query params
@@ -71,11 +71,7 @@ class MongoUtils():
         }
 
         update_fields = {
-            # FIXME: What is the point of flg_inappropriate if it's always going to be set to True?
-            # FIXME: What is inappropriate_rsn?
-            # FIXME: You only need one key, use "inappropriate"
-            "flg_inappropriate": True,
-            'inappropriate_rsn': query['inappropriate']
+            'inappropriate': query['inappropriate']
         }
 
         # Call the function to update fields based on query params
@@ -87,76 +83,101 @@ class MongoUtils():
 
     def find(self, query={}):
 
-        # FIXME: Is the date parameter still associate to a key in the root of the doc? I don't think so. This should be article.date.
-        docs = self.mongo.db[self.collection_name].find(query).sort("date", pymongo.DESCENDING)
+        docs = self.mongo.db[self.collection_name].find(query).sort("timestamp", pymongo.DESCENDING)
 
         return docs
 
-    def fetch_dynamic_data(self, query=None):
+    def get(self, query=None, chrome_user_id=None):
 
         query_params = {}
 
-        if query['marks']:
-            query_params = {
-                "mark": {"$in": query['marks']}
-            }
+        if 'marks' in query:
+            if query['marks']:
+                query_params = {
+                    "mark": {"$in": query['marks']}
+                }
 
-        if query["classifications"]:
-            query_params = {
-                "classification": {"$in": query['classifications']}
-            }
+        if 'classifications' in query:
+            query_params["classification"] = {"$in": query['classifications']}
+
             if "Promise" in query["classifications"]:
-                # FIXME: What if the user hasn't provided dueFrom date but provided dueTo date?
-                # FIXME: What if the user hasn't provided dueTo date but provided dueFrom date?
-                # FIXME: What if the usern hasn't provided dueTo nor dueFrom dates?
-                query_params['promise.due'] = {
-                    '$gte': self.convert_date(query['promise']['dueFrom']),
-                    '$lte': self.convert_date(query['promise']['dueTo'])
+
+                if 'promise' in query:
+
+                    query_params['promise'] = {}
+                    if query['promise']['dueFrom'] and query['promise']['dueFrom'] != '':
+                        query_params['promise']['due'] = {}
+
+                        query_params['promise']['date']['$gte'] = \
+                            self.convert_str_to_date(query['promise']['dueFrom'])
+
+                    if query['promise']['dueTo'] and query['promise']['dueTo'] != '':
+
+                        if 'due' not in query_params['promise']:
+                            query_params['promise']['due'] = {}
+
+                        query_params['promise']['date']['$gte'] = \
+                            self.convert_str_to_date(query['promise']['dueTo'])
+
+        if 'query' in query:
+            if query['grades']:
+                query_params = {
+                    "grade": {"$in": query['grades']}
                 }
 
-        if query['grades']:
-            query_params = {
-                "grade": {"$in": query['grades']}
-            }
+        if 'categories' in query:
 
-        if query['categories']:
-            query_params = {
-                "category": {"$in": query['categories']}
-            }
-
-        if query['article']['authors']:
-            query_params = {
-                "article.author": {"$in": query['article']['authors']},
-                # FIXME: What if the user hasn't provided from date but provided to date?
-                # FIXME: What if the user hasn't provided to date but provided from date?
-                # FIXME: What if the user hasn't provided to nor from dates?
-                'article.date': {
-                    '$gte': self.convert_date(query['article']['date']['from']),
-                    '$lte': self.convert_date(query['article']['date']['to'])
+            if query['categories']:
+                query_params = {
+                    "category": {"$in": query['categories']}
                 }
-            }
 
-        if query['quote']['author']:
-            query_params = {
-                "quote.author": query['quote']['author'],
-                'quote.politician': query['quote']['politician'],
-                # FIXME: What if the user hasn't provided from date but provided to date?
-                # FIXME: What if the user hasn't provided to date but provided from date?
-                # FIXME: What if the user hasn't provided to nor from dates?
-                'quote.date': {
-                    '$gte': self.convert_date(query['quote']['date']['from']),
-                    '$lte': self.convert_date(query['quote']['date']['to']),
-                }
-            }
+        if 'article' in query:
+            query_params['article'] = {}
+            if query['article']['authors']:
+                query_params['article']['authors'] = {"$in": query['article']['authors']}
 
+            if query['article']['date']:
+                query_params['article']['date'] = {}
+
+                if query['article']['date']['from'] and query['article']['date']['from'] != '':
+                    query_params['article']['date']['$gte'] = self.convert_str_to_date(query['article']['date']['from'])
+
+                if query['article']['date']['to'] and query['article']['date']['to'] != '':
+                    query_params['article']['date']['$lte'] = self.convert_str_to_date(query['article']['date']['to'])
+
+        # Build the quote query params
+        if 'quote' in query:
+            query_params['quote'] = {}
+
+            if query['quote']['politician']:
+                query_params['quote']['politician'] = query['quote']['politician']
+
+            if query['quote']['author']:
+                query_params['quote']['author'] = query['quote']['author']
+
+            if query['quote']['date']:
+                query_params['quote']['date'] = {}
+
+                if query['quote']['date']['from'] and query['quote']['date']['from'] != '':
+                    query_params['quote']['date']['$gte'] = self.convert_str_to_date(query['quote']['date']['from'])
+
+                if query['quote']['date']['to'] and query['quote']['date']['to'] != '':
+                    query_params['quote']['date']['$lte'] = self.convert_str_to_date(query['quote']['date']['to'])
+
+        # Make sure we only get for given chrome user, if chrome user id is specified:
+        if chrome_user_id:
+            query_params['chromeUserId'] = chrome_user_id
+
+        else:
+            # Let's make sure we don't return entries that have been flagged as inappropriate:
+            query_params['inappropriate'] = {'$exists': False}
+
+        # Execute query
         docs = self.find(query_params)
+
         return docs
 
     @staticmethod
-    def convert_date(inputs):
-        if inputs.strip() != '':
-            date = datetime.strptime(inputs, "%d/%m/%Y")
-        else:
-             # FIXME: Why this date? Why is this hardcoded?
-            date = datetime.strptime("01/01/2015", "%d/%m/%Y")
-        return date
+    def convert_str_to_date(date_str):
+        return datetime.strptime(date_str, "%d/%m/%Y")

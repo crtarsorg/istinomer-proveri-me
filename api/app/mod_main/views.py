@@ -7,7 +7,6 @@ mod_main = Blueprint('main', __name__)
 
 @mod_main.route('/', methods=['GET'])
 def index():
-
     factcheck_requests = mongo_utils.find()
     form = AdminForm()
     return render_template('mod_main/index.html', factcheck_requests=factcheck_requests, form=form)

@@ -12,8 +12,8 @@ def index():
     return render_template('mod_api/index.html')
 
 
-@mod_api.route('/factcheck/request', methods=['POST'])
-def factcheck_request():
+@mod_api.route('/entry/create', methods=['POST'])
+def create_entry():
     req = request.json
 
     extracted = tldextract.extract(req['url'])
@@ -22,53 +22,21 @@ def factcheck_request():
     doc = {
         'url': req['url'],
         'domain': domain,
-        'chrome_user_id': req['chrome_user_id'],
+        'chromeUserId': req['chrome_user_id'],
         'text': req['text'],
-        "date": datetime.fromtimestamp(req['date'] / 1e3),
+        'timestamp': datetime.fromtimestamp(req['date'] / 1e3),
         'mark': "Unverified"
     }
     mongo_utils.insert(doc)
     return Response(status=200)
 
 
-@mod_api.route('/fact-check/classifications', methods=["POST"])
-def query_classification():
-
-    # validate filtering params before applying the query to DB
-    if len(request.json) > 1:
-        return Response(status=400)
-
-    elif 'classifications' not in request.json:
-        return Response(status=400)
-
-    elif not set(request.json['classifications']).issubset(['Promise', 'Truthfulness', 'Consistency']):
-        return Response(status=400)
-
-    else:
-        # retrieve data from database, based on classification params
-        result = mongo_utils.get_entries_for_classifications(request.json['classifications'])
-        return Response(response=json_util.dumps(result), status=200, mimetype="application/json")
-
-
-@mod_api.route('/fact-check/status-provider', methods=['POST'])
-def send_data_and_status():
-
-    # validate filtering params before applying the query to DB
-    if len(request.json) > 1:
-        return Response(status=400)
-
-    elif 'chrome_user_id' not in request.json:
-        return Response(status=400)
-
-    else:
-        # retrieve data from database, based on classification params
-        result = mongo_utils.find({'chrome_user_id': request.json['chrome_user_id']})
-
-        return Response(response=json_util.dumps(result), status=200, mimetype="application/json")
-
-
 @mod_api.route('/entry/get', methods=['POST'])
-def get_latest_results():
+def get_entries():
 
-    result = mongo_utils.fetch_dynamic_data(request.json)
+    if 'chrome_user_id' in request.json:
+        result = mongo_utils.get({}, request.json['chrome_user_id'])
+    else:
+        result = mongo_utils.get(request.json, None)
+
     return Response(response=json_util.dumps(result), status=200, mimetype="application/json")

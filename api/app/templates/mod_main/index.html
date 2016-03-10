@@ -21,29 +21,29 @@
         $('#editSubmitBtn').click(function(){
 
             var data = {
-                'doc_id': $('#doc_id_modal').val(),
-                'evaluation_mark': $('#evaluation_mark').val(),
-                'category': $('#category').val(),
-                'date_of_statement': $('#date_of_statement').val(),
-                'date_of_article_pub': $('#date_of_article_pub').val(),
-                'author_of_article': $('#author_of_article').val(),
+                'doc_id': $('#doc_id_modal', "#editModal").val(),
+                'evaluation_mark': $('#evaluation_mark', "#editModal").val(),
+                'category': $('#category', "#editModal").val(),
+                'date_of_statement': $('#date_of_statement', "#editModal").val(),
+                'date_of_article_pub': $('#date_of_article_pub', "#editModal").val(),
+                'author_of_article': $('#author_of_article', "#editModal").val(),
                 'classification': $('#classification', "#editModal").val(),
                 'grade': $('#grade', "#editModal").val()
             };
 
             if($('#classification').val() == "Promise"){
-                data['promise_due_date'] = $('#dueness_promise').val();
+                data['promise_due_date'] = $('#dueness_promise', "#editModal").val();
             }
 
             if($("#check_author").is(':checked')){
                 data['politician'] = true;
-                data['quote_author'] = $('#politician').val();
-                data['quote_author_affiliation'] = $('#politician_party option:selected').html();
+                data['quote_author'] = $('#politician', "#editModal").val();
+                data['quote_author_affiliation'] = $('#politician_party option:selected', "#editModal").html();
             }
             else{
                 data['politician'] = false;
-                data['quote_author'] = $('#quote_author').val();
-                data['quote_author_affiliation'] = $('#quote_affiliation').val()
+                data['quote_author'] = $('#quote_author', "#editModal").val();
+                data['quote_author_affiliation'] = $('#quote_affiliation', "#editModal").val()
             }
 
             $.ajax({
@@ -219,7 +219,7 @@
                     {% endif %}
                     {{ req.text }}
                     <div style="margin-top:0.5em" align="right">
-                        {% if req.flg_inappropriate is undefined %}
+                        {% if req.inappropriate is undefined %}
                             <span id="factChecked" class="label label-{% if req.mark == "True" %}success{% elif req.mark == "False" %}danger{% else %}warning{% endif %}">
                                 {{ req.mark }}
                             </span>
@@ -238,7 +238,7 @@
                             <a class="source-url" href="{{ req.url }}" targ="_blank">{{ req.domain }}</a>
                         </span>
                         {% if session.logged_in is defined %}
-                            {% if req.flg_inappropriate is undefined %}
+                            {% if req.inappropriate is undefined %}
                                 <span class="editSpan" style="margin-left:2px;">
                                     <a class="btn btn-sm btn-success editParam" id="{{ req._id }}" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-pencil"></i></a>
                                 </span>
