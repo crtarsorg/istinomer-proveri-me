@@ -25,8 +25,7 @@ def edit_params():
     return redirect(url_for('main.index'))
 
 
-@mod_main.route('/submit', methods=['POST'])
+@mod_main.route('/entry/save', methods=['POST'])
 def submit_data():
-    print request.json
     mongo_utils.edit_entry_doc(request.json)
     return Response(status=200)

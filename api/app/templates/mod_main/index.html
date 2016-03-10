@@ -27,8 +27,8 @@
                 'date_of_statement': $('#date_of_statement').val(),
                 'date_of_article_pub': $('#date_of_article_pub').val(),
                 'author_of_article': $('#author_of_article').val(),
-                'classification': $('#classification').val(),
-                'grade': $('#grade').val()
+                'classification': $('#classification', "#editModal").val(),
+                'grade': $('#grade', "#editModal").val()
             };
 
             if($('#classification').val() == "Promise"){
