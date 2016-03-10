@@ -1,16 +1,9 @@
-from pymongo import MongoClient
 from flask.ext.scrypt import generate_random_salt, generate_password_hash
-from bson import ObjectId
+from app import create_app, mongo_users_utils
 
-# Connect to defualt local instance of MongoClient
-client = MongoClient()
-
-# Get database and collection
-db = client.istinometer
+app = create_app()
 
 def create_user():
-
-    db.users.remove({})
 
     # Enter user name
     user_name = raw_input("Enter a username: ")
@@ -29,17 +22,24 @@ def create_user():
 
     # Build user document
     user_doc = {
-        "_id": ObjectId(),
         "username": str(user_name),
         "password": hashed_password,
         "salt": salt
     }
 
     # Now, store user credentials in MongoDB
-    db.users.insert(user_doc)
+    with app.app_context():
 
-    message = "\nUser %s has been created" % user_name
-    print message
+        try:
+            result = mongo_users_utils.save(user_doc)
+            if result:
+                print "\nUser %s has been created" % user_name
+            else:
+                print "\nAn error has occurred."
+
+        except Exception as e:
+            print "\nAn error occurred.\n %s" % e
+
 
 # Execute the function
 create_user()

@@ -6,6 +6,7 @@ from logging.handlers import RotatingFileHandler
 from flask.ext.cors import CORS
 from utils.utils import Utils
 from utils.mongo_utils import MongoUtils
+from utils.mongo_users_utils import MongoUsersUtils
 #from flask.ext.cache import Cache
 
 # create cache instance
@@ -14,6 +15,8 @@ from utils.mongo_utils import MongoUtils
 # Create MongoDB database object.
 mongo = PyMongo()
 mongo_utils = MongoUtils(mongo)
+mongo_users_utils = MongoUsersUtils(mongo)
+
 utils = Utils()
 
 def create_app():
