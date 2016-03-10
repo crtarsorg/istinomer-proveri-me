@@ -2,10 +2,33 @@
 <html>
   <head>
   	<title>Istinomer FactChecker</title>
+      <style>
+          body{
+              width: 400px;
+          }
+          .list-group-factcheckr{
+              list-style-type: none;
+              padding: 2px
+          }
+          .list-group-factcheckr li {
+              word-wrap: break-word;
+              background: white;
+              height: 25%;
+              width: 100%;
+              padding: 2px;
+              border: 0.5px solid black;
+              border-radius: 3px;
+          }
+          .list-group-factcheckr li:nth-child(odd) {
+              background: #E8E8EE;
+          }
+      </style>
+      <script src="popup.js"></script>
+      <script src="js/jquery-1.12.0.min.js"></script>
   </head>
   <body>
-	<a href="http://www.istinomer.rs/" target="_blank">
-		<img src="istinomer-logo.png" />
-	</a>
+	<ul class="list-group list-group-factcheckr">
+        <li class="list-group-item" style="padding-bottom:0.6em; color: #337ab7;">No entry send from you!</li>
+    </ul>
   </body>
 </html>
