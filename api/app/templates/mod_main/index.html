@@ -42,7 +42,7 @@
             }
             else{
                 data['politician'] = false;
-                data['quote_author'] = $('#quote_author').val()
+                data['quote_author'] = $('#quote_author').val();
                 data['quote_author_affiliation'] = $('#quote_affiliation').val()
             }
 
@@ -58,25 +58,50 @@
 
          $(".editParam").click(function(){
               var row_id = $(this).attr('id');
-             var container = $('#'+row_id + " #dataContainer").val();
 
              $('#doc_id_modal', "#editModal").val(row_id);
-{#              $('#grade', "#editModal").val($('#grade', "#" + row_id).text().trim());#}
-{#             $('#evaluation_mark', "#editModal").val($('#factChecked', "#" + row_id).text().trim());#}
 
-             if ($('#classification', "#" + row_id).length){
-                 $('#classification', "#editModal").val($('#classification', "#" + row_id).text().trim());
+             $('#evaluation_mark', "#editModal").val($('#factChecked', "#" + row_id).text().trim());
+
+             if ($('#categoryContainer', "#" + row_id).length){
+
+                $('#classification', "#editModal").val($("#classificationContainer", "#" + row_id).val());
+
+                $('#category', "#editModal").val($("#categoryContainer", "#" + row_id).val());
+                $('#date_of_statement', "#editModal").val($("#quoteDateStringContainer", "#" + row_id).val());
+                $('#date_of_article_pub', "#editModal").val($("#articleDateStringContainer", "#" + row_id).val());
+
+                $('#author_of_article', "#editModal").val($("#articleAuthorContainer", "#" + row_id).val());
+                $('#grade', "#editModal").val($("#gradeContainer", "#" + row_id).val());
+                $('#dueness_promise', "#editModal").val($("#promiseDueContainer", "#" + row_id).val());
+
+                 if ($('#quotePoliticianContainer', "#" + row_id).val() == "True"){
+                     $('#check_author', "#editModal").prop('checked', true);
+
+                     $('#politician', "#editModal").val($("#quoteAuthorContainer", "#" + row_id).val());
+                     $('#politician_party', "#editModal").val($("#quoteAuthorContainer", "#" + row_id).val());
+
+                    $('.quoteAuth').hide();
+                    $('.quoteAffil').hide();
+
+                    $('.politicianDiv').show();
+                    $('.polParty').show();
+
+                }
+                else{
+                     $('#check_author', "#editModal").prop('checked', false);
+
+                     $('#politician', "#editModal").val($("#quoteAuthorContainer", "#" + row_id).val());
+                     $('#politician_party', "#editModal").val($("#quoteAffiliationContainer", "#" + row_id).val());
+
+                    $('.quoteAuth').show();
+                    $('.quoteAffil').show();
+
+                    $('.politicianDiv').hide();
+                    $('.polParty').hide();
+                }
              }
-             var ca = JSON.parse(container);
-             alert(ca['grade']);
 
-{#            $('#evaluation_mark', "#editModal").val(container['mark']);#}
-{#            $('#category', "#editModal").val(container['mark']);#}
-{#            $('#date_of_statement', "#editModal").val(container['mark']);#}
-{#            $('#date_of_article_pub', "#editModal").val(container['mark']);#}
-{#            $('#author_of_article', "#editModal").val(container['mark']);#}
-{#            $('#classification', "#editModal").val(container['mark']);#}
-{#            $('#grade', "#editModal").val(container['mark']);#}
          });
 
         $('.deleteBtn').click(function(){
@@ -194,7 +219,21 @@
             <ul class="list-group list-group-factcheckr">
             {% for req in factcheck_requests %}
                 <li id="{{ req._id }}" class="list-group-item" style="padding-bottom:0.6em;">
-                    <input type="hidden" id="dataContainer" value="{{ req|safe }}">
+                    <input type="hidden" id="markContainer" value="{{ req.mark }}">
+                    {% if req.quote is defined %}
+                    <input type="hidden" id="categoryContainer" value="{{ req.category }}">
+                    <input type="hidden" id="classificationContainer" value="{{ req.classification }}">
+                    <input type="hidden" id="gradeContainer" value="{{ req.grade }}">
+                    <input type="hidden" id="quoteAffiliationContainer" value="{{ req.quote.affiliation}}">
+                    <input type="hidden" id="quotePoliticianContainer" value="{{ req.quote.politician}}">
+                    <input type="hidden" id="quoteDateStringContainer" value="{{ req.quote.dateString}}">
+                    <input type="hidden" id="quoteAuthorContainer" value="{{ req.quote.author}}">
+                    {% if req.promise is defined %}
+                     <input type="hidden" id="promiseDueContainer" value="{{ req.promise.dateString}}">
+                    {% endif %}
+                    <input type="hidden" id="articleAuthorContainer" value="{{ req.article.author}}">
+                    <input type="hidden" id="articleDateStringContainer" value="{{ req.article.dateString}}">
+                    {% endif %}
                     {{ req.text }}
                     <div style="margin-top:0.5em" align="right">
                         {% if req.flg_inappropriate is undefined %}
