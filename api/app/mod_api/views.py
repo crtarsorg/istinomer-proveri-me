@@ -7,8 +7,8 @@ from datetime import datetime
 mod_api = Blueprint('api', __name__, url_prefix='/api')
 
 
-@mod_api.route('/entry/create', methods=['POST'])
-def create_entry():
+@mod_api.route('/entry/submit', methods=['POST'])
+def submit_entry():
     req = request.json
 
     extracted = tldextract.extract(req['url'])
