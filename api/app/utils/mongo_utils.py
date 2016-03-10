@@ -106,17 +106,17 @@ class MongoUtils():
 
                     query_params['promise'] = {}
                     if query['promise']['dueFrom'] and query['promise']['dueFrom'] != '':
-                        query_params['promise']['due'] = {}
+                        query_params['promise.due'] = {}
 
-                        query_params['promise']['date']['$gte'] = \
+                        query_params['promise.due']['$gte'] = \
                             self.convert_str_to_date(query['promise']['dueFrom'])
 
                     if query['promise']['dueTo'] and query['promise']['dueTo'] != '':
 
                         if 'due' not in query_params['promise']:
-                            query_params['promise']['due'] = {}
+                            query_params['promise.due'] = {}
 
-                        query_params['promise']['date']['$gte'] = \
+                        query_params['promise.due']['$gte'] = \
                             self.convert_str_to_date(query['promise']['dueTo'])
 
         if 'query' in query:
@@ -133,37 +133,41 @@ class MongoUtils():
                 }
 
         if 'article' in query:
-            query_params['article'] = {}
-            if query['article']['authors']:
-                query_params['article']['authors'] = {"$in": query['article']['authors']}
 
-            if query['article']['date']:
-                query_params['article']['date'] = {}
+            if 'authors' in query['article']:
+                if query['article']['authors']:
+                    query_params['article.authors'] = {"$in": query['article']['authors']}
 
-                if query['article']['date']['from'] and query['article']['date']['from'] != '':
-                    query_params['article']['date']['$gte'] = self.convert_str_to_date(query['article']['date']['from'])
+            if 'date' in query['article']:
+                if query['article']['date']:
+                    query_params['article.date'] = {}
 
-                if query['article']['date']['to'] and query['article']['date']['to'] != '':
-                    query_params['article']['date']['$lte'] = self.convert_str_to_date(query['article']['date']['to'])
+                    if query['article']['date']['from'] and query['article']['date']['from'] != '':
+                        query_params['article.date']['$gte'] = self.convert_str_to_date(query['article']['date']['from'])
+
+                    if query['article']['date']['to'] and query['article']['date']['to'] != '':
+                        query_params['article.date']['$lte'] = self.convert_str_to_date(query['article']['date']['to'])
 
         # Build the quote query params
         if 'quote' in query:
-            query_params['quote'] = {}
 
-            if query['quote']['politician']:
-                query_params['quote']['politician'] = query['quote']['politician']
+            if 'politician' in query['quote']:
+                if query['quote']['politician']:
+                    query_params['quote.politician'] = query['quote']['politician']
 
-            if query['quote']['author']:
-                query_params['quote']['author'] = query['quote']['author']
+            if 'author' in query['quote']:
+                if query['quote']['author']:
+                    query_params['quote.author'] = query['quote']['author']
 
-            if query['quote']['date']:
-                query_params['quote']['date'] = {}
+            if 'date' in query['quote']:
+                if query['quote']['date']:
+                    query_params['quote.date'] = {}
 
-                if query['quote']['date']['from'] and query['quote']['date']['from'] != '':
-                    query_params['quote']['date']['$gte'] = self.convert_str_to_date(query['quote']['date']['from'])
+                    if query['quote']['date']['from'] and query['quote']['date']['from'] != '':
+                        query_params['quote.date']['$gte'] = self.convert_str_to_date(query['quote']['date']['from'])
 
-                if query['quote']['date']['to'] and query['quote']['date']['to'] != '':
-                    query_params['quote']['date']['$lte'] = self.convert_str_to_date(query['quote']['date']['to'])
+                    if query['quote']['date']['to'] and query['quote']['date']['to'] != '':
+                        query_params['quote.date']['$lte'] = self.convert_str_to_date(query['quote']['date']['to'])
 
         # Make sure we only get for given chrome user, if chrome user id is specified:
         if chrome_user_id:
@@ -172,7 +176,7 @@ class MongoUtils():
         else:
             # Let's make sure we don't return entries that have been flagged as inappropriate:
             query_params['inappropriate'] = {'$exists': False}
-
+        print query_params
         # Execute query
         docs = self.find(query_params)
 
