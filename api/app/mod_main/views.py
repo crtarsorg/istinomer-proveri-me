@@ -28,5 +28,5 @@ def edit_params():
 @mod_main.route('/submit', methods=['POST'])
 def submit_data():
     print request.json
-    # mongo_utils.edit_entry_doc(request.json)
+    mongo_utils.edit_entry_doc(request.json)
     return Response(status=200)

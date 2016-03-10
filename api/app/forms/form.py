@@ -21,7 +21,7 @@ class AdminForm(Form):
     )
 
     grade = SelectField(
-        'Truthful grade',
+        'Grade',
         choices=[
             ('Istina', 'Istina'),  # truthfulness
             ('Skoro istina', 'Skoro istina'),  # truthfulness
@@ -29,7 +29,12 @@ class AdminForm(Form):
             ('Skoro neistina', 'Skoro neistina'),  # truthfulness
             ('Neistina', 'Neistina'),  # truthfulness
             ('Kratke noge', 'Kratke noge'),  # truthfulness
-
+            ('Ispunjeno', 'Ispunjeno'),  # promise
+            ('Skoro ispunjeno', 'Skoro ispunjeno'),  # promise
+            ('Radi se na tome', 'Radi se na tome'),  # promise
+            ('Krenuli pa stali', 'Krenuli pa stali'),  # promise
+            ('Neispunjeno', 'Neispunjeno'),  # promise
+            (u'Ni započeto', u'Ni započeto'),  # promise
             ('Dosledno', 'Dosledno'),  # consistency
             ('Nedosledno', 'Nedosledno'),  # consistency
             (u'Nešto između', u'Nešto između')  # consistency
@@ -46,11 +51,11 @@ class AdminForm(Form):
     )
 
     category = SelectField('Category', choices=[
-        ("Culture", "Culture"),
-        ("Politics", "Politics"),
-        ("Economy", "Economy"),
-        ("Healthcare", "Healthcare"),
-        ("Society", "Society"),
+        ("Culture", "Kultura"),
+        ("Politics", "Politika"),
+        ("Economy", "Ekonomija"),
+        ("Healthcare", "Zdravstvo"),
+        ("Society", "Drustvo"),
     ])
 
     check_author = BooleanField("Check Politician")
@@ -58,10 +63,17 @@ class AdminForm(Form):
     date_of_statement = StringField('Date of statement')
     date_of_article_pub = StringField('Date of article')
     author_of_article = StringField('Author of article')
-    politician = SelectField("Politician", choices=[(x, x) for x in People().get_name_of_politician()])
-    politician_party = SelectField("Affiliated Party", choices=[(x[0], x[1]) for x in People().list_of_politicians_with_parties()])
+    politician = SelectField(
+        "Politician",
+        choices=[(x, x) for x in sorted(People().get_name_of_politician())]
+    )
+
+    politician_party = SelectField(
+        "Affiliation",
+        choices=[(x[0], x[1]) for x in sorted(People().list_of_politicians_with_parties(), key=lambda x: x[1])]
+    )
 
     quote_author = StringField('Quote author')
-    quote_affiliation = StringField('Quote affiliation')
+    quote_affiliation = StringField('Affiliation')
 
 

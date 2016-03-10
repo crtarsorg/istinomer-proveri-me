@@ -25,7 +25,7 @@ def factcheck_request():
         'chrome_user_id': req['chrome_user_id'],
         'text': req['text'],
         "date": datetime.fromtimestamp(req['date'] / 1e3),
-        'factChecked': "Unverified"
+        'mark': "Unverified"
     }
     mongo_utils.insert(doc)
     return Response(status=200)
@@ -67,7 +67,8 @@ def send_data_and_status():
         return Response(response=json_util.dumps(result), status=200, mimetype="application/json")
 
 
-@mod_api.route('/latest-fact-checks', methods=['POST'])
+@mod_api.route('/entry/get', methods=['POST'])
 def get_latest_results():
-    result = mongo_utils.find()
-    return Response(response=json_util.dumps(result[:50]), status=200, mimetype="application/json")
+
+    result = mongo_utils.fetch_dynamic_data(request.json)
+    return Response(response=json_util.dumps(result), status=200, mimetype="application/json")

@@ -18,7 +18,7 @@
             autoclose: true
         });
 
-        $('#editBtn').click(function(){
+        $('#editSubmitBtn').click(function(){
 
             var data = {
                 'doc_id': $('#doc_id_modal').val(),
@@ -28,30 +28,24 @@
                 'date_of_article_pub': $('#date_of_article_pub').val(),
                 'author_of_article': $('#author_of_article').val(),
                 'classification': $('#classification').val(),
-                'promise_due_date': "",
-                'grade': ''
+                'grade': $('#grade').val()
             };
 
             if($('#classification').val() == "Promise"){
-                data['grade'] = $('#promise_grade').val();
                 data['promise_due_date'] = $('#dueness_promise').val();
             }
-            else if($('#classification').val() == "Truthfulness"){
-                data['grade'] = $('#truthfulness_grade').val();
-            }
-            else if($('#classification').val() == "Consistency"){
-                data['grade'] = $('#consistency_grade').val();
-            }
-
 
             if($("#check_author").is(':checked')){
+                data['politician'] = true;
                 data['quote_author'] = $('#politician').val();
-                data['quote_author_affiliation'] = $('#politician_party').val();
+                data['quote_author_affiliation'] = $('#politician_party option:selected').html();
             }
             else{
+                data['politician'] = false;
                 data['quote_author'] = $('#quote_author').val()
                 data['quote_author_affiliation'] = $('#quote_affiliation').val()
             }
+
             $.ajax({
                 type: "POST",
                 url: "{{ url_for("main.submit_data") }}",
@@ -64,13 +58,25 @@
 
          $(".editParam").click(function(){
               var row_id = $(this).attr('id');
-             $('#doc_id', "#editModal").val(row_id);
-             $('#grade', "#editModal").val($('#grade', "#" + row_id).text().trim());
-             $('#evaluation_mark', "#editModal").val($('#factChecked', "#" + row_id).text().trim());
+             var container = $('#'+row_id + " #dataContainer").val();
+
+             $('#doc_id_modal', "#editModal").val(row_id);
+{#              $('#grade', "#editModal").val($('#grade', "#" + row_id).text().trim());#}
+{#             $('#evaluation_mark', "#editModal").val($('#factChecked', "#" + row_id).text().trim());#}
 
              if ($('#classification', "#" + row_id).length){
                  $('#classification', "#editModal").val($('#classification', "#" + row_id).text().trim());
              }
+             var ca = JSON.parse(container);
+             alert(ca['grade']);
+
+{#            $('#evaluation_mark', "#editModal").val(container['mark']);#}
+{#            $('#category', "#editModal").val(container['mark']);#}
+{#            $('#date_of_statement', "#editModal").val(container['mark']);#}
+{#            $('#date_of_article_pub', "#editModal").val(container['mark']);#}
+{#            $('#author_of_article', "#editModal").val(container['mark']);#}
+{#            $('#classification', "#editModal").val(container['mark']);#}
+{#            $('#grade', "#editModal").val(container['mark']);#}
          });
 
         $('.deleteBtn').click(function(){
@@ -78,6 +84,11 @@
             $('#reason_id').val(row_id);
 
             $('#inappropriate', "#reasonModal").val($('#inapproText', "#" + row_id).text().trim());
+        });
+
+        $('.inappropriateLink').click(function(){
+            var row_id = $(this).attr('id');
+            $('#textRsn', "#showReasonModal").text($('#inapproText', "#" + row_id).text().trim());
         });
 
         $('#check_author').change(function(){
@@ -102,6 +113,7 @@
         if($('#classification').val() == "Promise"){
             $('#dueness_promise').addClass('datepicker');
             $('#dueness_promise').removeAttr("disabled");
+
         }
         else if($('#classification').val() == "Truthfulness"){
             $('#dueness_promise').prop("disabled", true);
@@ -121,7 +133,7 @@
            if($(this).val() == "Promise"){
                 $('#dueness_promise').addClass('datepicker');
                 $('#dueness_promise').removeAttr("disabled");
-                $('#grade option').remove();
+                $('.gradeDiv #grade option').remove();
 
                var promises_array = [
                     'Ispunjeno', 'Skoro ispunjeno',
@@ -130,22 +142,34 @@
                 ];
 
                $.each(promises_array, function(idx, value){
-                   $('#grade').append($("<option></option>")
-                             .attr("value",value)
-                             .text(value));
+                  $(".gradeDiv #grade").append($("<option></option>").val(value).html(value));
                });
-
 
            }
             else if($(this).val() == "Truthfulness"){
                 $('#dueness_promise').prop("disabled", true);
                 $('#dueness_promise').addClass('datepicker');
+               $('.gradeDiv #grade option').remove();
+
+               var truthfulness_array = [
+                   'Istina', 'Skoro istina', 'Poluistina',
+                   'Skoro neistina', 'Neistina', 'Kratke noge'
+               ];
+               $.each(truthfulness_array, function(idx, value){
+                  $(".gradeDiv #grade").append($("<option></option>").val(value).html(value));
+               });
 
             }
             else if($(this).val() == "Consistency"){
                 $('#dueness_promise').prop("disabled", true);
                 $('#dueness_promise').addClass('datepicker');
+               $('.gradeDiv #grade option').remove();
 
+               var consistency_array = ['Dosledno', 'Nedosledno', 'Nešto između'];
+
+               $.each(consistency_array, function(idx, value){
+                  $(".gradeDiv #grade").append($("<option></option>").val(value).html(value));
+               });
             }
             else{
                 $('#dueness_promise').prop("disabled", true);
@@ -170,11 +194,12 @@
             <ul class="list-group list-group-factcheckr">
             {% for req in factcheck_requests %}
                 <li id="{{ req._id }}" class="list-group-item" style="padding-bottom:0.6em;">
+                    <input type="hidden" id="dataContainer" value="{{ req|safe }}">
                     {{ req.text }}
                     <div style="margin-top:0.5em" align="right">
                         {% if req.flg_inappropriate is undefined %}
-                            <span id="factChecked" class="label label-{% if req.factChecked == "True" %}success{% elif req.factChecked == "False" %}danger{% else %}warning{% endif %}">
-                                {{ req.factChecked }}
+                            <span id="factChecked" class="label label-{% if req.mark == "True" %}success{% elif req.mark == "False" %}danger{% else %}warning{% endif %}">
+                                {{ req.mark }}
                             </span>
                         {% endif %}
                         {% if req.classification is defined %}
@@ -195,25 +220,17 @@
                                 <span class="editSpan" style="margin-left:2px;">
                                     <a class="btn btn-sm btn-success editParam" id="{{ req._id }}" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-pencil"></i></a>
                                 </span>
+                                 <span class="" style="margin-left:2px;">
+                                    <a class="btn btn-sm btn-danger deleteBtn" id="{{ req._id }}" data-toggle="modal" data-target="#reasonModal" ><i class="glyphicon glyphicon-trash"></i></a>
+                                </span>
                             {% else %}
-                                <span id="grade" class="label label-danger" style="margin: 2px;">
-                                Inappropriate
-                            </span>
+                                <span class="label label-danger" id="inapprSpan" style="margin-left:2px;">
+                                    <a class="source-url inappropriateLink" id="{{ req._id }}"  data-toggle="modal" data-target="#showReasonModal" targ="_blank">inappropriate</a>
+                                    <span id="inapproText" style="display: none">{{ req.inappropriate_rsn }}</span>
+                                </span>
                             {% endif %}
-                            <span class="" style="margin-left:2px;">
-                                <a class="btn btn-sm btn-danger deleteBtn" id="{{ req._id }}" data-toggle="modal" data-target="#reasonModal" ><i class="glyphicon glyphicon-trash"></i></a>
-                            </span>
                         {% endif %}
                     </div>
-                    {% if req.flg_inappropriate is defined %}
-                        <div class="adminPan">
-                            <br>
-                            <div class="row pull-left col-xs-offset-1">
-                                <b>Reason: </b><i id="inapproText">{{ req.inappropriate_rsn }}</i>
-                            </div>
-
-                        </div>
-                    {% endif %}
                 <br><br>
                 </li>
             {% endfor %}
@@ -279,10 +296,10 @@
                       </div>
                   </div>
                   <div class="row form-group">
-                      <div class=" col-xs-5">
+                      <div class="col-xs-5">
                           {{ form.grade.label(class="control-label pull-right") }}
                       </div>
-                      <div class=" col-xs-5">
+                      <div class="col-xs-5 gradeDiv">
                           {{ form.grade(class="form-control pull-left") }}
                       </div>
                   </div>
@@ -376,7 +393,7 @@
                   </div>
 
                    <div class="row form-group">
-                    <button type="button" id="editBtn" class="btn btn-default col-xs-offset-8">Submit</button>
+                    <button type="button" id="editSubmitBtn" class="btn btn-default col-xs-offset-8">Submit</button>
                    </div>
               </form>
           </div>
@@ -408,6 +425,24 @@
                     <button type="submit" id="btnFlagEntry" class="btn btn-default col-xs-offset-6">Submit</button>
                   </div>
               </form>
+          </div>
+        </div>
+      </div>
+</div>
+
+    <div id="showReasonModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Reason why this content is inappropriate!</h4>
+          </div>
+          <div class="modal-body">
+              <div class="row form-group">
+                <p id="textRsn" style="margin: 5px; padding: 2px"></p>
+              </div>
           </div>
         </div>
       </div>
