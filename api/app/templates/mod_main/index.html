@@ -309,20 +309,20 @@
           <div class="modal-body">
               <form class="form-horizontal" id="editForm">
                   <div class="row form-group">
+                      <div class=" col-xs-5">
+                          {{ form.evaluation_mark.label(class="control-label pull-right") }}
+                      </div>
+                      <div class=" col-xs-5">
+                          {{ form.evaluation_mark(class="form-control pull-left") }}
+                      </div>
+                  </div>
+                  <div class="row form-group">
                           {{ form.doc_id(id="doc_id_modal") }}
                       <div class=" col-xs-5">
                           {{ form.classification.label(class="control-label pull-right") }}
                       </div>
                       <div class=" col-xs-5">
                           {{ form.classification(class="form-control pull-left") }}
-                      </div>
-                  </div>
-                  <div class="row form-group">
-                      <div class="col-xs-5">
-                          {{ form.grade.label(class="control-label pull-right") }}
-                      </div>
-                      <div class="col-xs-5 gradeDiv">
-                          {{ form.grade(class="form-control pull-left") }}
                       </div>
                   </div>
                   <div class="row form-group dueDate">
@@ -334,11 +334,11 @@
                       </div>
                   </div>
                   <div class="row form-group">
-                      <div class=" col-xs-5">
-                          {{ form.evaluation_mark.label(class="control-label pull-right") }}
+                      <div class="col-xs-5">
+                          {{ form.grade.label(class="control-label pull-right") }}
                       </div>
-                      <div class=" col-xs-5">
-                          {{ form.evaluation_mark(class="form-control pull-left") }}
+                      <div class="col-xs-5 gradeDiv">
+                          {{ form.grade(class="form-control pull-left") }}
                       </div>
                   </div>
                   <div class="row form-group">
@@ -355,6 +355,14 @@
                       </div>
                       <div class=" col-xs-5">
                           {{ form.author_of_article(class="form-control pull-left") }}
+                      </div>
+                  </div>
+                  <div class="row form-group">
+                      <div class=" col-xs-5">
+                          {{ form.date_of_article_pub.label(class="control-label pull-right") }}
+                      </div>
+                      <div class=" col-xs-5">
+                          {{ form.date_of_article_pub(class="form-control pull-left datepicker") }}
                       </div>
                   </div>
                   <div class="row form-group">
@@ -405,15 +413,6 @@
                           {{ form.date_of_statement(class="form-control pull-left datepicker") }}
                       </div>
                   </div>
-                  <div class="row form-group">
-                      <div class=" col-xs-5">
-                          {{ form.date_of_article_pub.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.date_of_article_pub(class="form-control pull-left datepicker") }}
-                      </div>
-                  </div>
-
                    <div class="row form-group">
                     <button type="button" id="editSubmitBtn" class="btn btn-default col-xs-offset-8">Submit</button>
                    </div>
