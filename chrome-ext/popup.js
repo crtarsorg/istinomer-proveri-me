@@ -46,7 +46,7 @@ function retrieveDataWithUserToken(user_id){
 
     $.ajax({
         type: "POST",
-        url: "http://0.0.0.0:5000/api/entry/get",
+        url: "http://opendatakosovo.org/app/istinomer-factcheckr/api/entry/get",
         data: JSON.stringify({chrome_user_id: user_id}),
         contentType: "application/json"
       }).done(function (respData) {

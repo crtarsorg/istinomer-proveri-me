@@ -95,7 +95,7 @@ class MongoUtils():
             'timestamp': {'$dateToString': {'format': "%d/%m/%Y %H:%M:%S", "date": "$timestamp"}},
             'quote.author': True,
             'quote.affiliation': True,
-            
+
         }
 
         if 'marks' in query:
@@ -216,7 +216,6 @@ class MongoUtils():
             }
             pipeline.append(project_stage)
 
-        print pipeline
         # Execute query
         docs = self.mongo.db[self.collection_name].aggregate(pipeline)
 
