@@ -46,7 +46,7 @@ function retrieveDataWithUserToken(user_id){
 
     $.ajax({
         type: "POST",
-        url: "http://opendatakosovo.org/app/istinomer-factcheckr/api/fact-check/status-provider",
+        url: "http://0.0.0.0:5000/api/entry/get",
         data: JSON.stringify({chrome_user_id: user_id}),
         contentType: "application/json"
       }).done(function (respData) {
@@ -87,7 +87,7 @@ function buildHTML(respData){
             grade = "N/A";
         }
 
-        if(item['flg_inappropriate']){
+        if(item['inappropriate']){
 
             // if the content were flagged as inappropriate inject this html element to DOM
             notification_cnt++;
@@ -101,7 +101,7 @@ function buildHTML(respData){
                         "</div>" +
                     "</div><br>" +
                     "<div>"+
-                        "<b>Reason: </b>" + "<i>" + item['inappropriate_rsn'] + "</i>" +
+                        "<b>Reason: </b>" + "<i>" + item['inappropriate'] + "</i>" +
                     "</div><br>" +
                 "</li>"
             );
@@ -154,4 +154,4 @@ function buildHTML(respData){
 }
 
 // Run this request every 1 min
-window.setInterval(updateNotificationBox, 10000);
+//window.setInterval(updateNotificationBox, 10000);

@@ -3,7 +3,7 @@
 // Set chrome extension params and config
 chrome.runtime.onInstalled.addListener(function() {
   var id = chrome.contextMenus.create({
-    "title": "Istina?",
+    "title": "Proveri me!",
     "contexts":["selection"],
     "id": "istinomer"
   });
@@ -43,8 +43,8 @@ function executeRequestWithUserToken(user_id, info, tab) {
       // Notification options.
       var success_notification_opt = {
         type: "basic",
-        title: "Wait for us!",
-        message: "We're fact checking that request for you.",
+        title: "Da se ne lažemo",
+        message: "Poslato Istinomeru. Odgovor stiže nakon provere.",
         iconUrl: "icons/icon-128.png"
       };
 
