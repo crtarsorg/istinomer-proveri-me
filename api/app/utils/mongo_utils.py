@@ -207,6 +207,7 @@ class MongoUtils():
         if chrome_user_id:
             query_params['chromeUserId'] = chrome_user_id
             project['chromeUserId'] = True
+            project['inappropriate'] = True
 
         else:
             # Let's make sure we don't return entries that have been flagged as inappropriate:

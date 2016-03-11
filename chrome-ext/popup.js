@@ -1,6 +1,6 @@
 /** Popup content provider logic. **/
 
-var API_URL_FETCH = "http://opendatakosovo.org/app/istinomer-factcheckr/api/entry/get";
+var API_URL_FETCH = "http://0.0.0.0:5000/api/entry/get";
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -9,15 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var user_factcheck_requests = items.user_data;
         if (user_factcheck_requests){
-            // Call the function to build HTML DOM on callback response
+            // Call the function to build HTML DOM on data fetch from LS
             buildHTML(user_factcheck_requests);
             // Add the badge to the extension icon
             chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
             chrome.browserAction.setBadgeText({text: ''});
-        }
-        else{
-            // get all user notification
-            updateNotificationBox();
         }
     });
   });
@@ -53,11 +49,51 @@ function retrieveDataWithUserToken(user_id){
         contentType: "application/json"
       }).done(function (respData) {
 
-        // Build HTML DOM on update
-        buildHTML(respData);
+        chrome.storage.local.get('user_data', function(localData){
 
-        //Save the response data to a local storage, so that we dont need to interact with API server every time
-        chrome.storage.local.set({user_data: respData});
+            var localUserData = localData.user_data;
+
+            var total_cnt = 0;
+            if(localUserData){
+
+                $.each(respData, function(key, apiJson){
+                    var counter = checkDataVerificationOnResponse(localUserData, apiJson);
+
+                    if (counter != 0){
+                        respData[key]['updated'] = true;
+                    }
+                    total_cnt = total_cnt + counter;
+                });
+
+                if(total_cnt > 0){
+                    var ntf_txt;
+                    chrome.browserAction.getBadgeText({}, function(previous_ntf_nr) {
+
+                        if(previous_ntf_nr == ''){
+                            previous_ntf_nr = 0;
+                        }
+                        else {
+                            previous_ntf_nr = parseInt(previous_ntf_nr);
+                        }
+
+                        var ntf_nr = total_cnt + previous_ntf_nr;
+                        if (ntf_nr > 0){
+                            ntf_txt = ntf_nr.toString();
+                        }
+                        else {
+                            ntf_txt = '';
+                        }
+                         // Add the badge to the extension icon
+                        chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+                        chrome.browserAction.setBadgeText({text: ntf_txt});
+                    });
+                }
+            }
+
+            // Save the response data to a local storage, so that we dont need to interact with API server every time
+            chrome.storage.local.set({user_data: respData});
+        });
+
 
       }).fail(function () {
         var fail_notification_opt = {
@@ -78,27 +114,38 @@ function buildHTML(respData){
     // Empty current items from the
     $('.list-group-factcheckr').empty();
 
-    var notification_cnt = 0;
     $.each(respData, function(index, item){
         var grade;
         if(item['grade']){
             grade = item['grade'];
-            notification_cnt++;
         }
         else{
-            grade = "N/A";
+            grade = "";
+        }
+
+        if(item['domain']){
+            var domain = item['domain'];
+        }
+        else {
+            domain = '';
+        }
+
+        if(item['mark']){
+            var mark = item['mark'];
+        }
+        else {
+            mark = '';
         }
 
         if(item['inappropriate']){
 
             // if the content were flagged as inappropriate inject this html element to DOM
-            notification_cnt++;
             $('.list-group-factcheckr').append(
                 "<li>"+
                     "<div class='popUpStories'>" +
                         "<p class='itemTxt'>"+ item['text'] + "</p>" +
                         "<div style='display: inline-block;float: right;margin-right:7px;'>"+
-                            "<a class='spanLink' style='padding: 5px' href='"+ item['url'] + "' target='_blank'>" + item['domain'] + "</a>" +
+                            "<a class='spanLink' style='padding: 5px' href='"+ domain + "' target='_blank'>" + domain + "</a>" +
                             "<span class='evalMark' style='padding: 5px; margin:3px'>" + "Inappropriate" +"</span>" +
                         "</div>" +
                     "</div><br>" +
@@ -114,8 +161,8 @@ function buildHTML(respData){
                     "<div class='popUpStories'>" +
                         "<p class='itemTxt'>"+ item['text'] + "</p>" +
                         "<div style='display: inline-block;float: right;margin-right:7px;'>"+
-                            "<a class='spanLink' style='padding: 5px' href='"+ item['url'] + "' target='_blank'>" + item['domain'] + "</a>" +
-                            "<span class='evalMark' style='padding: 5px; margin:3px'>" + item['mark'] + "</span>" +
+                            "<a class='spanLink' style='padding: 5px' href='"+ item['url'] + "' target='_blank'>" + domain + "</a>" +
+                            "<span class='evalMark' style='padding: 5px; margin:3px'>" + mark + "</span>" +
                             "<span class='spanGrade' style='padding: 5px; margin:3px'>" + grade + "</span>" +
                         "</div>" +
                     "</div><br>" +
@@ -125,35 +172,37 @@ function buildHTML(respData){
 
     });
 
-    var ntf_txt;
-    // create notification based on the response we got
-    chrome.storage.local.get('ntf_cnt', function(notifications){
-        var ntf_number = notifications.ntf_cnt;
-        if(ntf_number){
-            var tmp_cnt = notification_cnt - ntf_number;
-            if(tmp_cnt > 0) {
-                ntf_txt = tmp_cnt.toString();
-            }
-        }
-        else{
-            if(notification_cnt == 0){
-                ntf_txt = '';
-            }
-            else{
-
-                ntf_txt = notification_cnt.toString();
-            }
-        }
-
-        // store it for the next session
-        chrome.storage.local.set({ntf_cnt: notification_cnt});
-        // Add the badge to the extension icon
-        chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-        chrome.browserAction.setBadgeText({text: ntf_txt});
-    });
-
-
 }
 
+function checkDataVerificationOnResponse(localData, respJson){
+
+    var ntf_count = 0;
+    // create notification based on the response we got
+    $.each(localData, function(key, item){
+
+        if(item['_id']){
+            if (respJson['_id']['$oid'] == item['_id']['$oid']){
+
+                if(respJson['mark'] != item['mark'] && respJson['inappropriate'] == undefined){
+                    ntf_count++;
+                }
+                else if(respJson['classification'] != item['classification'] && respJson['inappropriate'] == undefined){
+                    ntf_count++;
+                }
+                else if(respJson['grade'] != item['grade'] && respJson['inappropriate'] == undefined){
+                    ntf_count++;
+                }
+                else if (respJson['inappropriate']){
+                    if (respJson['inappropriate'] != item['inappropriate']){
+                        ntf_count++;
+                    }
+
+                }
+            }
+        }
+    });
+
+    return ntf_count;
+}
 // Run this request every 1 min
 window.setInterval(updateNotificationBox, 10000);

@@ -1,6 +1,6 @@
 /** Context menu and factcheck logic implementation. **/
 
-var API_URL_SUBMIT = "http://opendatakosovo.org/app/istinomer-factcheckr/api/entry/submit";
+var API_URL_SUBMIT = "http://0.0.0.0:5000/api/entry/submit";
 
 // Set chrome extension params and config
 chrome.runtime.onInstalled.addListener(function() {
@@ -73,6 +73,22 @@ function executeRequestWithUserToken(user_id, info, tab) {
       }).done(function () {
           // Success notification
           chrome.notifications.create("success-notification", success_notification_opt);
+
+
+        // Retrieve data from local storage, otherwise retrieve them from database
+        chrome.storage.local.get('user_data', function(items){
+
+            var user_factcheck_requests = items.user_data;
+            if (user_factcheck_requests){
+                user_factcheck_requests.push(data);
+                chrome.storage.local.set({user_data: user_factcheck_requests});
+            }
+            else{
+
+                //Save the response data to a local storage, so that we dont need to interact with API server every time
+                chrome.storage.local.set({user_data: data});
+            }
+        });
 
       }).fail(function () {
         // Failure notification

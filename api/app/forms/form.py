@@ -58,7 +58,7 @@ class AdminForm(Form):
         ("Society", "Drustvo"),
     ])
 
-    check_author = BooleanField("Check Politician")
+    check_author = BooleanField("Check if Politician")
     dueness_promise = StringField('Promise dueness')
     date_of_statement = StringField('Date of statement')
     date_of_article_pub = StringField('Date of article')
