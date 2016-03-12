@@ -159,7 +159,7 @@ function buildHTML(respData){
                         "</div>" +
                     "</div><br>" +
                     "<div>"+
-                        "<b>Reason: </b>" + "<i>" + item['inappropriate'] + "</i>" +
+                        "<b>Razlog: </b>" + "<i>" + item['inappropriate'] + "</i>" +
                     "</div><br>" +
                 "</li>"
             );
