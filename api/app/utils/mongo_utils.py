@@ -12,23 +12,6 @@ class MongoUtils():
     def insert(self, doc):
         self.mongo.db[self.collection_name].insert(doc)
 
-    def get_by_classifications(self, classifications):
-        query = {
-            "classification": {
-                "$in": classifications
-            }
-        }
-
-        docs = self.mongo.db[self.collection_name]\
-            .find(query)\
-            .sort("timestamp", pymongo.DESCENDING)\
-            .limit(20)
-
-        return list(docs)
-
-    def create(self):
-        pass
-
     def edit_entry_doc(self, query=None):
 
         query_param = {
@@ -99,7 +82,8 @@ class MongoUtils():
             'timestamp': {'$dateToString': {'format': "%d/%m/%Y %H:%M:%S", "date": "$timestamp"}},
             'quote.author': True,
             'quote.affiliation': True,
-
+            'classifications': True,
+            'grade': True
         }
 
         if 'classifications' in query:
@@ -204,6 +188,7 @@ class MongoUtils():
         else:
             # Let's make sure we don't return entries that have been flagged as inappropriate:
             query_params['inappropriate'] = {'$exists': False}
+            query_params['classification'] = {'$ne': "Backlog"}
 
         pipeline = [
             {"$match": query_params},

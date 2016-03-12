@@ -10,7 +10,17 @@ document.addEventListener("DOMContentLoaded", function () {
         var user_factcheck_requests = items.user_data;
         if (user_factcheck_requests){
             // Call the function to build HTML DOM on data fetch from LS
-            buildHTML(user_factcheck_requests);
+            if(user_factcheck_requests.length > 0){
+                buildHTML(user_factcheck_requests);
+            }
+            else {
+                $('.list-group-factcheckr').append(
+                    "<li >" +
+                        "<p class='itemText'>"+ "Nijedan rezultat nije pronađen." + "</p>" +
+                    "</li>"
+                );
+
+            }
             // Add the badge to the extension icon
             chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
             chrome.browserAction.setBadgeText({text: ''});
@@ -129,11 +139,18 @@ function buildHTML(respData){
             domain = '';
         }
 
+        if (item['_id']){
+            var list_tag = "<li id='" + item['_id']['$oid'] + "'>";
+        }
+        else {
+            list_id = "<li>";
+        }
+
         if(item['inappropriate']){
 
             // if the content were flagged as inappropriate inject this html element to DOM
             $('.list-group-factcheckr').append(
-                "<li>"+
+                list_tag +
                     "<div class='popUpStories'>" +
                         "<p class='itemTxt'>"+ item['text'] + "</p>" +
                         "<div style='display: inline-block;float: right;margin-right:7px;'>"+
@@ -149,7 +166,7 @@ function buildHTML(respData){
         }
         else{
             $('.list-group-factcheckr').append(
-                "<li>"+
+                list_tag +
                     "<div class='popUpStories'>" +
                         "<p class='itemTxt'>"+ item['text'] + "</p>" +
                         "<div style='display: inline-block;float: right;margin-right:7px;'>"+
@@ -174,10 +191,10 @@ function checkDataVerificationOnResponse(localData, respJson){
         if(item['_id']){
             if (respJson['_id']['$oid'] == item['_id']['$oid']){
 
-                if(respJson['classification'] != item['classification'] && respJson['inappropriate'] == undefined){
+                if(respJson['classification'] != item['classification']){
                     ntf_count++;
                 }
-                else if(respJson['grade'] != item['grade'] && respJson['inappropriate'] == undefined){
+                else if(respJson['grade'] != item['grade']){
                     ntf_count++;
                 }
                 else if (respJson['inappropriate']){

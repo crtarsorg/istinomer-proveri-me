@@ -62,7 +62,8 @@ function executeRequestWithUserToken(user_id, info, tab) {
         chrome_user_id: user_id,
         url: tab.url,
         text: info.selectionText,
-        date: Date.now()
+        date: Date.now(),
+        classification: "Backlog"
       };
 
       $.ajax({
