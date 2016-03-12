@@ -5,14 +5,15 @@ from app.utils.people_utils import People
 
 
 class AdminForm(Form):
-    username = StringField('Username')
-    password = PasswordField('Password')
+    username = StringField(u'Korisničko ime')
+    password = PasswordField(u'Šifra')
     doc_id = HiddenField('Id')
 
-    inappropriate = TextAreaField('Provide a reason')
+    inappropriate = TextAreaField('Navedite razlog')
     classification = SelectField(
-        'Classification',
+        'Tip izjave',
         choices=[
+            ('Backlog', 'Backlog'),
             ('Notepad', 'Notepad'),
             ('Promise', 'Promise'),
             ('Truthfulness', 'Truthfulness'),
@@ -21,7 +22,7 @@ class AdminForm(Form):
     )
 
     grade = SelectField(
-        'Grade',
+        'Ocena',
         choices=[
             ('Istina', 'Istina'),  # truthfulness
             ('Skoro istina', 'Skoro istina'),  # truthfulness
@@ -41,15 +42,6 @@ class AdminForm(Form):
         ]
     )
 
-    evaluation_mark = SelectField(
-        'Evaluation mark',
-        choices=[
-            ('True', 'True'),
-            ('False', 'False'),
-            ('Unverified', 'Unverified')
-        ]
-    )
-
     category = SelectField('Category', choices=[
         ("Culture", "Kultura"),
         ("Politics", "Politika"),
@@ -58,22 +50,22 @@ class AdminForm(Form):
         ("Society", "Drustvo"),
     ])
 
-    check_author = BooleanField("Check if Politician")
-    dueness_promise = StringField('Promise dueness')
-    date_of_statement = StringField('Date of statement')
-    date_of_article_pub = StringField('Date of article')
-    author_of_article = StringField('Author of article')
+    check_author = BooleanField(u"Izaberite ukoliko je u pitanju izjava javnog funkcionera.")
+    dueness_promise = StringField(u'Rok kada ističe obećanje')
+    date_of_statement = StringField('Datum izjave')
+    date_of_article_pub = StringField('Datum ocene')
+    author_of_article = StringField('Autor ocene')
     politician = SelectField(
-        "Politician",
+        "Javni funkcioner",
         choices=[(x, x) for x in sorted(People().get_name_of_politician())]
     )
 
     politician_party = SelectField(
-        "Affiliation",
+        "Pripadnost",
         choices=[(x[0], x[1]) for x in sorted(People().list_of_politicians_with_parties(), key=lambda x: x[1])]
     )
 
-    quote_author = StringField('Quote author')
-    quote_affiliation = StringField('Affiliation')
+    quote_author = StringField('Citirajte autora')
+    quote_affiliation = StringField('Pripadnost')
 
 

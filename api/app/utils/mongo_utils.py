@@ -36,7 +36,6 @@ class MongoUtils():
         }
 
         update_fields = {
-            "mark": query['evaluation_mark'],
             'grade': query['grade'],
             'classification': query['classification'],
             'category': query['category'],
@@ -97,18 +96,11 @@ class MongoUtils():
             "domain": True,
             "url": True,
             "text": True,
-            'mark': True,
             'timestamp': {'$dateToString': {'format': "%d/%m/%Y %H:%M:%S", "date": "$timestamp"}},
             'quote.author': True,
             'quote.affiliation': True,
 
         }
-
-        if 'marks' in query:
-            if query['marks']:
-                query_params = {
-                    "mark": {"$in": query['marks']}
-                }
 
         if 'classifications' in query:
             query_params["classification"] = {"$in": query['classifications']}

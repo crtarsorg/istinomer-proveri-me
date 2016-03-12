@@ -53,7 +53,7 @@ function executeRequestWithUserToken(user_id, info, tab) {
       var fail_notification_opt = {
         type: "basic",
         title: "Oh!",
-        message: "We're broken, please try again later.",
+        message: "Sajt je nedostupan, molim vas pokušajte kasnije.",
         iconUrl: "icons/icon-128.png"
       };
 

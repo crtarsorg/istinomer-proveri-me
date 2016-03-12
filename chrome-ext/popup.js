@@ -94,12 +94,11 @@ function retrieveDataWithUserToken(user_id){
             chrome.storage.local.set({user_data: respData});
         });
 
-
       }).fail(function () {
         var fail_notification_opt = {
             type: "basic",
             title: "Oh!",
-            message: "We're broken, please try again later.",
+            message: "Sajt je nedostupan, molim vas pokušajte kasnije.",
             iconUrl: "icons/icon-128.png"
           };
         // Failure notification
@@ -130,13 +129,6 @@ function buildHTML(respData){
             domain = '';
         }
 
-        if(item['mark']){
-            var mark = item['mark'];
-        }
-        else {
-            mark = '';
-        }
-
         if(item['inappropriate']){
 
             // if the content were flagged as inappropriate inject this html element to DOM
@@ -146,7 +138,7 @@ function buildHTML(respData){
                         "<p class='itemTxt'>"+ item['text'] + "</p>" +
                         "<div style='display: inline-block;float: right;margin-right:7px;'>"+
                             "<a class='spanLink' style='padding: 5px' href='"+ domain + "' target='_blank'>" + domain + "</a>" +
-                            "<span class='evalMark' style='padding: 5px; margin:3px'>" + "Inappropriate" +"</span>" +
+                            "<span class='evalMark' style='padding: 5px; margin:3px'>" + "Neprikladno" +"</span>" +
                         "</div>" +
                     "</div><br>" +
                     "<div>"+
@@ -162,7 +154,6 @@ function buildHTML(respData){
                         "<p class='itemTxt'>"+ item['text'] + "</p>" +
                         "<div style='display: inline-block;float: right;margin-right:7px;'>"+
                             "<a class='spanLink' style='padding: 5px' href='"+ item['url'] + "' target='_blank'>" + domain + "</a>" +
-                            "<span class='evalMark' style='padding: 5px; margin:3px'>" + mark + "</span>" +
                             "<span class='spanGrade' style='padding: 5px; margin:3px'>" + grade + "</span>" +
                         "</div>" +
                     "</div><br>" +
@@ -183,10 +174,7 @@ function checkDataVerificationOnResponse(localData, respJson){
         if(item['_id']){
             if (respJson['_id']['$oid'] == item['_id']['$oid']){
 
-                if(respJson['mark'] != item['mark'] && respJson['inappropriate'] == undefined){
-                    ntf_count++;
-                }
-                else if(respJson['classification'] != item['classification'] && respJson['inappropriate'] == undefined){
+                if(respJson['classification'] != item['classification'] && respJson['inappropriate'] == undefined){
                     ntf_count++;
                 }
                 else if(respJson['grade'] != item['grade'] && respJson['inappropriate'] == undefined){
@@ -204,5 +192,5 @@ function checkDataVerificationOnResponse(localData, respJson){
 
     return ntf_count;
 }
-// Run this request every 1 min
+// Run this request
 window.setInterval(updateNotificationBox, 10000);

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Istinomer FactCheckr",
-  "description": "A chrome extension to have the people over at istinomer.rs fact check highlighted text on a website.",
+  "name": "Istinomer",
+  "description": "Dodatak za Chrome kojim se čitaoci informativnih web portala pozivaju da pošalju Istinomeru činjenice na proveru. Obeležite tekst koji želite da proverite, i desnim klikom izaberite Istinomer i time ste poslali izjavu sa činjenicama na proveru.",
   "version": "1.0",
   "browser_action": {
     "default_icon": "icons/icon-19.png",
