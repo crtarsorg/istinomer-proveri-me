@@ -159,14 +159,17 @@ function checkClassificationOptions(childId, parentId, row_id){
         $('#dueness_promise', "#editModal").removeAttr("disabled");
         $('.gradeDiv #grade option').remove();
 
-       var promises_array = [
-            'Ispunjeno', 'Skoro ispunjeno',
-            'Radi se na tome', 'Krenuli pa stali',
-            'Neispunjeno', 'Ni započeto'
-        ];
+       var promises_array = {
+            'Fulfilled': 'Ispunjeno',
+            'Almost fulfilled': 'Skoro ispunjeno',
+            'In progress': 'Radi se na tome',
+            'Stalled': 'Krenuli pa stali',
+            'Unfulfilled': 'Neispunjeno',
+            'Not started': 'Ni započeto'
+        };
 
-       $.each(promises_array, function(idx, value){
-          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
+       $.each(promises_array, function(key, value){
+          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(key).html(value));
        });
 
    }
@@ -175,12 +178,17 @@ function checkClassificationOptions(childId, parentId, row_id){
         $('#dueness_promise', "#editModal").addClass('datepicker');
        $('.gradeDiv #grade option', "#editModal").remove();
 
-       var truthfulness_array = [
-           'Istina', 'Skoro istina', 'Poluistina',
-           'Skoro neistina', 'Neistina', 'Kratke noge'
-       ];
-       $.each(truthfulness_array, function(idx, value){
-          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
+       var truthfulness_array = {
+            'True': 'Istina',
+            'Mostly true': 'Skoro istina',
+            'Half true': 'Poluistina',
+            'Mostly false': 'Skoro neistina',
+            'False': 'Neistina',
+            'Pants on fire': 'Kratke noge'
+        };
+
+       $.each(truthfulness_array, function(key, value){
+          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(key).html(value));
        });
 
     }
@@ -189,10 +197,13 @@ function checkClassificationOptions(childId, parentId, row_id){
         $('#dueness_promise', "#editModal").addClass('datepicker');
        $('.gradeDiv #grade option', "#editModal").remove();
 
-       var consistency_array = ['Dosledno', 'Nedosledno', 'Nešto između'];
-
-       $.each(consistency_array, function(idx, value){
-          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
+        var consistency_array = {
+            'Consistent': 'Dosledno',
+            'In between': 'Nedosledno',
+            'Inconsistent': 'Nešto između'
+        };
+       $.each(consistency_array, function(key, value){
+          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(key).html(value));
        });
     }
     else{
@@ -200,7 +211,6 @@ function checkClassificationOptions(childId, parentId, row_id){
         $(".gradeDiv #grade", "#editModal").append($("<option></option>").val('').html(''));
         $('#dueness_promise', "#editModal").prop("disabled", true);
         $('#dueness_promise', "#editModal").addClass('datepicker');
-
     }
     var map_select = $("#gradeContainer", "#" + row_id).val();
     $(".gradeDiv #grade option[value='" + map_select + "']", "#editModal").attr("selected","selected");
@@ -239,7 +249,25 @@ function checkClassificationOptions(childId, parentId, row_id){
                         {% endif %}
                         {% if req.grade is defined and req.classification not in ["Notepad", "Backlog"]%}
                             <span id="grade" class="label label-primary" style="margin: 2px;">
-                                {{ req.grade }}
+                                {%  set array = {
+                                        'True': 'Istina',
+                                        'Mostly true': 'Skoro istina',
+                                        'Half true': 'Poluistina',
+                                        'Mostly false': 'Skoro neistina',
+                                        'False': 'Neistina',
+                                        'Pants on fire': 'Kratke noge',
+                                        'Fulfilled': 'Ispunjeno',
+                                        'Almost fulfilled': 'Skoro ispunjeno',
+                                        'In progress': 'Radi se na tome',
+                                        'Stalled': 'Krenuli pa stali',
+                                        'Unfulfilled': 'Neispunjeno',
+                                        'Not started': 'Ni započeto',
+                                        'Consistent': 'Dosledno',
+                                        'In between': 'Nedosledno',
+                                        'Inconsistent': 'Nešto između'
+                                    }
+                                %}
+                                {{ array[req.grade] }}
                             </span>
                         {% endif %}
                         <span class="label label-default" style="margin-left:2px;">
@@ -256,7 +284,7 @@ function checkClassificationOptions(childId, parentId, row_id){
                             {% else %}
                                 <span class="label label-danger" id="inapprSpan" style="margin-left:2px;">
                                     <a class="source-url inappropriateLink" id="{{ req._id }}"  data-toggle="modal" data-target="#showReasonModal" targ="_blank">Neprikladno</a>
-                                    <span id="inapproText" style="display: none">{{ req.inappropriate_rsn }}</span>
+                                    <span id="inapproText" style="display: none">{{ req.inappropriate }}</span>
                                 </span>
                             {% endif %}
                         {% endif %}
@@ -458,7 +486,7 @@ function checkClassificationOptions(childId, parentId, row_id){
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Reason why this content is inappropriate!</h4>
+            <h4 class="modal-title">Razlog:</h4>
           </div>
           <div class="modal-body">
               <div class="row form-group">

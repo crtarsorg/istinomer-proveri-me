@@ -24,21 +24,21 @@ class AdminForm(Form):
     grade = SelectField(
         'Ocena',
         choices=[
-            ('Istina', 'Istina'),  # truthfulness
-            ('Skoro istina', 'Skoro istina'),  # truthfulness
-            ('Poluistina', 'Poluistina'),  # truthfulness
-            ('Skoro neistina', 'Skoro neistina'),  # truthfulness
-            ('Neistina', 'Neistina'),  # truthfulness
-            ('Kratke noge', 'Kratke noge'),  # truthfulness
+            ('True', 'Istina'),  # truthfulness
+            ('Mostly true', 'Skoro istina'),  # truthfulness
+            ('Half true', 'Poluistina'),  # truthfulness
+            ('Mostly false', 'Skoro neistina'),  # truthfulness
+            ('False', 'Neistina'),  # truthfulness
+            ('Pants on fire', 'Kratke noge'),  # truthfulness
             ('Fulfilled', 'Ispunjeno'),  # promise
-            ('Skoro ispunjeno', 'Skoro ispunjeno'),  # promise
-            ('Radi se na tome', 'Radi se na tome'),  # promise
-            ('Krenuli pa stali', 'Krenuli pa stali'),  # promise
-            ('Neispunjeno', 'Neispunjeno'),  # promise
-            (u'Ni započeto', u'Ni započeto'),  # promise
-            ('Dosledno', 'Dosledno'),  # consistency
-            ('Nedosledno', 'Nedosledno'),  # consistency
-            (u'Nešto između', u'Nešto između')  # consistency
+            ('Almost fulfilled', 'Skoro ispunjeno'),  # promise
+            ('In progress', 'Radi se na tome'),  # promise
+            ('Stalled', 'Krenuli pa stali'),  # promise
+            ('Unfulfilled', 'Neispunjeno'),  # promise
+            ('Not started', u'Ni započeto'),  # promise
+            ('Consistent', 'Dosledno'),  # consistency
+            ('In between', 'Nedosledno'),  # consistency
+            ('Inconsistent', u'Nešto između')  # consistency
         ]
     )
 

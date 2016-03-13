@@ -73,9 +73,6 @@ function retrieveDataWithUserToken(user_id){
                 $.each(respData, function(key, apiJson){
                     var counter = checkDataVerificationOnResponse(localUserData, apiJson);
 
-                    if (counter == 0){
-                        respData[key]['new_update'] = false;
-                    }
                     total_cnt = total_cnt + counter;
                 });
 
@@ -120,10 +117,28 @@ function buildHTML(respData){
     // Empty current items from the
     $('.list-group-factcheckr').empty();
 
+    var grades_json = {
+        'True': 'Istina',
+        'Mostly true': 'Skoro istina',
+        'Half true': 'Poluistina',
+        'Mostly false': 'Skoro neistina',
+        'False': 'Neistina',
+        'Pants on fire': 'Kratke noge',
+        'Fulfilled': 'Ispunjeno',
+        'Almost fulfilled': 'Skoro ispunjeno',
+        'In progress': 'Radi se na tome',
+        'Stalled': 'Krenuli pa stali',
+        'Unfulfilled': 'Neispunjeno',
+        'Not started': 'Ni započeto',
+        'Consistent': 'Dosledno',
+        'In between': 'Nedosledno',
+        'Inconsistent': 'Nešto između'
+    };
+
     $.each(respData, function(index, item){
         var grade;
         if(item['grade']){
-            grade = item['grade'];
+            grade = grades_json[item['grade']];
         }
         else{
             grade = "";
@@ -145,6 +160,15 @@ function buildHTML(respData){
 
         if(item['inappropriate'] || item['inappropriate'] == ""){
 
+            if (!item['inappropriate'] == ""){
+                var inapproper_html = "<div>"+
+                                        "<b>Razlog: </b>" + "<i>" + item['inappropriate'] + "</i>" +
+                                    "</div><br>";
+            }
+            else{
+                inapproper_html = '';
+            }
+
             // if the content were flagged as inappropriate inject this html element to DOM
             $('.list-group-factcheckr').append(
                 list_tag +
@@ -155,9 +179,7 @@ function buildHTML(respData){
                             "<span class='evalMark' style='padding: 5px; margin:3px'>" + "Neprikladno" +"</span>" +
                         "</div>" +
                     "</div><br>" +
-                    "<div>"+
-                        "<b>Razlog: </b>" + "<i>" + item['inappropriate'] + "</i>" +
-                    "</div><br>" +
+                    inapproper_html +
                 "</li>"
             );
         }
@@ -202,6 +224,9 @@ function checkDataVerificationOnResponse(localData, respJson){
                     if (respJson['inappropriate'] != item['inappropriate']){
                         ntf_count++;
                     }
+                }
+                if (counter == 0){
+                    respJson['new_update'] = false;
                 }
             }
         }
