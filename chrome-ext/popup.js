@@ -225,7 +225,7 @@ function checkDataVerificationOnResponse(localData, respJson){
                         ntf_count++;
                     }
                 }
-                if (counter == 0){
+                if (ntf_count == 0 && item['new_update'] != true){
                     respJson['new_update'] = false;
                 }
             }
