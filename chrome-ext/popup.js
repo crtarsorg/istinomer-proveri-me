@@ -175,8 +175,8 @@ function buildHTML(respData){
                     "<div class='popUpStories'>" +
                         "<p class='itemTxt'>"+ item['text'] + "</p>" +
                         "<div style='display: inline-block;float: right;margin-right:7px;'>"+
-                            "<a class='spanLink' style='padding: 5px' href='"+ domain + "' target='_blank'>" + domain + "</a>" +
-                            "<span class='evalMark' style='padding: 5px; margin:3px'>" + "Neprikladno" +"</span>" +
+                            "<span class='evalMark' style='padding: 5px; margin:3px'><strong>" + "Neprikladno" +"</strong></span>" +
+                            "<a class='spanLink' style='padding: 5px' href='"+  item['url']  + "' target='_blank'>" + domain + "</a>" +
                         "</div>" +
                     "</div><br>" +
                     inapproper_html +
@@ -189,8 +189,8 @@ function buildHTML(respData){
                     "<div class='popUpStories'>" +
                         "<p class='itemTxt'>"+ item['text'] + "</p>" +
                         "<div style='display: inline-block;float: right;margin-right:7px;'>"+
+                            "<span class='spanGrade' style='padding: 5px; margin:3px'><strong>" + grade + "</strong></span>" +
                             "<a class='spanLink' style='padding: 5px' href='"+ item['url'] + "' target='_blank'>" + domain + "</a>" +
-                            "<span class='spanGrade' style='padding: 5px; margin:3px'>" + grade + "</span>" +
                         "</div>" +
                     "</div><br>" +
                 "</li>"
