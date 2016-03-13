@@ -59,6 +59,8 @@
          $(".editParam").click(function(){
               var row_id = $(this).attr('id');
 
+             checkClassificationOptions('#classificationContainer', "#"+row_id, null);
+
              $('#doc_id_modal', "#editModal").val(row_id);
 
              if ($('#categoryContainer', "#" + row_id).length){
@@ -140,54 +142,7 @@
 
         $('#classification', "#editModal").change(function(){
 
-           if($(this).val() == "Promise"){
-                $('#dueness_promise', "#editModal").addClass('datepicker');
-                $('#dueness_promise', "#editModal").removeAttr("disabled");
-                $('.gradeDiv #grade option').remove();
-
-               var promises_array = [
-                    'Ispunjeno', 'Skoro ispunjeno',
-                    'Radi se na tome', 'Krenuli pa stali',
-                    'Neispunjeno', 'Ni započeto'
-                ];
-
-               $.each(promises_array, function(idx, value){
-                  $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
-               });
-
-           }
-            else if($(this).val() == "Truthfulness"){
-                $('#dueness_promise', "#editModal").prop("disabled", true);
-                $('#dueness_promise', "#editModal").addClass('datepicker');
-               $('.gradeDiv #grade option', "#editModal").remove();
-
-               var truthfulness_array = [
-                   'Istina', 'Skoro istina', 'Poluistina',
-                   'Skoro neistina', 'Neistina', 'Kratke noge'
-               ];
-               $.each(truthfulness_array, function(idx, value){
-                  $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
-               });
-
-            }
-            else if($(this).val() == "Consistency"){
-                $('#dueness_promise', "#editModal").prop("disabled", true);
-                $('#dueness_promise', "#editModal").addClass('datepicker');
-               $('.gradeDiv #grade option', "#editModal").remove();
-
-               var consistency_array = ['Dosledno', 'Nedosledno', 'Nešto između'];
-
-               $.each(consistency_array, function(idx, value){
-                  $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
-               });
-            }
-            else{
-                $('.gradeDiv #grade option', "#editModal").remove();
-                $(".gradeDiv #grade", "#editModal").append($("<option></option>").val('').html(''));
-                $('#dueness_promise', "#editModal").prop("disabled", true);
-                $('#dueness_promise', "#editModal").addClass('datepicker');
-
-            }
+            checkClassificationOptions('#classification', "#editModal");
         });
 
         $('#politician_party').val($('#politician').val());
@@ -196,6 +151,60 @@
         });
 
     });
+
+
+function checkClassificationOptions(childId, parentId, row_id){
+    if($(childId, parentId).val() == "Promise"){
+        $('#dueness_promise', "#editModal").addClass('datepicker');
+        $('#dueness_promise', "#editModal").removeAttr("disabled");
+        $('.gradeDiv #grade option').remove();
+
+       var promises_array = [
+            'Ispunjeno', 'Skoro ispunjeno',
+            'Radi se na tome', 'Krenuli pa stali',
+            'Neispunjeno', 'Ni započeto'
+        ];
+
+       $.each(promises_array, function(idx, value){
+          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
+       });
+
+   }
+    else if($(childId, parentId).val() == "Truthfulness"){
+        $('#dueness_promise', "#editModal").prop("disabled", true);
+        $('#dueness_promise', "#editModal").addClass('datepicker');
+       $('.gradeDiv #grade option', "#editModal").remove();
+
+       var truthfulness_array = [
+           'Istina', 'Skoro istina', 'Poluistina',
+           'Skoro neistina', 'Neistina', 'Kratke noge'
+       ];
+       $.each(truthfulness_array, function(idx, value){
+          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
+       });
+
+    }
+    else if($(childId, parentId).val() == "Consistency"){
+        $('#dueness_promise', "#editModal").prop("disabled", true);
+        $('#dueness_promise', "#editModal").addClass('datepicker');
+       $('.gradeDiv #grade option', "#editModal").remove();
+
+       var consistency_array = ['Dosledno', 'Nedosledno', 'Nešto između'];
+
+       $.each(consistency_array, function(idx, value){
+          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(value).html(value));
+       });
+    }
+    else{
+        $('.gradeDiv #grade option', "#editModal").remove();
+        $(".gradeDiv #grade", "#editModal").append($("<option></option>").val('').html(''));
+        $('#dueness_promise', "#editModal").prop("disabled", true);
+        $('#dueness_promise', "#editModal").addClass('datepicker');
+
+    }
+    var map_select = $("#gradeContainer", "#" + row_id).val();
+    $(".gradeDiv #grade option[value='" + map_select + "']", "#editModal").attr("selected","selected");
+}
 </script>
 {% endblock %}
 
@@ -224,10 +233,11 @@
                     <div style="margin-top:0.5em" align="right">
                         {% if req.classification is defined %}
                             <span id="classification" class="label label-primary" style="margin: 2px;">
-                                {{ req.classification }}
+                                {% set class_json = {'Backlog': 'Backlog', 'Notepad': 'Beležnica', 'Promise': 'Obecanja', 'Truthfulness':'Istinitost', 'Consistency': 'Doslednost'} %}
+                                {{ class_json[req.classification] }}
                             </span>
                         {% endif %}
-                        {% if req.grade is defined %}
+                        {% if req.grade is defined and req.classification not in ["Notepad", "Backlog"]%}
                             <span id="grade" class="label label-primary" style="margin: 2px;">
                                 {{ req.grade }}
                             </span>

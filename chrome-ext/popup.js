@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
             // Call the function to build HTML DOM on data fetch from LS
             if(user_factcheck_requests.length > 0){
                 buildHTML(user_factcheck_requests);
+                $.each(user_factcheck_requests,function(key, item){
+                    user_factcheck_requests[key]['new_update'] = false
+                });
+                chrome.storage.local.set({user_data: user_factcheck_requests});
             }
             else {
                 $('.list-group-factcheckr').append(
@@ -98,10 +102,10 @@ function retrieveDataWithUserToken(user_id){
                         chrome.browserAction.setBadgeText({text: ntf_txt});
                     });
 
-                    // Save the response data to a local storage,
-                    // so that we dont need to interact with API server every time
-                    chrome.storage.local.set({user_data: respData});
                 }
+                // Save the response data to a local storage,
+                // so that we dont need to interact with API server every time
+                chrome.storage.local.set({user_data: respData});
             }
 
         });
@@ -136,7 +140,7 @@ function buildHTML(respData){
             var list_tag = "<li id='" + item['_id']['$oid'] + "'>";
         }
         else {
-            list_id = "<li>";
+            list_tag = "<li>";
         }
 
         if(item['inappropriate'] || item['inappropriate'] == ""){
@@ -171,7 +175,7 @@ function buildHTML(respData){
             );
         }
 
-        if (item['updated']){
+        if (item['new_update'] == true){
             $('#' + item['_id']['$oid']).css({'border-color': '#512e3c', 'background': '#7d9bb8'});
         }
 
@@ -198,7 +202,6 @@ function checkDataVerificationOnResponse(localData, respJson){
                     if (respJson['inappropriate'] != item['inappropriate']){
                         ntf_count++;
                     }
-
                 }
             }
         }

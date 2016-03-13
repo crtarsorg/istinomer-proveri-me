@@ -29,7 +29,8 @@ class MongoUtils():
                 'politician': query['politician'],
                 'author': query['quote_author'],
                 'affiliation': query['quote_author_affiliation']
-            }
+            },
+            'new_update': True
         }
 
         if 'date_of_article_pub' in query:
@@ -56,7 +57,8 @@ class MongoUtils():
         }
 
         update_fields = {
-            'inappropriate': query['inappropriate']
+            'inappropriate': query['inappropriate'],
+            'new_update': True
         }
 
         # Call the function to update fields based on query params
@@ -184,6 +186,7 @@ class MongoUtils():
             query_params['chromeUserId'] = chrome_user_id
             project['chromeUserId'] = True
             project['inappropriate'] = True
+            project['new_update'] = True
 
         else:
             # Let's make sure we don't return entries that have been flagged as inappropriate:
