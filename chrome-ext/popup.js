@@ -73,8 +73,8 @@ function retrieveDataWithUserToken(user_id){
                 $.each(respData, function(key, apiJson){
                     var counter = checkDataVerificationOnResponse(localUserData, apiJson);
 
-                    if (counter > 0){
-                        respData[key]['updated'] = true;
+                    if (counter == 0){
+                        respData[key]['new_update'] = false;
                     }
                     total_cnt = total_cnt + counter;
                 });
