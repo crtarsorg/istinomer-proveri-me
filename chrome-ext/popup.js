@@ -160,7 +160,7 @@ function buildHTML(respData){
 
         if(item['inappropriate'] || item['inappropriate'] == ""){
 
-            if (!item['inappropriate'] == ""){
+            if (!(item['inappropriate'] == "")){
                 var inapproper_html = "<div>"+
                                         "<b>Razlog: </b>" + "<i>" + item['inappropriate'] + "</i>" +
                                     "</div><br>";
