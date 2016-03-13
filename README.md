@@ -11,7 +11,6 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
   "url": "https://www.washingtonpost.com/opinions/nixon-both-lofty-and-criminal/2015/07/24/5e3ee074-2b1a-11e5-bd33-395c05608059_story.html",
   "text": "I ordered that they use any means necessary, including illegal means, to accomplish this goal.... The president of the United States can never admit that.",
   "chrome_user_id": "xzy",
-  "mark": "True",
   "classification": "Truthfulness",
   "grade": "Istina",
   "category": "Politics",
@@ -30,7 +29,6 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 #### Sample JSON Payload - Promise
 ```json 
 {
-  "mark": "True",
   "classification": "Promise",
   "grade": "Krenuli pas stali",
   "category": "Politics",
@@ -76,11 +74,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
  - Dosledno
  - Nedosledno
  - Nešto između
- 
-##### mark 
- - Unverified (String)
- - True (String)
- - False (String)
+
 
 ##### category 
  - Culture
@@ -95,8 +89,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 #### JSON Payload - Filter Parameters 
 
 | Property          | Data Type     | Description                                                   |
-|-------------------|---------------|---------------------------------------------------------------|
-| marks             | List\<String\>| The evaluation marks.                                         |
+|-------------------|---------------|---------------------------------------------------------------|                        |
 | classifications   | List\<String\>| The classifications.                                          |
 | grades            | List\<String\>| The grades.                                                   |
 | categories        | List\<String\>| The categories.                                               |
@@ -115,7 +108,6 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 #### Sample JSON Payload
 ```json 
 {
-  "marks": ["True"],
   "classifications": ["Truthfulness", "Promise", "Consistency"],
   "grades": ["Istina", "Ispunjeno", "Dosledno"],
   "categories": ["Politics"],

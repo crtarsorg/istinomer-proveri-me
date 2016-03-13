@@ -14,10 +14,10 @@ class AdminForm(Form):
         'Tip izjave',
         choices=[
             ('Backlog', 'Backlog'),
-            ('Notepad', 'Notepad'),
-            ('Promise', 'Promise'),
-            ('Truthfulness', 'Truthfulness'),
-            ('Consistency', 'Consistency'),
+            ('Notepad', u'Beležnica'),
+            ('Promise', 'Obecanja'),
+            ('Truthfulness', 'Istinitost'),
+            ('Consistency', 'Doslednost'),
         ]
     )
 
@@ -30,7 +30,7 @@ class AdminForm(Form):
             ('Skoro neistina', 'Skoro neistina'),  # truthfulness
             ('Neistina', 'Neistina'),  # truthfulness
             ('Kratke noge', 'Kratke noge'),  # truthfulness
-            ('Ispunjeno', 'Ispunjeno'),  # promise
+            ('Fulfilled', 'Ispunjeno'),  # promise
             ('Skoro ispunjeno', 'Skoro ispunjeno'),  # promise
             ('Radi se na tome', 'Radi se na tome'),  # promise
             ('Krenuli pa stali', 'Krenuli pa stali'),  # promise

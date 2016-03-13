@@ -34,6 +34,7 @@
                 data['promise_due_date'] = $('#dueness_promise', "#editModal").val();
             }
 
+
             if($("#check_author").is(':checked')){
                 data['politician'] = true;
                 data['quote_author'] = $('#politician', "#editModal").val();
@@ -132,6 +133,10 @@
             }
         });
 
+        if ($('#classification', "#editModal").val() == "Notepad" || $('#classification', "#editModal").val() == "Backlog"){
+            $('.gradeDiv #grade option', "#editModal").remove();
+            $(".gradeDiv #grade", "#editModal").append($("<option></option>").val('').html(''));
+        }
 
         $('#classification', "#editModal").change(function(){
 
@@ -177,6 +182,8 @@
                });
             }
             else{
+                $('.gradeDiv #grade option', "#editModal").remove();
+                $(".gradeDiv #grade", "#editModal").append($("<option></option>").val('').html(''));
                 $('#dueness_promise', "#editModal").prop("disabled", true);
                 $('#dueness_promise', "#editModal").addClass('datepicker');
 
@@ -238,7 +245,7 @@
                                 </span>
                             {% else %}
                                 <span class="label label-danger" id="inapprSpan" style="margin-left:2px;">
-                                    <a class="source-url inappropriateLink" id="{{ req._id }}"  data-toggle="modal" data-target="#showReasonModal" targ="_blank">inappropriate</a>
+                                    <a class="source-url inappropriateLink" id="{{ req._id }}"  data-toggle="modal" data-target="#showReasonModal" targ="_blank">Neprikladno</a>
                                     <span id="inapproText" style="display: none">{{ req.inappropriate_rsn }}</span>
                                 </span>
                             {% endif %}

@@ -192,7 +192,7 @@ class MongoUtils():
 
         pipeline = [
             {"$match": query_params},
-            {"$sort": SON([('timestamp', 1)])}
+            {"$sort": SON([('timestamp', -1)])}
         ]
 
         if project:

@@ -69,7 +69,7 @@ function retrieveDataWithUserToken(user_id){
                 $.each(respData, function(key, apiJson){
                     var counter = checkDataVerificationOnResponse(localUserData, apiJson);
 
-                    if (counter != 0){
+                    if (counter > 0){
                         respData[key]['updated'] = true;
                     }
                     total_cnt = total_cnt + counter;
@@ -97,25 +97,18 @@ function retrieveDataWithUserToken(user_id){
                         chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
                         chrome.browserAction.setBadgeText({text: ntf_txt});
                     });
+
+                    // Save the response data to a local storage,
+                    // so that we dont need to interact with API server every time
+                    chrome.storage.local.set({user_data: respData});
                 }
             }
 
-            // Save the response data to a local storage, so that we dont need to interact with API server every time
-            chrome.storage.local.set({user_data: respData});
         });
 
-      }).fail(function () {
-        var fail_notification_opt = {
-            type: "basic",
-            title: "Oh!",
-            message: "Sajt je nedostupan, molim vas pokušajte kasnije.",
-            iconUrl: "icons/icon-128.png"
-          };
-        // Failure notification
-        chrome.notifications.create("fail-notification", fail_notification_opt);
-
+      }).fail(function (err) {
+        // console.log(JSON.stringify(err));
       });
-
 }
 
 function buildHTML(respData){
@@ -146,7 +139,7 @@ function buildHTML(respData){
             list_id = "<li>";
         }
 
-        if(item['inappropriate']){
+        if(item['inappropriate'] || item['inappropriate'] == ""){
 
             // if the content were flagged as inappropriate inject this html element to DOM
             $('.list-group-factcheckr').append(
@@ -178,6 +171,10 @@ function buildHTML(respData){
             );
         }
 
+        if (item['updated']){
+            $('#' + item['_id']['$oid']).css({'border-color': '#512e3c', 'background': '#7d9bb8'});
+        }
+
     });
 
 }
@@ -197,7 +194,7 @@ function checkDataVerificationOnResponse(localData, respJson){
                 else if(respJson['grade'] != item['grade']){
                     ntf_count++;
                 }
-                else if (respJson['inappropriate']){
+                else if (respJson['inappropriate'] || respJson['inappropriate'] == ""){
                     if (respJson['inappropriate'] != item['inappropriate']){
                         ntf_count++;
                     }
