@@ -235,4 +235,4 @@ function checkDataVerificationOnResponse(localData, respJson){
     return ntf_count;
 }
 // Run this request
-window.setInterval(updateNotificationBox, 1800000);
+window.setInterval(updateNotificationBox, 10000);
