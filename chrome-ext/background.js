@@ -1,6 +1,6 @@
 /** Context menu and factcheck logic implementation. **/
 
-var API_URL_SUBMIT = "http://opendatakosovo.org/app/api/entry/submit";
+var API_URL_SUBMIT = "http://opendatakosovo.org/app/istinomer-factcheckr/api/entry/submit";
 
 // Set chrome extension params and config
 chrome.runtime.onInstalled.addListener(function() {
