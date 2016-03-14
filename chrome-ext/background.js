@@ -14,20 +14,6 @@ chrome.runtime.onInstalled.addListener(function() {
 // Context Menu and event listener to send fact check entries
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
     callDataProvider(info, tab);
-    // Retrieve data from local storage, otherwise retrieve them from database
-        chrome.storage.local.get('user_data', function(items){
-
-            var user_factcheck_requests = items.user_data;
-            if (user_factcheck_requests){
-                user_factcheck_requests.push(data);
-                chrome.storage.local.set({user_data: user_factcheck_requests});
-            }
-            else{
-
-                //Save the response data to a local storage, so that we dont need to interact with API server every time
-                chrome.storage.local.set({user_data: data});
-            }
-        });
 });
 
 // Data Provider function with token checker
@@ -69,12 +55,12 @@ function executeRequestWithUserToken(user_id, info, tab) {
         chrome.storage.local.get('user_data', function(items){
 
             var user_factcheck_requests = items.user_data;
+            
             if (user_factcheck_requests){
                 user_factcheck_requests.push(data);
                 chrome.storage.local.set({user_data: user_factcheck_requests});
             }
             else{
-
                 //Save the response data to a local storage, so that we dont need to interact with API server every time
                 chrome.storage.local.set({user_data: data});
             }
