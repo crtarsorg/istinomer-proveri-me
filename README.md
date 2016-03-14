@@ -57,7 +57,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 
 
 ##### grade 
-###### Truthfulness
+###### Truthfulness (Istinitost)
  - False (Neistina)
  - Half true (Poluistina)
  - Mostly false (Skoro neistina)
@@ -65,7 +65,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
  - Pants on fire (Kratke noge)
  - True (Istina)
 
-###### Promise
+###### Promise (Obecanja)
 
  - Almost fulfilled (Skoro ispunjeno)
  - Fulfilled (Ispunjeno)
@@ -74,7 +74,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
  - Stalled (Krenuli pa stali)
  - Unfulfilled (Neispunjeno)
 
-###### Consistency
+###### Consistency (Doslednost)
  - Consistent (Dosledno)
  - Inconsistent (Nešto između)
  - In between (Nedosledno)

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
             else {
                 $('.list-group-factcheckr').append(
                     "<li >" +
-                        "<p class='itemText'>"+ "Nijedan rezultat nije pronađen." + "</p>" +
+                        "<p class='itemText'>"+ "Nijedan rezultat nije prona"+"&#273;"+"en." + "</p>" +
                     "</li>"
                 );
 
