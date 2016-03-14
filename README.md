@@ -12,7 +12,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
   "text": "I ordered that they use any means necessary, including illegal means, to accomplish this goal.... The president of the United States can never admit that.",
   "chrome_user_id": "xzy",
   "classification": "Truthfulness",
-  "grade": "Istina",
+  "grade": "True",
   "category": "Politics",
   "article": {
     "author": "Carl Bernstein",
@@ -30,7 +30,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 ```json 
 {
   "classification": "Promise",
-  "grade": "Krenuli pas stali",
+  "grade": "Fulfilled",
   "category": "Politics",
   "article": {
     "author": "Carl Bernstein",
@@ -49,41 +49,44 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 
 #### Parameter Options
 ##### classification 
- - Truthfulness
- - Promise
- - Consistency
+ - Backlog (Backlog)
+ - Consistency (Doslednost)
+ - Notepad (Beležnica)
+ - Promise (Obecanja)
+ - Truthfulness (Istinitost)
+
 
 ##### grade 
 ###### Truthfulness
- - Istina
- - Kratke noge
- - Neistina
- - Poluistina
- - Skoro istina
- - Skoro neistina
+ - False (Neistina)
+ - Half true (Poluistina)
+ - Mostly false (Skoro neistina)
+ - Mostly true (Skoro istina)
+ - Pants on fire (Kratke noge)
+ - True (Istina)
 
 ###### Promise
- - Ispunjeno
- - Krenuli pas stali
- - Neispunjeno
- - Ni započeto
- - Radi se na tome
- - Skoro ispunjeno
- 
-###### Consistency
- - Dosledno
- - Nedosledno
- - Nešto između
 
+ - Almost fulfilled (Skoro ispunjeno)
+ - Fulfilled (Ispunjeno)
+ - In progress (Radi se na tome)
+ - Not started (Ni započeto)
+ - Stalled (Krenuli pa stali)
+ - Unfulfilled (Neispunjeno)
+
+###### Consistency
+ - Consistent (Dosledno)
+ - Inconsistent (Nešto između)
+ - In between (Nedosledno)
 
 ##### category 
- - Culture
- - Politics
- - Economy
- - Healthcare
- - Society
+ - Culture (Kultura)
+ - Politics (Politika)
+ - Economy (Ekonomija)
+ - Healthcare (Zdravstvo)
+ - Society (Drustvo)
 
- 
+
 ## Fetch Entries
 ### POST  /api/entry/get
 #### JSON Payload - Filter Parameters 
@@ -109,7 +112,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 ```json 
 {
   "classifications": ["Truthfulness", "Promise", "Consistency"],
-  "grades": ["Istina", "Ispunjeno", "Dosledno"],
+  "grades": ["Mostly true", "Fulfilled", "Consistent"],
   "categories": ["Politics"],
   "article": {
     "authors": ["Carl Bernstein", "Bob Woodward"],

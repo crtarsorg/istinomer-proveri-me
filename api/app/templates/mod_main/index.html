@@ -239,7 +239,7 @@ function checkClassificationOptions(childId, parentId, row_id){
                     <input type="hidden" id="articleAuthorContainer" value="{{ req.article.author}}">
                     <input type="hidden" id="articleDateStringContainer" value="{{ req.article.date.strftime('%d/%m/%Y') if req.article.date else '' }}">
                     {% endif %}
-                    {{ req.text }}
+                    <p style="text-align: left">{{ req.text }}</p>
                     <div style="margin-top:0.5em" align="right">
                         {% if req.classification is defined %}
                             <span id="classification" class="label label-primary" style="margin: 2px;">
