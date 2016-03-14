@@ -1,6 +1,6 @@
 /** Popup content provider logic. **/
 
-var API_URL_FETCH = "http://0.0.0.0:5000/api/entry/get";
+var API_URL_FETCH = "http://opendatakosovo.org/app/istinomer-factcheckr/api/entry/get";
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -235,4 +235,4 @@ function checkDataVerificationOnResponse(localData, respJson){
     return ntf_count;
 }
 // Run this request
-window.setInterval(updateNotificationBox, 10000);
+window.setInterval(updateNotificationBox, 1800000);
