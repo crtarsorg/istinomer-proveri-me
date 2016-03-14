@@ -55,14 +55,14 @@ function executeRequestWithUserToken(user_id, info, tab) {
         chrome.storage.local.get('user_data', function(items){
 
             var user_factcheck_requests = items.user_data;
-            
+
             if (user_factcheck_requests){
                 user_factcheck_requests.push(data);
-                chrome.storage.local.set({user_data: user_factcheck_requests});
+                chrome.storage.local.set({user_data: user_factcheck_requests}, function(){});
             }
             else{
                 //Save the response data to a local storage, so that we dont need to interact with API server every time
-                chrome.storage.local.set({user_data: data});
+                chrome.storage.local.set({user_data: [data]}, function(){});
             }
         });
 
