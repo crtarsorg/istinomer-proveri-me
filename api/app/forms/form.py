@@ -37,8 +37,8 @@ class AdminForm(Form):
             ('Unfulfilled', 'Neispunjeno'),  # promise
             ('Not started', u'Ni započeto'),  # promise
             ('Consistent', 'Dosledno'),  # consistency
-            ('In between', 'Nedosledno'),  # consistency
-            ('Inconsistent', u'Nešto između')  # consistency
+            ('In between', u'Nešto između'),  # consistency
+            ('Inconsistent', 'Nedosledno')  # consistency
         ]
     )
 

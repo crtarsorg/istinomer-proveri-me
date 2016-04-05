@@ -76,8 +76,8 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 
 ###### Consistency (Doslednost)
  - Consistent (Dosledno)
- - Inconsistent (Nešto između)
- - In between (Nedosledno)
+ - Inconsistent (Nedosledno) 
+ - In between (Nešto između)
 
 ##### category 
  - Culture (Kultura)

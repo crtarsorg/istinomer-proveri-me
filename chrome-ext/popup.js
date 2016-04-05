@@ -129,11 +129,11 @@ function buildHTML(respData){
         'In progress': 'Radi se na tome',
         'Stalled': 'Krenuli pa stali',
         'Unfulfilled': 'Neispunjeno',
-        'Not started': 'Ni započeto',
+        'Not started': 'Ni zapo&#269;eto', //Ni započeto
         'Consistent': 'Dosledno',
-        'In between': 'Nedosledno',
-        'Inconsistent': 'Nešto između'
-    };
+        'Inconsistent': 'Ne&#353;to izme&#273;u', //Nešto između
+        'In between': 'Nedosledno'
+           };
 
     $.each(respData, function(index, item){
         var grade;

@@ -1,499 +1,497 @@
 {% extends "layout.html" %}
-
 {% block style %}
-    <style>
-        a.source-url, a.source-url:hover{
-            color: white;
-        }
-        .list-group-factcheckr li { background: white; }
-        .list-group-factcheckr li:nth-child(odd) { background: #E8E8EE; }
-    </style>
+<style>
+   a.source-url, a.source-url:hover{
+   color: white;
+   }
+   .list-group-factcheckr li { background: white; }
+   .list-group-factcheckr li:nth-child(odd) { background: #E8E8EE; }
+</style>
 {% endblock %}
 {% block script %}
 <script type="text/javascript">
-    $(document).ready(function(){
-
-        $('.datepicker').datepicker({
-            format: 'dd/mm/yyyy',
-            autoclose: true
-        });
-
-        $('#editSubmitBtn').click(function(){
-
-            var data = {
-                'doc_id': $('#doc_id_modal', "#editModal").val(),
-                'category': $('#category', "#editModal").val(),
-                'date_of_statement': $('#date_of_statement', "#editModal").val(),
-                'date_of_article_pub': $('#date_of_article_pub', "#editModal").val(),
-                'author_of_article': $('#author_of_article', "#editModal").val(),
-                'classification': $('#classification', "#editModal").val(),
-                'grade': $('#grade', "#editModal").val()
-            };
-
-            if($('#classification').val() == "Promise"){
-                data['promise_due_date'] = $('#dueness_promise', "#editModal").val();
-            }
-
-
-            if($("#check_author").is(':checked')){
-                data['politician'] = true;
-                data['quote_author'] = $('#politician', "#editModal").val();
-                data['quote_author_affiliation'] = $('#politician_party option:selected', "#editModal").html();
-            }
-            else{
-                data['politician'] = false;
-                data['quote_author'] = $('#quote_author', "#editModal").val();
-                data['quote_author_affiliation'] = $('#quote_affiliation', "#editModal").val()
-            }
-
-            $.ajax({
-                type: "POST",
-                url: "{{ url_for("main.edit") }}",
-                data: JSON.stringify(data),
-                contentType: "application/json; charset=utf-8"
-              }).done(function () {
-                document.location = "{{ url_for( 'main.index') }}"
-            }).fail(function () { });
-        });
-
-         $(".editParam").click(function(){
-              var row_id = $(this).attr('id');
-
-             checkClassificationOptions('#classificationContainer', "#"+row_id, null);
-
-             $('#doc_id_modal', "#editModal").val(row_id);
-
-             if ($('#categoryContainer', "#" + row_id).length){
-
-                $('#classification', "#editModal").val($("#classificationContainer", "#" + row_id).val());
-
-                $('#category', "#editModal").val($("#categoryContainer", "#" + row_id).val());
-                $('#date_of_statement', "#editModal").val($("#quoteDateStringContainer", "#" + row_id).val());
-                $('#date_of_article_pub', "#editModal").val($("#articleDateStringContainer", "#" + row_id).val());
-
-                $('#author_of_article', "#editModal").val($("#articleAuthorContainer", "#" + row_id).val());
-                $('#grade', "#editModal").val($("#gradeContainer", "#" + row_id).val());
-                $('#dueness_promise', "#editModal").val($("#promiseDueContainer", "#" + row_id).val());
-
-                 if ($('#quotePoliticianContainer', "#" + row_id).val() == "True"){
-                     $('#check_author', "#editModal").prop('checked', true);
-
-                     $('#politician', "#editModal").val($("#quoteAuthorContainer", "#" + row_id).val());
-                     $('#politician_party', "#editModal").val($("#quoteAuthorContainer", "#" + row_id).val());
-
-                    $('.quoteAuth').hide();
-                    $('.quoteAffil').hide();
-
-                    $('.politicianDiv').show();
-                    $('.polParty').show();
-
-                }
-                else{
-                     $('#check_author', "#editModal").prop('checked', false);
-
-                     $('#quote_author', "#editModal").val($("#quoteAuthorContainer", "#" + row_id).val());
-                     $('#quote_affiliation', "#editModal").val($("#quoteAffiliationContainer", "#" + row_id).val());
-
-                    $('.quoteAuth').show();
-                    $('.quoteAffil').show();
-
-                    $('.politicianDiv').hide();
-                    $('.polParty').hide();
-                }
-             }
-
-         });
-
-        $('.deleteBtn').click(function(){
-            var row_id = $(this).attr('id');
-            $('#reason_id').val(row_id);
-
-            $('#inappropriate', "#reasonModal").val($('#inapproText', "#" + row_id).text().trim());
-        });
-
-        $('.inappropriateLink').click(function(){
-            var row_id = $(this).attr('id');
-            $('#textRsn', "#showReasonModal").text($('#inapproText', "#" + row_id).text().trim());
-        });
-
-        $('#check_author').change(function(){
-            if($(this).is(':checked')){
-
-                $('.quoteAuth').hide();
-                $('.quoteAffil').hide();
-
-                $('.politicianDiv').show();
-                $('.polParty').show();
-
-            }
-            else{
-                $('.quoteAuth').show();
-                $('.quoteAffil').show();
-
-                $('.politicianDiv').hide();
-                $('.polParty').hide();
-            }
-        });
-
-        if ($('#classification', "#editModal").val() == "Notepad" || $('#classification', "#editModal").val() == "Backlog"){
-            $('.gradeDiv #grade option', "#editModal").remove();
-            $(".gradeDiv #grade", "#editModal").append($("<option></option>").val('').html(''));
-        }
-
-        $('#classification', "#editModal").change(function(){
-
-            checkClassificationOptions('#classification', "#editModal");
-        });
-
-        $('#politician_party').val($('#politician').val());
-        $('#politician').change(function(){
-            $('#politician_party').val($(this).val());
-        });
-
-    });
-
-
-function checkClassificationOptions(childId, parentId, row_id){
-    if($(childId, parentId).val() == "Promise"){
-        $('#dueness_promise', "#editModal").addClass('datepicker');
-        $('#dueness_promise', "#editModal").removeAttr("disabled");
-        $('.gradeDiv #grade option').remove();
-
-       var promises_array = {
-            'Fulfilled': 'Ispunjeno',
-            'Almost fulfilled': 'Skoro ispunjeno',
-            'In progress': 'Radi se na tome',
-            'Stalled': 'Krenuli pa stali',
-            'Unfulfilled': 'Neispunjeno',
-            'Not started': 'Ni započeto'
-        };
-
-       $.each(promises_array, function(key, value){
-          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(key).html(value));
+   $(document).ready(function(){
+   
+       $('.datepicker').datepicker({
+           format: 'dd/mm/yyyy',
+           autoclose: true
        });
-
+   
+       $('#editSubmitBtn').click(function(){
+   
+           var data = {
+               'doc_id': $('#doc_id_modal', "#editModal").val(),
+               'category': $('#category', "#editModal").val(),
+               'date_of_statement': $('#date_of_statement', "#editModal").val(),
+               'date_of_article_pub': $('#date_of_article_pub', "#editModal").val(),
+               'author_of_article': $('#author_of_article', "#editModal").val(),
+               'classification': $('#classification', "#editModal").val(),
+               'grade': $('#grade', "#editModal").val()
+           };
+   
+           if($('#classification').val() == "Promise"){
+               data['promise_due_date'] = $('#dueness_promise', "#editModal").val();
+           }
+           // if($('#classification').val() == "Notepad"){
+           //     data['date_of_statement'] = $('#date_of_statement', "#editModal").val();
+           // }
+   
+   
+           if($("#check_author").is(':checked')){
+               data['politician'] = true;
+               data['quote_author'] = $('#politician', "#editModal").val();
+               data['quote_author_affiliation'] = $('#politician_party option:selected', "#editModal").html();
+           }
+           else{
+               data['politician'] = false;
+               data['quote_author'] = $('#quote_author', "#editModal").val();
+               data['quote_author_affiliation'] = $('#quote_affiliation', "#editModal").val()
+           }
+   
+           $.ajax({
+               type: "POST",
+               url: "{{ url_for("main.edit") }}",
+               data: JSON.stringify(data),
+               contentType: "application/json; charset=utf-8"
+             }).done(function () {
+               document.location = "{{ url_for( 'main.index') }}"
+           }).fail(function () { });
+       });
+   
+        $(".editParam").click(function(){
+             var row_id = $(this).attr('id');
+   
+            checkClassificationOptions('#classificationContainer', "#"+row_id, null);
+   
+            $('#doc_id_modal', "#editModal").val(row_id);
+   
+            if ($('#categoryContainer', "#" + row_id).length){
+   
+               $('#classification', "#editModal").val($("#classificationContainer", "#" + row_id).val());
+   
+               $('#category', "#editModal").val($("#categoryContainer", "#" + row_id).val());
+               $('#date_of_statement', "#editModal").val($("#quoteDateStringContainer", "#" + row_id).val());
+               $('#date_of_article_pub', "#editModal").val($("#articleDateStringContainer", "#" + row_id).val());
+   
+               $('#author_of_article', "#editModal").val($("#articleAuthorContainer", "#" + row_id).val());
+               $('#grade', "#editModal").val($("#gradeContainer", "#" + row_id).val());
+               $('#dueness_promise', "#editModal").val($("#promiseDueContainer", "#" + row_id).val());
+   
+                if ($('#quotePoliticianContainer', "#" + row_id).val() == "True"){
+                    $('#check_author', "#editModal").prop('checked', true);
+   
+                    $('#politician', "#editModal").val($("#quoteAuthorContainer", "#" + row_id).val());
+                    $('#politician_party', "#editModal").val($("#quoteAuthorContainer", "#" + row_id).val());
+   
+                   $('.quoteAuth').hide();
+                   $('.quoteAffil').hide();
+   
+                   $('.politicianDiv').show();
+                   $('.polParty').show();
+   
+               }
+               else{
+                    $('#check_author', "#editModal").prop('checked', false);
+   
+                    $('#quote_author', "#editModal").val($("#quoteAuthorContainer", "#" + row_id).val());
+                    $('#quote_affiliation', "#editModal").val($("#quoteAffiliationContainer", "#" + row_id).val());
+   
+                   $('.quoteAuth').show();
+                   $('.quoteAffil').show();
+   
+                   $('.politicianDiv').hide();
+                   $('.polParty').hide();
+               }
+            }
+   
+        });
+   
+       $('.deleteBtn').click(function(){
+           var row_id = $(this).attr('id');
+           $('#reason_id').val(row_id);
+   
+           $('#inappropriate', "#reasonModal").val($('#inapproText', "#" + row_id).text().trim());
+       });
+   
+       $('.inappropriateLink').click(function(){
+           var row_id = $(this).attr('id');
+           $('#textRsn', "#showReasonModal").text($('#inapproText', "#" + row_id).text().trim());
+       });
+   
+       $('#check_author').change(function(){
+           if($(this).is(':checked')){
+   
+               $('.quoteAuth').hide();
+               $('.quoteAffil').hide();
+   
+               $('.politicianDiv').show();
+               $('.polParty').show();
+   
+           }
+           else{
+               $('.quoteAuth').show();
+               $('.quoteAffil').show();
+   
+               $('.politicianDiv').hide();
+               $('.polParty').hide();
+           }
+       });
+   
+       if ($('#classification', "#editModal").val() == "Notepad" || $('#classification', "#editModal").val() == "Backlog"){
+           $('.gradeDiv #grade option', "#editModal").remove();
+           $(".gradeDiv #grade", "#editModal").append($("<option></option>").val('').html(''));
+       }
+   
+       $('#classification', "#editModal").change(function(){
+   
+           checkClassificationOptions('#classification', "#editModal");
+       });
+   
+       $('#politician_party').val($('#politician').val());
+       $('#politician').change(function(){
+           $('#politician_party').val($(this).val());
+       });
+   
+   });
+   
+   
+   function checkClassificationOptions(childId, parentId, row_id){
+   if($(childId, parentId).val() == "Promise"){
+       $('#dueness_promise', "#editModal").addClass('datepicker');
+       $('#dueness_promise', "#editModal").removeAttr("disabled");
+       $('#date_of_statement', "#editModal").prop("disabled", true);
+       $('.gradeDiv #grade option').remove();
+   
+      var promises_array = {
+           'Fulfilled': 'Ispunjeno',
+           'Almost fulfilled': 'Skoro ispunjeno',
+           'In progress': 'Radi se na tome',
+           'Stalled': 'Krenuli pa stali',
+           'Unfulfilled': 'Neispunjeno',
+           'Not started': 'Ni započeto'
+       };
+   
+      $.each(promises_array, function(key, value){
+         $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(key).html(value));
+      });
+   
    }
-    else if($(childId, parentId).val() == "Truthfulness"){
-        $('#dueness_promise', "#editModal").prop("disabled", true);
-        $('#dueness_promise', "#editModal").addClass('datepicker');
+   else if($(childId, parentId).val() == "Notepad"){
+        $('#date_of_statement', "#editModal").prop("disabled", false);
+   }
+   else if($(childId, parentId).val() == "Truthfulness"){
+       $('#dueness_promise', "#editModal").prop("disabled", true);
+       $('#dueness_promise', "#editModal").addClass('datepicker');
        $('.gradeDiv #grade option', "#editModal").remove();
-
-       var truthfulness_array = {
-            'True': 'Istina',
-            'Mostly true': 'Skoro istina',
-            'Half true': 'Poluistina',
-            'Mostly false': 'Skoro neistina',
-            'False': 'Neistina',
-            'Pants on fire': 'Kratke noge'
-        };
-
-       $.each(truthfulness_array, function(key, value){
-          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(key).html(value));
-       });
-
-    }
-    else if($(childId, parentId).val() == "Consistency"){
-        $('#dueness_promise', "#editModal").prop("disabled", true);
-        $('#dueness_promise', "#editModal").addClass('datepicker');
+       $('#date_of_statement', "#editModal").prop("disabled", true);
+      var truthfulness_array = {
+           'True': 'Istina',
+           'Mostly true': 'Skoro istina',
+           'Half true': 'Poluistina',
+           'Mostly false': 'Skoro neistina',
+           'False': 'Neistina',
+           'Pants on fire': 'Kratke noge'
+       };
+   
+      $.each(truthfulness_array, function(key, value){
+         $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(key).html(value));
+      });
+   
+   }
+   else if($(childId, parentId).val() == "Consistency"){
+       $('#dueness_promise', "#editModal").prop("disabled", true);
+       $('#dueness_promise', "#editModal").addClass('datepicker');
+      $('.gradeDiv #grade option', "#editModal").remove();
+      $('#date_of_statement', "#editModal").prop("disabled", true);
+       var consistency_array = {
+           'Consistent': 'Dosledno',
+           'In between': 'Nešto između',
+           'Inconsistent': 'Nedosledno'
+       };
+      $.each(consistency_array, function(key, value){
+         $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(key).html(value));
+      });
+   }
+   else{
        $('.gradeDiv #grade option', "#editModal").remove();
-
-        var consistency_array = {
-            'Consistent': 'Dosledno',
-            'In between': 'Nedosledno',
-            'Inconsistent': 'Nešto između'
-        };
-       $.each(consistency_array, function(key, value){
-          $(".gradeDiv #grade", "#editModal").append($("<option></option>").val(key).html(value));
-       });
-    }
-    else{
-        $('.gradeDiv #grade option', "#editModal").remove();
-        $(".gradeDiv #grade", "#editModal").append($("<option></option>").val('').html(''));
-        $('#dueness_promise', "#editModal").prop("disabled", true);
-        $('#dueness_promise', "#editModal").addClass('datepicker');
-    }
-    var map_select = $("#gradeContainer", "#" + row_id).val();
-    $(".gradeDiv #grade option[value='" + map_select + "']", "#editModal").attr("selected","selected");
-}
+       $('#date_of_statement', "#editModal").prop("disabled", true);
+       $(".gradeDiv #grade", "#editModal").append($("<option></option>").val('').html(''));
+       $('#dueness_promise', "#editModal").prop("disabled", true);
+       $('#dueness_promise', "#editModal").addClass('datepicker');
+   }
+   var map_select = $("#gradeContainer", "#" + row_id).val();
+   $(".gradeDiv #grade option[value='" + map_select + "']", "#editModal").attr("selected","selected");
+   }
 </script>
 {% endblock %}
-
 {% block content %}
 <section class="container content-section text-center">
-    <div class="row">
-        <div class="col-lg-12" style="padding-left:15%;padding-right:15%">
-            <ul class="list-group list-group-factcheckr">
+   <div class="row">
+      <div class="col-lg-12" style="padding-left:15%;padding-right:15%">
+         <ul class="list-group list-group-factcheckr">
             {% for req in factcheck_requests %}
-                <li id="{{ req._id }}" class="list-group-item" style="padding-bottom:0.6em;">
-                    {% if req.quote is defined %}
-                    <input type="hidden" id="categoryContainer" value="{{ req.category }}">
-                    <input type="hidden" id="classificationContainer" value="{{ req.classification }}">
-                    <input type="hidden" id="gradeContainer" value="{{ req.grade }}">
-                    <input type="hidden" id="quoteAffiliationContainer" value="{{ req.quote.affiliation}}">
-                    <input type="hidden" id="quotePoliticianContainer" value="{{ req.quote.politician}}">
-                    <input type="hidden" id="quoteDateStringContainer" value="{{ req.quote.date.strftime('%d/%m/%Y') if req.quote.date else '' }}">
-                    <input type="hidden" id="quoteAuthorContainer" value="{{ req.quote.author}}">
-                    {% if req.promise is defined %}
-                     <input type="hidden" id="promiseDueContainer" value="{{ req.promise.due.strftime('%d/%m/%Y') if req.promise.due else '' }}">
-                    {% endif %}
-                    <input type="hidden" id="articleAuthorContainer" value="{{ req.article.author}}">
-                    <input type="hidden" id="articleDateStringContainer" value="{{ req.article.date.strftime('%d/%m/%Y') if req.article.date else '' }}">
-                    {% endif %}
-                    <p style="text-align: left">{{ req.text }}</p>
-                    <div style="margin-top:0.5em" align="right">
-                        {% if req.classification is defined %}
-                            <span id="classification" class="label label-primary" style="margin: 2px;">
-                                {% set class_json = {'Backlog': 'Backlog', 'Notepad': 'Beležnica', 'Promise': 'Obecanja', 'Truthfulness':'Istinitost', 'Consistency': 'Doslednost'} %}
-                                {{ class_json[req.classification] }}
-                            </span>
-                        {% endif %}
-                        {% if req.grade is defined and req.classification not in ["Notepad", "Backlog"]%}
-                            <span id="grade" class="label label-primary" style="margin: 2px;">
-                                {%  set array = {
-                                        'True': 'Istina',
-                                        'Mostly true': 'Skoro istina',
-                                        'Half true': 'Poluistina',
-                                        'Mostly false': 'Skoro neistina',
-                                        'False': 'Neistina',
-                                        'Pants on fire': 'Kratke noge',
-                                        'Fulfilled': 'Ispunjeno',
-                                        'Almost fulfilled': 'Skoro ispunjeno',
-                                        'In progress': 'Radi se na tome',
-                                        'Stalled': 'Krenuli pa stali',
-                                        'Unfulfilled': 'Neispunjeno',
-                                        'Not started': 'Ni započeto',
-                                        'Consistent': 'Dosledno',
-                                        'In between': 'Nedosledno',
-                                        'Inconsistent': 'Nešto između'
-                                    }
-                                %}
-                                {{ array[req.grade] }}
-                            </span>
-                        {% endif %}
-                        <span class="label label-default" style="margin-left:2px;">
-                            <a class="source-url" href="{{ req.url }}" targ="_blank">{{ req.domain }}</a>
-                        </span>
-                        {% if session.logged_in is defined %}
-                            {% if req.inappropriate is undefined %}
-                                <span class="editSpan" style="margin-left:2px;">
-                                    <a class="btn btn-sm btn-success editParam" id="{{ req._id }}" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-pencil"></i></a>
-                                </span>
-                                 <span class="" style="margin-left:2px;">
-                                    <a class="btn btn-sm btn-danger deleteBtn" id="{{ req._id }}" data-toggle="modal" data-target="#reasonModal" ><i class="glyphicon glyphicon-trash"></i></a>
-                                </span>
-                            {% else %}
-                                <span class="label label-danger" id="inapprSpan" style="margin-left:2px;">
-                                    <a class="source-url inappropriateLink" id="{{ req._id }}"  data-toggle="modal" data-target="#showReasonModal" targ="_blank">Neprikladno</a>
-                                    <span id="inapproText" style="display: none">{{ req.inappropriate }}</span>
-                                </span>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                <br><br>
-                </li>
+            <li id="{{ req._id }}" class="list-group-item" style="padding-bottom:0.6em;">
+               {% if req.quote is defined %}
+               <input type="hidden" id="categoryContainer" value="{{ req.category }}">
+               <input type="hidden" id="classificationContainer" value="{{ req.classification }}">
+               <input type="hidden" id="gradeContainer" value="{{ req.grade }}">
+               <input type="hidden" id="quoteAffiliationContainer" value="{{ req.quote.affiliation}}">
+               <input type="hidden" id="quotePoliticianContainer" value="{{ req.quote.politician}}">
+               <input type="hidden" id="quoteDateStringContainer" value="{{ req.quote.date.strftime('%d/%m/%Y') if req.quote.date else '' }}">
+               <input type="hidden" id="quoteAuthorContainer" value="{{ req.quote.author}}">
+               {% if req.promise is defined %}
+               <input type="hidden" id="promiseDueContainer" value="{{ req.promise.due.strftime('%d/%m/%Y') if req.promise.due else '' }}">
+               {% endif %}
+               <input type="hidden" id="articleAuthorContainer" value="{{ req.article.author}}">
+               <input type="hidden" id="articleDateStringContainer" value="{{ req.article.date.strftime('%d/%m/%Y') if req.article.date else '' }}">
+               {% endif %}
+               <p style="text-align: left">{{ req.text }}</p>
+               <div style="margin-top:0.5em" align="right">
+                  {% if req.classification is defined %}
+                  <span id="classification" class="label label-primary" style="margin: 2px;">
+                  {% set class_json = {'Backlog': 'Backlog', 'Notepad': 'Beležnica', 'Promise': 'Obecanja', 'Truthfulness':'Istinitost', 'Consistency': 'Doslednost'} %}
+                  {{ class_json[req.classification] }}
+                  </span>
+                  {% endif %}
+                  {% if req.grade is defined and req.classification not in ["Notepad", "Backlog"]%}
+                  <span id="grade" class="label label-primary" style="margin: 2px;">
+                  {%  set array = {
+                  'True': 'Istina',
+                  'Mostly true': 'Skoro istina',
+                  'Half true': 'Poluistina',
+                  'Mostly false': 'Skoro neistina',
+                  'False': 'Neistina',
+                  'Pants on fire': 'Kratke noge',
+                  'Fulfilled': 'Ispunjeno',
+                  'Almost fulfilled': 'Skoro ispunjeno',
+                  'In progress': 'Radi se na tome',
+                  'Stalled': 'Krenuli pa stali',
+                  'Unfulfilled': 'Neispunjeno',
+                  'Not started': 'Ni započeto',
+                  'Consistent': 'Dosledno',
+                  'In between': 'Nešto između',
+                  'Inconsistent': 'Nedosledno'
+                  }
+                  %}
+                  {{ array[req.grade] }}
+                  </span>
+                  {% endif %}
+                  <span class="label label-default" style="margin-left:2px;">
+                  <a class="source-url" href="{{ req.url }}" targ="_blank">{{ req.domain }}</a>
+                  </span>
+                  {% if session.logged_in is defined %}
+                  {% if req.inappropriate is undefined %}
+                  <span class="editSpan" style="margin-left:2px;">
+                  <a class="btn btn-sm btn-success editParam" id="{{ req._id }}" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </span>
+                  <span class="" style="margin-left:2px;">
+                  <a class="btn btn-sm btn-danger deleteBtn" id="{{ req._id }}" data-toggle="modal" data-target="#reasonModal" ><i class="glyphicon glyphicon-trash"></i></a>
+                  </span>
+                  {% else %}
+                  <span class="label label-danger" id="inapprSpan" style="margin-left:2px;">
+                  <a class="source-url inappropriateLink" id="{{ req._id }}"  data-toggle="modal" data-target="#showReasonModal" targ="_blank">Neprikladno</a>
+                  <span id="inapproText" style="display: none">{{ req.inappropriate }}</span>
+                  </span>
+                  {% endif %}
+                  {% endif %}
+               </div>
+               <br><br>
+            </li>
             {% endfor %}
-            </ul>
-        </div>
-    </div>
+         </ul>
+      </div>
+   </div>
 </section>
 <div id="loginModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
+   <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Login as Admin</h4>
-          </div>
-          <div class="modal-body">
-              <form class="form-horizontal" method="post" action="{{ url_for("admin.login") }}">
-                  <div class="row form-group">
-                      <div class=" col-xs-5">
-                          {{ form.username.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.username(class="form-control pull-left") }}
-                      </div>
-                  </div>
-                  <div class="row form-group">
-                      <div class=" col-xs-5">
-                          {{ form.password.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.password(class="form-control pull-left") }}
-                      </div>
-                  </div>
-                   <div class="row form-group">
-                    <button type="submit" class="btn btn-default col-xs-offset-8">Prijavite se</button>
-                   </div>
-              </form>
-
-          </div>
-        </div>
+         </div>
+         <div class="modal-body">
+            <form class="form-horizontal" method="post" action="{{ url_for("admin.login") }}">
+            <div class="row form-group">
+               <div class=" col-xs-5">
+                  {{ form.username.label(class="control-label pull-right") }}
+               </div>
+               <div class=" col-xs-5">
+                  {{ form.username(class="form-control pull-left") }}
+               </div>
+            </div>
+            <div class="row form-group">
+               <div class=" col-xs-5">
+                  {{ form.password.label(class="control-label pull-right") }}
+               </div>
+               <div class=" col-xs-5">
+                  {{ form.password(class="form-control pull-left") }}
+               </div>
+            </div>
+            <div class="row form-group">
+               <button type="submit" class="btn btn-default col-xs-offset-8">Prijavite se</button>
+            </div>
+            </form>
+         </div>
       </div>
+   </div>
 </div>
-
-    <div id="editModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
+<div id="editModal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Izmenite parametre</h4>
-          </div>
-          <div class="modal-body">
-              <form class="form-horizontal" id="editForm">
-                  <div class="row form-group">
-                          {{ form.doc_id(id="doc_id_modal") }}
-                      <div class=" col-xs-5">
-                          {{ form.classification.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.classification(class="form-control pull-left") }}
-                      </div>
+         </div>
+         <div class="modal-body">
+            <form class="form-horizontal" id="editForm">
+               <div class="row form-group">
+                  {{ form.doc_id(id="doc_id_modal") }}
+                  <div class=" col-xs-5">
+                     {{ form.classification.label(class="control-label pull-right") }}
                   </div>
-                  <div class="row form-group dueDate">
-                      <div class=" col-xs-5">
-                          {{ form.dueness_promise.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.dueness_promise(class="form-control pull-left datepicker",  disabled="disabled") }}
-                      </div>
+                  <div class=" col-xs-5">
+                     {{ form.classification(class="form-control pull-left") }}
                   </div>
-                  <div class="row form-group">
-                      <div class="col-xs-5">
-                          {{ form.grade.label(class="control-label pull-right") }}
-                      </div>
-                      <div class="col-xs-5 gradeDiv">
-                          {{ form.grade(class="form-control pull-left") }}
-                      </div>
+               </div>
+               <div class="row form-group dueDate">
+                  <div class=" col-xs-5">
+                     {{ form.dueness_promise.label(class="control-label pull-right") }}
                   </div>
-                  <div class="row form-group">
-                      <div class=" col-xs-5">
-                          {{ form.category.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.category(class="form-control pull-left") }}
-                      </div>
+                  <div class=" col-xs-5">
+                     {{ form.dueness_promise(class="form-control pull-left datepicker",  disabled="disabled") }}
                   </div>
-                    <div class="row form-group">
-                      <div class=" col-xs-5">
-                          {{ form.author_of_article.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.author_of_article(class="form-control pull-left") }}
-                      </div>
+               </div>
+               <div class="row form-group">
+                  <div class="col-xs-5">
+                     {{ form.grade.label(class="control-label pull-right") }}
                   </div>
-                  <div class="row form-group">
-                      <div class=" col-xs-5">
-                          {{ form.date_of_article_pub.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.date_of_article_pub(class="form-control pull-left datepicker") }}
-                      </div>
+                  <div class="col-xs-5 gradeDiv">
+                     {{ form.grade(class="form-control pull-left") }}
                   </div>
-                  <div class="row form-group">
-                      <div class=" col-xs-5">
-                          {{ form.check_author.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.check_author(class="pull-left") }}
-                      </div>
+               </div>
+               <div class="row form-group">
+                  <div class=" col-xs-5">
+                     {{ form.category.label(class="control-label pull-right") }}
                   </div>
-                  <div class="row form-group politicianDiv" style="display: none;">
-                      <div class=" col-xs-5">
-                          {{ form.politician.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.politician(class="form-control pull-left") }}
-                      </div>
+                  <div class=" col-xs-5">
+                     {{ form.category(class="form-control pull-left") }}
                   </div>
-                  <div class="row form-group polParty" style="display: none;">
-                      <div class=" col-xs-5">
-                          {{ form.politician_party.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.politician_party(class="form-control pull-left", disabled="disabled") }}
-                      </div>
+               </div>
+               <div class="row form-group">
+                  <div class=" col-xs-5">
+                     {{ form.author_of_article.label(class="control-label pull-right") }}
                   </div>
-                  <div class="row form-group quoteAuth">
-                      <div class=" col-xs-5">
-                          {{ form.quote_author.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.quote_author(class="form-control pull-left") }}
-                      </div>
+                  <div class=" col-xs-5">
+                     {{ form.author_of_article(class="form-control pull-left") }}
                   </div>
-                  <div class="row form-group quoteAffil">
-                      <div class=" col-xs-5">
-                          {{ form.quote_affiliation.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.quote_affiliation(class="form-control pull-left") }}
-                      </div>
+               </div>
+               <div class="row form-group">
+                  <div class=" col-xs-5">
+                     {{ form.date_of_article_pub.label(class="control-label pull-right") }}
                   </div>
-                  <div class="row form-group">
-                      <div class=" col-xs-5">
-                          {{ form.date_of_statement.label(class="control-label pull-right") }}
-                      </div>
-                      <div class=" col-xs-5">
-                          {{ form.date_of_statement(class="form-control pull-left datepicker") }}
-                      </div>
+                  <div class=" col-xs-5">
+                     {{ form.date_of_article_pub(class="form-control pull-left datepicker") }}
                   </div>
-                   <div class="row form-group">
-                    <button type="button" id="editSubmitBtn" class="btn btn-default col-xs-offset-8">Potvrdite</button>
-                   </div>
-              </form>
-          </div>
-        </div>
+               </div>
+               <div class="row form-group">
+                  <div class=" col-xs-5">
+                     {{ form.check_author.label(class="control-label pull-right") }}
+                  </div>
+                  <div class=" col-xs-5">
+                     {{ form.check_author(class="pull-left") }}
+                  </div>
+               </div>
+               <div class="row form-group politicianDiv" style="display: none;">
+                  <div class=" col-xs-5">
+                     {{ form.politician.label(class="control-label pull-right") }}
+                  </div>
+                  <div class=" col-xs-5">
+                     {{ form.politician(class="form-control pull-left") }}
+                  </div>
+               </div>
+               <div class="row form-group polParty" style="display: none;">
+                  <div class=" col-xs-5">
+                     {{ form.politician_party.label(class="control-label pull-right") }}
+                  </div>
+                  <div class=" col-xs-5">
+                     {{ form.politician_party(class="form-control pull-left", disabled="disabled") }}
+                  </div>
+               </div>
+               <div class="row form-group quoteAuth">
+                  <div class=" col-xs-5">
+                     {{ form.quote_author.label(class="control-label pull-right") }}
+                  </div>
+                  <div class=" col-xs-5">
+                     {{ form.quote_author(class="form-control pull-left") }}
+                  </div>
+               </div>
+               <div class="row form-group quoteAffil">
+                  <div class=" col-xs-5">
+                     {{ form.quote_affiliation.label(class="control-label pull-right") }}
+                  </div>
+                  <div class=" col-xs-5">
+                     {{ form.quote_affiliation(class="form-control pull-left") }}
+                  </div>
+               </div>
+               <div class="row form-group">
+                  <div class=" col-xs-5">
+                     {{ form.date_of_statement.label(class="control-label pull-right") }}
+                  </div>
+                  <div class=" col-xs-5">
+                     {{ form.date_of_statement(class="form-control pull-left datepicker", disabled="disabled") }}
+                  </div>
+               </div>
+               <div class="row form-group">
+                  <button type="button" id="editSubmitBtn" class="btn btn-default col-xs-offset-8">Potvrdite</button>
+               </div>
+            </form>
+         </div>
       </div>
+   </div>
 </div>
-
 <div id="reasonModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
+   <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Zbog čega je ovaj unos neprikladan?</h4>
-          </div>
-          <div class="modal-body">
-              <form class="form-horizontal" method="post" action="{{ url_for("main.inappropriate") }}">
-                  <div class="row form-group">
-                    {{ form.doc_id(id="reason_id") }}
-                    <div class="col-xs-5">
-                        {{ form.inappropriate.label(class="pull-right") }}
-                    </div>
-                    <div class="col-xs-7">
-                        {{ form.inappropriate(class="form-control") }}
-                    </div>
-                  </div>
-                  <div class="row form-group">
-                    <button type="submit" id="btnFlagEntry" class="btn btn-default col-xs-offset-6">Potvrdite</button>
-                  </div>
-              </form>
-          </div>
-        </div>
+         </div>
+         <div class="modal-body">
+            <form class="form-horizontal" method="post" action="{{ url_for("main.inappropriate") }}">
+            <div class="row form-group">
+               {{ form.doc_id(id="reason_id") }}
+               <div class="col-xs-5">
+                  {{ form.inappropriate.label(class="pull-right") }}
+               </div>
+               <div class="col-xs-7">
+                  {{ form.inappropriate(class="form-control") }}
+               </div>
+            </div>
+            <div class="row form-group">
+               <button type="submit" id="btnFlagEntry" class="btn btn-default col-xs-offset-6">Potvrdite</button>
+            </div>
+            </form>
+         </div>
       </div>
+   </div>
 </div>
-
-    <div id="showReasonModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
+<div id="showReasonModal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Razlog:</h4>
-          </div>
-          <div class="modal-body">
-              <div class="row form-group">
-                <p id="textRsn" style="margin: 5px; padding: 2px"></p>
-              </div>
-          </div>
-        </div>
+         </div>
+         <div class="modal-body">
+            <div class="row form-group">
+               <p id="textRsn" style="margin: 5px; padding: 2px"></p>
+            </div>
+         </div>
       </div>
+   </div>
 </div>
 {% endblock %}
