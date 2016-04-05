@@ -106,13 +106,18 @@
    
         });
    
-       $('.deleteBtn').click(function(){
+       $('.ignoreBtn').click(function(){
            var row_id = $(this).attr('id');
            $('#reason_id').val(row_id);
-   
            $('#inappropriate', "#reasonModal").val($('#inapproText', "#" + row_id).text().trim());
        });
-   
+
+        $('.deleteBtn').click(function(){
+           var row_id = $(this).attr('id');
+           $('#delete_id').val(row_id);
+           $('#delete', "#deleteModal").val($('#inapproText', "#" + row_id).text().trim());
+       });
+
        $('.inappropriateLink').click(function(){
            var row_id = $(this).attr('id');
            $('#textRsn', "#showReasonModal").text($('#inapproText', "#" + row_id).text().trim());
@@ -285,7 +290,10 @@
                   <a class="btn btn-sm btn-success editParam" id="{{ req._id }}" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-pencil"></i></a>
                   </span>
                   <span class="" style="margin-left:2px;">
-                  <a class="btn btn-sm btn-danger deleteBtn" id="{{ req._id }}" data-toggle="modal" data-target="#reasonModal" ><i class="glyphicon glyphicon-trash"></i></a>
+                  <a class="btn btn-sm btn-warning ignoreBtn" id="{{ req._id }}" data-toggle="modal" data-target="#reasonModal" ><i class="glyphicon glyphicon-ban-circle"></i></a>
+                  </span>
+                  <span class="" style="margin-left:2px;">
+                  <a class="btn btn-sm btn-danger deleteBtn" id="{{ req._id }}" data-toggle="modal" data-target="#deleteModal" ><i class="glyphicon glyphicon-trash"></i></a>
                   </span>
                   {% else %}
                   <span class="label label-danger" id="inapprSpan" style="margin-left:2px;">
@@ -490,6 +498,30 @@
             <div class="row form-group">
                <p id="textRsn" style="margin: 5px; padding: 2px"></p>
             </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div id="deleteModal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <span class="glyphicon glyphicon-question-sign"></span>
+         </div>
+         <div class="modal-body">
+            <form class="form-horizontal" method="post" action="{{ url_for("main.delete") }}">
+            <div class="form-group">
+               {{ form.doc_id(id="delete_id") }}
+               <div class="col-xs-7">
+                  Da li ste sigurni?
+               </div>
+            </div>
+            <div class="form-group" style="text-align: center">
+               <button type="submit" id="btnDelete" class="btn btn-default">Da</button>
+            </div>
+            </form>
          </div>
       </div>
    </div>

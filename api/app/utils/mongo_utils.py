@@ -64,12 +64,25 @@ class MongoUtils():
         # Call the function to update fields based on query params
         self._update(query_param, update_fields)
 
+    def soft_delete_entry(self, query):
+
+        query_param = {
+            "_id": ObjectId(query['doc_id'])
+        }
+
+        update_fields = {
+            'delete': True,
+            'new_update': True
+        }
+
+        # Call the function to update fields based on query params
+        self._update(query_param, update_fields)
+
     def _update(self, query_param, update_fields):
 
         self.mongo.db[self.collection_name].update(query_param, {"$set": update_fields})
 
-    def find(self, query={}):
-
+    def find(self, query={"delete": {'$exists': False}}):
         docs = self.mongo.db[self.collection_name].find(query).sort("timestamp", pymongo.DESCENDING)
 
         return docs

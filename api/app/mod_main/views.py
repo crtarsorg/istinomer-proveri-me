@@ -31,3 +31,10 @@ def edit():
     mongo_utils.edit_entry_doc(request.json)
     return Response(status=200)
 
+
+
+@mod_main.route('/entry/delete', methods=['POST'])
+def delete():
+    form = AdminForm(request.form)
+    mongo_utils.soft_delete_entry(form.data)
+    return redirect(url_for('main.index'))
