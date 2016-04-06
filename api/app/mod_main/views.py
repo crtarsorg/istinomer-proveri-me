@@ -11,7 +11,6 @@ def index():
     form = AdminForm()
     return render_template('mod_main/index.html', factcheck_requests=entries, form=form)
 
-
 @mod_main.route('/feed-module', methods=['GET'])
 def feed_module():
     return render_template('mod_main/feed_module.html')
