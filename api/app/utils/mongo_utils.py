@@ -222,6 +222,14 @@ class MongoUtils():
 
         return docs['result']
 
+    def find_entry_based_on_url(self, current_url):
+        query = {"url": current_url,
+                 "delete": {'$exists': False},
+                 "inappropriate": {'$exists': False}}
+
+        docs = self.mongo.db[self.collection_name].find(query)
+        return docs
+
     @staticmethod
     def convert_str_to_date(date_str):
         return datetime.strptime(date_str, "%d/%m/%Y")
