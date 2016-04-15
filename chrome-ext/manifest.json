@@ -12,15 +12,21 @@
     "scripts": [
       "js/jquery-1.12.0.min.js",
       "background.js",
-      "popup.js"
-    ]
+      "popup.js",
+      "blic-fact-checker.js"
+    ],
+    "css":["custom-css.css"]
   },
   "permissions": [
     "notifications",
     "contextMenus",
     "storage",
     "tabs",
-    "http://*.datacentar.io/"
+    "activeTab",
+    "http://localhost:5000/*",
+    "http://*.datacentar.io/*",
+    "https://*.blic.rs/*"
+
   ],
   "icons": {
     "16": "icons/icon-16.png",
