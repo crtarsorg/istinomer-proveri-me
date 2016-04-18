@@ -20,7 +20,8 @@ def submit_entry():
         'chromeUserId': req['chrome_user_id'],
         'text': req['text'],
         'timestamp': datetime.fromtimestamp(req['date'] / 1e3),
-        "classification": req['classification']
+        "classification": req['classification'],
+        "version":req['version']
     }
     mongo_utils.insert(doc)
     return Response(status=200)
