@@ -1,3 +1,8 @@
+/** Hightlight factcheck logic implementation for blic.rs **/
+
+
+var API_URL_GET_CHECKED_FACTS = "http://datacentar.io/app/istinomer-factchecker/get-page-fact-check-requests";
+var currentTabUrl  = window.location.href;
 
 var greenList = ['Half true', 'Mostly true', 'True', 'Consistent', 'In progress', 'Almost fulfilled', 'Fulfilled'];
 var yellowList = ['Stalled','Ins between'];
@@ -29,8 +34,6 @@ function styleFactCheckRequest(statement, grade) {
     });
 }
 
-var API_URL_GET_CHECKED_FACTS = "http://datacentar.io/app/istinomer-factchecker/get-page-fact-check-requests";
-var currentTabUrl  = window.location.href;
 var data = {currentUrl: currentTabUrl};
 $.ajax({
     type: "POST",
