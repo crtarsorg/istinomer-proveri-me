@@ -29,9 +29,9 @@ function styleFactCheckRequest(statement, grade) {
     });
 }
 
-var API_URL_GET_CHECKED_FACTS = "http://localhost:5000/api/get-page-fact-check-requests";
-var current_tab_url      = window.location.href;
-var data = {currentUrl: current_tab_url};
+var API_URL_GET_CHECKED_FACTS = "http://datacentar.io/app/istinomer-factchecker/get-page-fact-check-requests";
+var currentTabUrl  = window.location.href;
+var data = {currentUrl: currentTabUrl};
 $.ajax({
     type: "POST",
     url: API_URL_GET_CHECKED_FACTS,
@@ -47,7 +47,7 @@ $.ajax({
         }
     },
     error: function(err){
-        console.error("Unexpected error while trying to retrieve fact-checked entries for blic.rs");
+        console.error("Unexpected error while trying to retrieve fact-checking requests for blic.rs");
     }
 });
 

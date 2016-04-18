@@ -44,6 +44,7 @@ function executeRequestWithUserToken(user_id, info, tab) {
 
     // Generate json data to send to API
       var data = {
+        version: 2,
         chrome_user_id: user_id,
         url: tab.url,
         text: info.selectionText,
