@@ -10,19 +10,19 @@
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "https://*.blic.rs/*",
+        "http://*.blic.rs/*"
       ],
-      "css": [ "custom-css.css"],
-       "js": [ "js/jquery-1.12.0.min.js" ,"inject-css.js"],
-      "run_at": "document_start"
+      "css": [ "js/content-scripts/blic.rs/custom-css.css"],
+      "js": [ "js/jquery-1.12.0.min.js" ,"js/content-scripts/blic.rs/inject-css.js"],
+      "run_at": "document_end"
     }],
   "background": {
     "persistent": false,
     "scripts": [
       "js/jquery-1.12.0.min.js",
       "background.js",
-      "popup.js",
-      "blic-fact-checker.js"
+      "popup.js"
     ],
     "css":["custom-css.css"]
   },

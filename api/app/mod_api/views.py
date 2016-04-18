@@ -35,8 +35,8 @@ def get_entries():
     return Response(response=json_util.dumps(result), status=200, mimetype="application/json")
 
 
-@mod_api.route('/blic/fact/checker', methods=['POST'])
-def blic_fact_checker():
+@mod_api.route('/get-page-fact-check-requests', methods=['POST'])
+def get_page_fact_check_requests():
 
     if 'currentUrl' in request.json:
         result = mongo_utils.find_entry_based_on_url(request.json['currentUrl'])
