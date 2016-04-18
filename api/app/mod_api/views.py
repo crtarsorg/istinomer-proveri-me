@@ -21,8 +21,11 @@ def submit_entry():
         'text': req['text'],
         'timestamp': datetime.fromtimestamp(req['date'] / 1e3),
         "classification": req['classification'],
-        "version":req['version']
     }
+
+    if "version" in req:
+        doc["version"] = req['version']
+        
     mongo_utils.insert(doc)
     return Response(status=200)
 
