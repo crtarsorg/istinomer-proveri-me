@@ -5,21 +5,19 @@ window.onload = function() {
     chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         if (changeInfo.status == 'complete') {
             var tabUrl = tab.url;
-          searchForBlicInCurrentURL(tabUrl);
-
+            searchForBlicInCurrentURL(tabUrl,tabId);
         }
     });
 };
 
-function searchForBlicInCurrentURL(currentUrl) {
+function searchForBlicInCurrentURL(currentUrl,tabId) {
     var findDomain = "blic.rs";
     if (currentUrl.indexOf(findDomain) != -1){
-        retrieveBlicCheckedFacts(currentUrl);
-
+        retrieveBlicCheckedFacts(currentUrl,tabId);
     }
 }
 
-function retrieveBlicCheckedFacts(tabUrl){
+function retrieveBlicCheckedFacts(tabUrl, tabId){
     var data = {currentUrl: tabUrl};
     $.support.cors = true;
     $.ajax({
@@ -28,9 +26,12 @@ function retrieveBlicCheckedFacts(tabUrl){
         crossDomain: true,
         data: JSON.stringify(data),
         contentType: "application/json",
-        success: function(data){
-            console.log(data);
-            findTextInsideParagraphs(data);
+        success: function(respData){
+            for (var count = 0; count < respData.length; count++) {
+                var findCheckedFact = respData[count]["text"];
+                var gradeOfCheckedFact = respData[count]["grade"];
+                findText(findCheckedFact,gradeOfCheckedFact, tabId);
+            }
         },
         error: function(err){
             console.log(JSON.stringify(err));
@@ -39,36 +40,17 @@ function retrieveBlicCheckedFacts(tabUrl){
 }
 
 
-function findTextInsideParagraphs(respData){
-        $("#detail").find('p').each(function() {
-          for (var count = 0; count < respData.length; count++) {
-            var findCheckedFact = respData[count]["text"];
-            var str = $(this).text();
-            console.log(str);
-            if (str.indexOf(findCheckedFact) >= 0) {
-                $(this).html(
-                    $(this).html().replace(findCheckedFact, "<span class="+getColorBasedOnCategory(respData[count]["grade"]) +"> $& </span>")
-              );
-            }
-          }
-        })
-}
-function getColorBasedOnCategory(value){
-    var greenList = ['Half true', 'Mostly true', 'True', 'Consistent', 'In progress', 'Almost fulfilled', 'Fulfilled'];
-    var yellowList = ['Stalled','In between'];
-    var redList = ['Pants on fire','False', 'Not started', 'Unfulfilled', 'Inconsistent', 'Mostly false'];
+function findText(findCheckedFact,gradeOfCheckedFact, tabId) {
+    chrome.tabs.executeScript(tabId, {file: "js/jquery-1.12.0.min.js"}, function () {
+        chrome.tabs.executeScript(tabId, {file: "inject-css.js"}, function () {
+            chrome.tabs.sendMessage(tabId, {
+                scriptOptions: {
+                    param1: findCheckedFact,
+                    param2: gradeOfCheckedFact
+                }
+            }, function () {
 
-    if($.inArray( value, greenList )>=0){
-        return  "light-green";
-    }
-    else if($.inArray( value, yellowList )>=0){
-        return  "yellow";
-    }
-    else if($.inArray( value, redList )>=0){
-        return  "red";
-    }
-    else {
-        return "light-grey";
-    }
+            });
+        });
+    });
 }
-

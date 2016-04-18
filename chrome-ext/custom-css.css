@@ -14,3 +14,11 @@ span.yellow{
 span.red{
     background-color: red;
 }
+
+#grade-logo-factchecker
+{
+    background:url('chrome-extension://__MSG_@@extension_id__/icons/icon-16.png') left top;
+    width:16px;
+    height:13px;
+    display: inline-block;
+}

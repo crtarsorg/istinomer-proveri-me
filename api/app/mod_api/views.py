@@ -40,7 +40,6 @@ def blic_fact_checker():
 
     if 'currentUrl' in request.json:
         result = mongo_utils.find_entry_based_on_url(request.json['currentUrl'])
-        print json_util.dumps(result)
         return Response(response=json_util.dumps(result), status=200, mimetype="application/json")
     else:
         return Response(status=404)

@@ -7,6 +7,15 @@
     "default_icon": "icons/icon-19.png",
     "default_popup": "popup.html"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [ "custom-css.css"],
+       "js": [ "js/jquery-1.12.0.min.js" ,"inject-css.js"],
+      "run_at": "document_start"
+    }],
   "background": {
     "persistent": false,
     "scripts": [
@@ -18,6 +27,7 @@
     "css":["custom-css.css"]
   },
   "permissions": [
+    "background",
     "notifications",
     "contextMenus",
     "storage",
@@ -25,9 +35,10 @@
     "activeTab",
     "http://localhost:5000/*",
     "http://*.datacentar.io/*",
-    "https://*.blic.rs/*"
-
+    "https://*.blic.rs/*",
+    "http://*.blic.rs/*"
   ],
+   "web_accessible_resources": ["js/jquery-1.12.0.min.js", "icons/icon-16.png"],
   "icons": {
     "16": "icons/icon-16.png",
     "48": "icons/icon-48.png",
