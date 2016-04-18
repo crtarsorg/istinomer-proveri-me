@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Istinomer",
+  "name": "Istinomer Proveri me!",
   "description": "Dodatak za Chrome kojim se čitaoci informativnih web portala pozivaju da pošalju Istinomeru činjenice na proveru. Obeležite tekst koji želite da proverite, i desnim klikom izaberite Istinomer i time ste poslali izjavu sa činjenicama na proveru.",
   "version": "2.0",
   "browser_action": {
@@ -33,7 +33,6 @@
     "storage",
     "tabs",
     "activeTab",
-    "http://localhost:5000/*",
     "http://*.datacentar.io/*",
     "https://*.blic.rs/*",
     "http://*.blic.rs/*"
