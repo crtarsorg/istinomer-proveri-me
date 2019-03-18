@@ -7,10 +7,27 @@ mod_main = Blueprint('main', __name__)
 
 @mod_main.route('/', methods=['GET'])
 def index():
-    entries = mongo_utils.find()
-    form = AdminForm()
-    return render_template('mod_main/index.html', factcheck_requests=entries, form=form)
+    # print request.args
+    # skip = 0
+    # limit = 20
+    # entries = mongo_utils.find(skip, limit)
+    # total = mongo_utils.total_facts()
+    # form = AdminForm()
+    # return render_template('mod_main/index.html', factcheck_requests=entries, form=form, total = total)
+    return redirect(url_for('main.show', show=20, page=0))
 
+@mod_main.route('/show', methods=['GET'])
+def show():
+    show = request.args.get('show')
+    page = request.args.get('page')
+    if show is None or page is None:
+        return redirect(url_for('main.index'))
+    skip = int(show) * int(page)
+    limit = int(show)
+    entries = mongo_utils.find(skip, limit)
+    total = mongo_utils.total_facts()
+    form = AdminForm()
+    return render_template('mod_main/index.html', factcheck_requests=entries, form=form, total = total, page = int(page), show = int(show))
 
 @mod_main.route('/feed-module', methods=['GET'])
 def feed_module():
@@ -22,6 +39,12 @@ def feed_module():
 def inappropriate():
     form = AdminForm(request.form)
     mongo_utils.flag_entry_as_inappropriate(form.data)
+    return redirect(url_for('main.index'))
+
+@mod_main.route('/entry/remove/inappropriate', methods=['POST'])
+def remove_inappropriate():
+    form = AdminForm(request.form)
+    mongo_utils.remove_inappropriate_flag_entry(form.data)
     return redirect(url_for('main.index'))
 
 

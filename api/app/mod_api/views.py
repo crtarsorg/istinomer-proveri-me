@@ -25,7 +25,7 @@ def submit_entry():
 
     if "version" in req:
         doc["version"] = req['version']
-        
+
     mongo_utils.insert(doc)
     return Response(status=200)
 
@@ -43,7 +43,8 @@ def get_entries():
 def get_page_fact_check_requests():
 
     if 'currentUrl' in request.json:
-        result = mongo_utils.find_entry_based_on_url(request.json['currentUrl'])
+        result = mongo_utils.find_entry_based_on_url(
+            request.json['currentUrl'])
         return Response(response=json_util.dumps(result), status=200, mimetype="application/json")
     else:
         return Response(status=404)

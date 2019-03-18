@@ -1,0 +1,93 @@
+{% macro facts_macro(factcheck_requests, page, show) %}
+<div class="row">
+    <div class="col-lg-12" style="padding-left:15%;padding-right:15%">
+        <ul class="list-group list-group-factcheckr">
+            {% for req in factcheck_requests %}
+            <li id="{{ req._id }}" class="list-group-item" style="padding-bottom:0.6em;">
+                {% if req.quote is defined %}
+                <input type="hidden" id="categoryContainer" value="{{ req.category }}">
+                <input type="hidden" id="classificationContainer" value="{{ req.classification }}">
+                <input type="hidden" id="gradeContainer" value="{{ req.grade }}">
+                <input type="hidden" id="quoteAffiliationContainer" value="{{ req.quote.affiliation}}">
+                <input type="hidden" id="quotePoliticianContainer" value="{{ req.quote.politician}}">
+                <input type="hidden" id="quoteDateStringContainer"
+                    value="{{ req.quote.date.strftime('%d/%m/%Y') if req.quote.date else '' }}">
+                <input type="hidden" id="quoteAuthorContainer" value="{{ req.quote.author}}">
+                {% if req.promise is defined %}
+                <input type="hidden" id="promiseDueContainer"
+                    value="{{ req.promise.due.strftime('%d/%m/%Y') if req.promise.due else '' }}">
+                {% endif %}
+                <input type="hidden" id="articleAuthorContainer" value="{{ req.article.author}}">
+                <input type="hidden" id="articleDateStringContainer"
+                    value="{{ req.article.date.strftime('%d/%m/%Y') if req.article.date else '' }}">
+                {% endif %}
+                <p style="text-align: left">
+                    {% if page is not undefined and show is not undefined %}
+                    <strong>{{loop.index + (page * show)}}. </strong>
+                    {% else %}
+                    <strong>{{loop.index}}. </strong>
+                    {% endif %}
+                    {{ req.text }}</p>
+                <div style="margin-top:0.5em" align="right">
+                    {% if req.classification is defined %}
+                    <span id="classification" class="label label-primary" style="margin: 2px;">
+                        {% set class_json = {'Backlog': 'Backlog', 'Notepad': 'Beležnica', 'Promise': 'Obecanja', 'Truthfulness':'Istinitost', 'Consistency': 'Doslednost'} %}
+                        {{ class_json[req.classification] }}
+                    </span>
+                    {% endif %}
+                    {% if req.grade is defined and req.classification not in ["Notepad", "Backlog"]%}
+                    <span id="grade" class="label label-primary" style="margin: 2px;">
+                        {%  set array = {
+                    'True': 'Istina',
+                    'Mostly true': 'Skoro istina',
+                    'Half true': 'Poluistina',
+                    'Mostly false': 'Skoro neistina',
+                    'False': 'Neistina',
+                    'Pants on fire': 'Kratke noge',
+                    'Fulfilled': 'Ispunjeno',
+                    'Almost fulfilled': 'Skoro ispunjeno',
+                    'In progress': 'Radi se na tome',
+                    'Stalled': 'Krenuli pa stali',
+                    'Unfulfilled': 'Neispunjeno',
+                    'Not started': 'Ni započeto',
+                    'Consistent': 'Dosledno',
+                    'In between': 'Nešto između',
+                    'Inconsistent': 'Nedosledno'
+                    }
+                    %}
+                        {{ array[req.grade] }}
+                    </span>
+                    {% endif %}
+                    <span class="label label-default" style="margin-left:2px;">
+                        <a class="source-url" href="{{ req.url }}" targ="_blank">{{ req.domain }}</a>
+                    </span>
+                    {% if session.logged_in is defined %}
+                    {% if req.inappropriate|length > 1 and req.inappropriate is not undefined%}
+                    <span class="label label-danger" id="inapprSpan" style="margin-left:2px;">
+                        <a class="source-url inappropriateLink" id="{{ req._id }}" data-toggle="modal"
+                            data-target="#showReasonModal" targ="_blank" style="cursor: pointer;">Neprikladno</a>
+                        <span id="inapproText" style="display: none">{{ req.inappropriate }}</span>
+                    </span>
+                    {% endif %}
+                    <span class="editSpan" style="margin-left:2px;">
+                        <a class="btn btn-sm btn-success editParam" id="{{ req._id }}" data-toggle="modal"
+                            data-target="#editModal"><i class="glyphicon glyphicon-pencil"></i></a>
+                    </span>
+                    <span class="" style="margin-left:2px;">
+                        <a class="btn btn-sm btn-warning ignoreBtn" id="{{ req._id }}" data-toggle="modal"
+                            data-target="#reasonModal"><i class="glyphicon glyphicon-ban-circle"></i></a>
+                    </span>
+                    <span class="" style="margin-left:2px;">
+                        <a class="btn btn-sm btn-danger deleteBtn" id="{{ req._id }}" data-toggle="modal"
+                            data-target="#deleteModal"><i class="glyphicon glyphicon-trash"></i></a>
+                    </span>
+
+                    {% endif %}
+                </div>
+                <br><br>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endmacro %}

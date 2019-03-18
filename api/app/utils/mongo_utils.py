@@ -1,5 +1,5 @@
 import pymongo
-from bson import ObjectId, SON
+from bson import ObjectId
 from datetime import datetime
 
 
@@ -35,14 +35,16 @@ class MongoUtils():
 
         if 'date_of_article_pub' in query:
             if query['date_of_article_pub'] != "":
-                update_fields['article']['date'] = self.convert_str_to_date(query['date_of_article_pub'])
+                update_fields['article']['date'] = self.convert_str_to_date(
+                    query['date_of_article_pub'])
 
         if 'date_of_statement' in query:
             if query['date_of_statement'] != "":
-                update_fields['quote']['date'] = self.convert_str_to_date(query['date_of_statement'])
+                update_fields['quote']['date'] = self.convert_str_to_date(
+                    query['date_of_statement'])
 
         if 'promise_due_date' in query:
-            
+
             update_fields['promise'] = {
                 'due': self.convert_str_to_date(query['promise_due_date'])
             }
@@ -58,6 +60,19 @@ class MongoUtils():
 
         update_fields = {
             'inappropriate': query['inappropriate'],
+            'new_update': True
+        }
+
+        # Call the function to update fields based on query params
+        self._update(query_param, update_fields)
+
+    def remove_inappropriate_flag_entry(self, query):
+        query_param = {
+            "_id": ObjectId(query['doc_id'])
+        }
+
+        update_fields = {
+            'inappropriate': '',
             'new_update': True
         }
 
@@ -80,12 +95,19 @@ class MongoUtils():
 
     def _update(self, query_param, update_fields):
 
-        self.mongo.db[self.collection_name].update(query_param, {"$set": update_fields})
+        self.mongo.db[self.collection_name].update(
+            query_param, {"$set": update_fields})
 
-    def find(self, query={"delete": {'$exists': False}}):
-        docs = self.mongo.db[self.collection_name].find(query).sort("timestamp", pymongo.DESCENDING)
+    def find(self, skip, limit, query={"delete": {'$exists': False}}):
+        docs = self.mongo.db[self.collection_name].find(query).skip(skip).limit(limit).sort("timestamp", pymongo.DESCENDING)
 
         return docs
+
+    def total_facts(self, query={"delete": {'$exists': False}}):
+        docs_total = self.mongo.db[self.collection_name].find(query).count()
+
+        return docs_total
+
 
     def get(self, query=None, chrome_user_id=None):
 
@@ -115,7 +137,8 @@ class MongoUtils():
                         query_params['promise.due'] = {}
 
                         query_params['promise.due']['$gte'] = \
-                            self.convert_str_to_date(query['promise']['dueFrom'])
+                            self.convert_str_to_date(
+                                query['promise']['dueFrom'])
 
                         project['promise'] = {
                             "due": {'$dateToString;': {'format': "%d/%m/%Y", "date": "$promise.due"}}
@@ -152,7 +175,8 @@ class MongoUtils():
 
             if 'authors' in query['article']:
                 if query['article']['authors']:
-                    query_params['article.author'] = {"$in": query['article']['authors']}
+                    query_params['article.author'] = {
+                        "$in": query['article']['authors']}
 
                     project['article.author'] = True
 
@@ -161,12 +185,15 @@ class MongoUtils():
                     query_params['article.date'] = {}
 
                     if query['article']['date']['from'] and query['article']['date']['from'] != '':
-                        query_params['article.date']['$gte'] = self.convert_str_to_date(query['article']['date']['from'])
+                        query_params['article.date']['$gte'] = self.convert_str_to_date(
+                            query['article']['date']['from'])
 
                     if query['article']['date']['to'] and query['article']['date']['to'] != '':
-                        query_params['article.date']['$lte'] = self.convert_str_to_date(query['article']['date']['to'])
+                        query_params['article.date']['$lte'] = self.convert_str_to_date(
+                            query['article']['date']['to'])
 
-                project['article.date'] = {'$dateToString': {'format': "%d/%m/%Y", "date": "$article.date"}}
+                project['article.date'] = {'$dateToString': {
+                    'format': "%d/%m/%Y", "date": "$article.date"}}
         # Build the quote query params
         if 'quote' in query:
 
@@ -187,12 +214,15 @@ class MongoUtils():
                     query_params['quote.date'] = {}
 
                     if query['quote']['date']['from'] and query['quote']['date']['from'] != '':
-                        query_params['quote.date']['$gte'] = self.convert_str_to_date(query['quote']['date']['from'])
+                        query_params['quote.date']['$gte'] = self.convert_str_to_date(
+                            query['quote']['date']['from'])
 
                     if query['quote']['date']['to'] and query['quote']['date']['to'] != '':
-                        query_params['quote.date']['$lte'] = self.convert_str_to_date(query['quote']['date']['to'])
+                        query_params['quote.date']['$lte'] = self.convert_str_to_date(
+                            query['quote']['date']['to'])
 
-                    project['quote.date'] = {'$dateToString': {'format': "%d/%m/%Y", "date": "$quote.date"}}
+                    project['quote.date'] = {'$dateToString': {
+                        'format': "%d/%m/%Y", "date": "$quote.date"}}
 
         # Make sure we only get for given chrome user, if chrome user id is specified:
         if chrome_user_id:
@@ -208,7 +238,8 @@ class MongoUtils():
 
         pipeline = [
             {"$match": query_params},
-            {"$sort": SON([('timestamp', -1)])}
+            # {"$sort": SON([('timestamp', -1)])}
+            {"$sort": {'timestamp': -1}}
         ]
 
         if project:
@@ -218,9 +249,10 @@ class MongoUtils():
             pipeline.append(project_stage)
 
         # Execute query
-        docs = self.mongo.db[self.collection_name].aggregate(pipeline)
+        docs = list(self.mongo.db[self.collection_name].aggregate(
+            pipeline, cursor={}))
 
-        return docs['result']
+        return docs
 
     def find_entry_based_on_url(self, current_url):
         query = {"url": current_url,
