@@ -185,15 +185,18 @@
 
       $('#pagination').change(function () {
          const show = $(this).val();
-         location.href = window.location.origin + '/show?page=0&show=' + show;
+         // location.href = window.location.href + '/show?page=0&show=' + show;
+         window.location = '/show?page=0&show=' + show;
       })
 
       $('#prev').click(function () {
-         location.href = window.location.origin + '/show?page=' + (page - 1) + '&show=' + show;
+         // location.href = window.location.href + '/show?page=' + (page - 1) + '&show=' + show;
+         window.location = '/show?page=' + (page - 1) + '&show=' + show;
       });
 
       $('#next').click(function () {
-         location.href = window.location.origin + '/show?page=' + (parseInt(page) + 1) + '&show=' + show;
+         // location.href = window.location.href + '/show?page=' + (parseInt(page) + 1) + '&show=' + show;
+         window.localStorage = '/show?page=' + (parseInt(page) + 1) + '&show=' + show;
       });
 
       $('.select-politican').select2({
