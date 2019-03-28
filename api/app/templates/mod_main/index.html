@@ -14,6 +14,10 @@
    .list-group-factcheckr li:nth-child(odd) {
       background: #E8E8EE;
    }
+
+   .hide {
+      display: none;
+   }
 </style>
 {% endblock %}
 {% block script %}
@@ -119,6 +123,8 @@
             }
          }
 
+
+
       });
 
       $('.ignoreBtn').click(function () {
@@ -179,7 +185,6 @@
 
       $('#pagination').change(function () {
          const show = $(this).val();
-         console.log(window.location.origin)
          location.href = window.location.origin + '/show?page=0&show=' + show;
       })
 
@@ -189,6 +194,15 @@
 
       $('#next').click(function () {
          location.href = window.location.origin + '/show?page=' + (parseInt(page) + 1) + '&show=' + show;
+      });
+
+      $('.select-politican').select2({
+         width: '100%'
+      });
+
+      $('.select-politican').on('select2:select', function (e) {
+         var data = e.params.data;
+         $('#politician').val(data.text).change();
       });
 
    });
@@ -268,9 +282,9 @@
    <div class="row" style="padding-left:15%;padding-right:15%; margin-bottom: 25px;">
       <div class="col-md-4" style="float: right;">
          <select class="form-control" id="pagination">
-            <option value="20" selected>20</option>
-            <option value="100">100</option>
-            <option value="0">All</option>
+            <option value="20" selected>Show 20</option>
+            <option value="100">Show 100</option>
+            <option value="0">Show All</option>
          </select>
       </div>
    </div>
@@ -391,10 +405,28 @@
                </div>
                <div class="row form-group politicianDiv" style="display: none;">
                   <div class=" col-xs-5">
-                     {{ form.politician.label(class="control-label pull-right") }}
+                     {{ form.politician.label(class="control-label pull-right hide") }}
                   </div>
                   <div class=" col-xs-5">
-                     {{ form.politician(class="form-control pull-left") }}
+                     {{ form.politician(class="form-control pull-left hide") }}
+                  </div>
+               </div>
+
+               <div class="row form-group politicianDiv" style="display: none;">
+                  <div class=" col-xs-5">
+                     <label class="control-label pull-right" for="politician">Javni funkcioner</label>
+                  </div>
+                  <div class=" col-xs-5">
+                     <select class="form-control pull-left select-politican">
+                        {% for politican in people %}
+                        {% if politican == 'Aca Jevtić' %}
+                        <option value="{{politican}}" selected>{{politican}}</option>
+                        {% else %}
+                        <option value="{{politican}}">{{politican}}</option>
+
+                        {% endif %}
+                        {% endfor %}
+                     </select>
                   </div>
                </div>
                <div class="row form-group polParty" style="display: none;">

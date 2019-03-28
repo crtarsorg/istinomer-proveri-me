@@ -4,33 +4,34 @@
 
 <head>
     <!-- Place this data between the <head> tags of your website -->
-	<title>Istinomer FactCheckr</title>
-	<meta name="description" content="" />
+    <title>Istinomer FactCheckr</title>
+    <meta name="description" content="" />
 
-	<!-- Twitter Card data -->
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:site" content="@istinomer">
-	<meta name="twitter:title" content="Istinomer FactCheckr">
-	<meta name="twitter:description" content="">
-	<meta name="twitter:creator" content="@CRTArs">
-	<!-- Twitter Summary card images must be at least 120x120px -->
-	<meta name="twitter:image" content="http://opendatakosovo.org/app/istinomer-factcheckr/img/istinomer.png">
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@istinomer">
+    <meta name="twitter:title" content="Istinomer FactCheckr">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:creator" content="@CRTArs">
+    <!-- Twitter Summary card images must be at least 120x120px -->
+    <meta name="twitter:image" content="http://opendatakosovo.org/app/istinomer-factcheckr/img/istinomer.png">
 
-	<!-- Open Graph data -->
-	<meta property="og:title" content="Istinomer FactCheckr" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="http://opendatakosovo.org/app/istinomer-factcheckr/" />
-	<meta property="og:image" content="http://opendatakosovo.org/app/istinomer-factcheckr/img/istinomer.png" />
-	<meta property="og:description" content="" />
-	<meta property="og:site_name" content="" />
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Istinomer FactCheckr" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://opendatakosovo.org/app/istinomer-factcheckr/" />
+    <meta property="og:image" content="http://opendatakosovo.org/app/istinomer-factcheckr/img/istinomer.png" />
+    <meta property="og:description" content="" />
+    <meta property="og:site_name" content="" />
 
-	<!-- Bootstrap Core CSS -->
+    <!-- Bootstrap Core CSS -->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
-    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
 
@@ -49,8 +50,13 @@
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
     <!-- Bootstrap Date picker -->
-    <link href="{{ url_for('static', filename='bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}"
+        rel="stylesheet">
     <script src="{{ url_for('static', filename='bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+
+    <!-- Select2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 
     {% block style %}
@@ -60,8 +66,8 @@
     {% endblock %}
 
     <!-- Google Analytics -->
-	<script>
-	</script>
+    <script>
+    </script>
 
 </head>
 
@@ -69,7 +75,8 @@
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -80,9 +87,10 @@
             </div>
             <div class="col-xs-2 pull-right" style="margin-top: 10px;">
                 {% if session.logged_in is not defined %}
-                    <a class="btn btn-sm btn-default pull-right" href="#loginModal" data-toggle="modal" data-target="#loginModal">Prijavite se</a>
+                <a class="btn btn-sm btn-default pull-right" href="#loginModal" data-toggle="modal"
+                    data-target="#loginModal">Prijavite se</a>
                 {% else %}
-                    <a class="btn btn-sm btn-default pull-right" href="{{ url_for('admin.logout') }}">Odjavite se</a>
+                <a class="btn btn-sm btn-default pull-right" href="{{ url_for('admin.logout') }}">Odjavite se</a>
                 {% endif %}
             </div>
         </div>

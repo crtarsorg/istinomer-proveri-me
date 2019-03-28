@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, Response
 from app import mongo_utils
 from app.forms.form import AdminForm
+from app.utils.people_utils import People
 
 mod_main = Blueprint('main', __name__)
 
@@ -27,7 +28,7 @@ def show():
     entries = mongo_utils.find(skip, limit)
     total = mongo_utils.total_facts()
     form = AdminForm()
-    return render_template('mod_main/index.html', factcheck_requests=entries, form=form, total = total, page = int(page), show = int(show))
+    return render_template('mod_main/index.html', factcheck_requests=entries, form=form, total = total, page = int(page), show = int(show), people = People().get_name_of_politician())
 
 @mod_main.route('/feed-module', methods=['GET'])
 def feed_module():

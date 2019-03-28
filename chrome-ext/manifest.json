@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Istinomer Proveri me!",
   "description": "Dodatak za Chrome kojim se čitaoci informativnih web portala pozivaju da pošalju Istinomeru činjenice na proveru.",
-  "version": "2.0",
+  "version": "2.1",
   "browser_action": {
     "default_icon": "icons/icon-19.png",
     "default_popup": "popup.html"
@@ -11,20 +11,42 @@
     {
       "matches": [
         "https://*.blic.rs/*",
-        "http://*.blic.rs/*"
+        "http://*.blic.rs/*",
+        "https://*.kurir.rs/*",
+        "http://*.kurir.rs/*",
+        "https://*.telegraf.rs/*",
+        "http://*.telegraf.rs/*",
+        "https://*.espreso.rs/*",
+        "http://*.espreso.rs/*",
+        "https://*.srbijadanas.com/*",
+        "http://*.srbijadanas.com/*",
+        "https://*.danas.rs/*",
+        "http://*.danas.rs/*",
+        "https://*.n1info.com/*",
+        "http://*.n1info.com/*"
       ],
-      "css": [ "js/content-scripts/blic.rs/custom-css.css"],
-      "js": [ "js/jquery-1.12.0.min.js" ,"js/content-scripts/blic.rs/inject-css.js"],
+      "css": [
+        "js/content-scripts/sites/custom-css.css"
+      ],
+      "js": [
+        "sites.js",
+        "js/jquery-1.12.0.min.js",
+        "js/content-scripts/sites/inject-css.js"
+      ],
       "run_at": "document_end"
-    }],
+    }
+  ],
   "background": {
     "persistent": false,
     "scripts": [
+      "sites.js",
       "js/jquery-1.12.0.min.js",
       "background.js",
       "popup.js"
     ],
-    "css":["custom-css.css"]
+    "css": [
+      "custom-css.css"
+    ]
   },
   "permissions": [
     "background",
@@ -33,11 +55,12 @@
     "storage",
     "tabs",
     "activeTab",
-    "http://*.datacentar.io/*",
-    "https://*.blic.rs/*",
-    "http://*.blic.rs/*"
+    "http://0.0.0.0:5000/*"
   ],
-   "web_accessible_resources": ["js/jquery-1.12.0.min.js", "icons/icon-16.png"],
+  "web_accessible_resources": [
+    "js/jquery-1.12.0.min.js",
+    "icons/icon-16.png"
+  ],
   "icons": {
     "16": "icons/icon-16.png",
     "48": "icons/icon-48.png",
