@@ -1,7 +1,7 @@
 /** Context menu and factcheck logic implementation. **/
 
-// var API_URL_SUBMIT = "https://datacentar.io/app/istinomer-factchecker/api/entry/submit";
-var API_URL_SUBMIT = "http://0.0.0.0:5000/api/entry/submit";
+var API_URL_SUBMIT = "https://datacentar.io/app/istinomer-factchecker/api/entry/submit";
+// var API_URL_SUBMIT = "http://0.0.0.0:5000/api/entry/submit";
 
 // Set chrome extension params and config
 chrome.runtime.onInstalled.addListener(function () {
@@ -55,7 +55,7 @@ function executeRequestWithUserToken(user_id, info, tab) {
     chrome.notifications.create("site-notification", {
       type: "basic",
       title: "Oh!",
-      message: "Fact checker does not work on this site!",
+      message: "Istinomer Proveri me! aplikacija ne radi na ovom sajtu!",
       iconUrl: "icons/icon-128.png"
     });
     return;
@@ -103,7 +103,7 @@ function executeRequestWithUserToken(user_id, info, tab) {
       chrome.notifications.create("exists-notification", {
         type: "basic",
         title: "Oh!",
-        message: "You have selected this text before!",
+        message: "Već ste obeležili ovaj tekst ranije!",
         iconUrl: "icons/icon-128.png"
       });
       return;
