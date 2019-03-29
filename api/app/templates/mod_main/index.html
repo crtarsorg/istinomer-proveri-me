@@ -189,11 +189,11 @@
       })
 
       $('#prev').click(function () {
-         location.href = window.location.href + window.location.pathname + '?page=' + (page - 1) + '&show=' + show;
+         location.href = window.location.origin + window.location.pathname + '?page=' + (page - 1) + '&show=' + show;
       });
 
       $('#next').click(function () {
-         location.href = window.location.href + window.location.pathname + '?page=' + (parseInt(page) + 1) + '&show=' + show;
+         location.href = window.location.origin + window.location.pathname + '?page=' + (parseInt(page) + 1) + '&show=' + show;
       });
       $('.select-politican').select2({
          width: '100%'
