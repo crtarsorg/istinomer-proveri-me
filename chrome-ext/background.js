@@ -92,10 +92,13 @@ function executeRequestWithUserToken(user_id, info, tab) {
 
 
     var user_factcheck_requests = items.user_data;
-    for (let i = 0; i < user_factcheck_requests.length; i++) {
-      if (user_factcheck_requests[i].text == data.text) {
-        textFound = true;
-        break;
+
+    if (user_factcheck_requests) {
+      for (let i = 0; i < user_factcheck_requests.length; i++) {
+        if (user_factcheck_requests[i].text == data.text) {
+          textFound = true;
+          break;
+        }
       }
     }
 
