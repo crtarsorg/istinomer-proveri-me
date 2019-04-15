@@ -3,7 +3,7 @@
 var API_URL_SUBMIT = "https://datacentar.io/app/istinomer-factchecker/api/entry/submit";
 // var API_URL_SUBMIT = "http://0.0.0.0:5000/api/entry/submit";
 
-// Set chrome extension params and config
+// Set browser extension params and config
 chrome.contextMenus.create({
   "title": "Proveri me!",
   "contexts": ["selection"],
