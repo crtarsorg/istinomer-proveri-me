@@ -65,7 +65,7 @@
                     {% if req.inappropriate|length > 1 and req.inappropriate is not undefined%}
                     <span class="label label-danger" id="inapprSpan" style="margin-left:2px;">
                         <a class="source-url inappropriateLink" id="{{ req._id }}" data-toggle="modal"
-                            data-target="#showReasonModal" targ="_blank" style="cursor: pointer;">Neprikladno</a>
+                            data-target="#showReasonModal" targ="_blank" style="cursor: pointer;">Neadekvatno</a>
                         <span id="inapproText" style="display: none">{{ req.inappropriate }}</span>
                     </span>
                     {% endif %}

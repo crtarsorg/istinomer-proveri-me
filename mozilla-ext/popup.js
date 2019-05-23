@@ -176,7 +176,7 @@ function buildHTML(respData) {
                 "<div class='popUpStories'>" +
                 "<p class='itemTxt'>" + item['text'] + "</p>" +
                 "<div style='display: inline-block;float: right;margin-right:7px;'>" +
-                "<span class='evalMark' style='padding: 5px; margin:3px'><strong>" + "Neprikladno" + "</strong></span>" +
+                "<span class='evalMark' style='padding: 5px; margin:3px'><strong>" + "Neadekvatno" + "</strong></span>" +
                 "<a class='spanLink' style='padding: 5px' href='" + item['url'] + "' target='_blank'>" + domain + "</a>" +
                 "</div>" +
                 "</div><br>" +

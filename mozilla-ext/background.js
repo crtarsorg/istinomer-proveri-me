@@ -63,7 +63,7 @@ function executeRequestWithUserToken(user_id, info, tab) {
   var success_notification_opt = {
     type: "basic",
     title: "Da se ne lažemo",
-    message: "Poslato Istinomeru. Odgovor stiže nakon provere.",
+    message: "Izjava je primljena na proveru. Bićete obavešteni nakon što tim Istinomera oceni izjavu.",
     iconUrl: "icons/icon-128.png"
   };
 
