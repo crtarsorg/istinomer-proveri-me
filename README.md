@@ -92,7 +92,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 #### JSON Payload - Filter Parameters 
 
 | Property          | Data Type     | Description                                                   |
-|-------------------|---------------|---------------------------------------------------------------|                        |
+|-------------------|---------------|---------------------------------------------------------------|
 | classifications   | List\<String\>| The classifications.                                          |
 | grades            | List\<String\>| The grades.                                                   |
 | categories        | List\<String\>| The categories.                                               |
