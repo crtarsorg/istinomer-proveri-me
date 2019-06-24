@@ -1,4 +1,7 @@
 # Istinomer Fact Checker
+
+#Project Description
+
 A chrome extension to have the people over at istinomer.rs fact check text that has been highlighted on a website.
 
 
