@@ -1,28 +1,101 @@
 # Istinomer Fact Checker
-A chrome extension to have the people over at istinomer.rs fact check text that has been highlighted on a website.
+# Project Description
+A chrome extension to have the people over at istinomer.rs fact check text that has been highlighted on a website
 
+
+Technical Instructions
+
+- Linux Distribution Example: Ubuntu 18.04 LTS t
+- MongoDB 3.2.x   
+- Python 2.X
+
+#### Initial Setup
+
+### 2. Local Installation (UBUNTU)
+
+
+First create a folder in your desktop called dev:
+```
+cd ~
+mkdir dev
+cd dev
+```
+
+Getting the project in your local machine:
+```
+git clone https://github.com/crtarsorg/istinomer-proveri-me.git
+
+cd istinomer-proveri-me
+
+create a config.cfg inside api directory and paste the contents of config-template.cfg to the new file that you created
+
+cd api 
+touch config.cfg 
+cat config-template.cfg > config.cfg 
+
+open the config.cfg file and pass the following arguments to it 
+
+[Application]
+#put any port that you wish which is not in use example 8000
+SERVER_PORT = 8000
+
+#put any string that you wish as a secret key, example: 'mySecretKey'
+SECRET_KEY = 'mySecretKey'
+
+[Mongo]
+
+DB_NAME = 'Mongodb'
+
+[Logging]
+#this will create a directory named log and a logfile errors.log in the app directory 
+PATH = /logs/errors.log 
+LEVEL = ERROR 
+
+
+bash install.sh 
+
+(this script will check whether your system consists python 2.x, if it does (if it does not, it will install python 2.7.3) then it will create a virtualenvironment with python2.7.x and inside that virtualenvironment it will install the python dependecies that are required to setup the app)
+
+```
+
+Install and run the app:
+```
+bash install.sh
+bash run-debug.sh
+```
+
+```
+
+#Note: In oder to test the installed extension you need to install POSTMAN in your system and make the POST request through it
+
+
+- install POSTMAN API https://www.getpostman.com/downloads/
+-make a POST request adding the url in which the server is running in your local system example: http://0.0.0.0:8000/api/entry/submit
+- At the body select JSON file application and paste the following JSON payload
+```
 
 ## Save Entry
-### POST  /api/entry/save
+### POST  /api/entry/submit
 #### Sample JSON Payload - Truthfulness
 ```json 
 {
-  "domain": "washingtonpost.com",
-  "url": "https://www.washingtonpost.com/opinions/nixon-both-lofty-and-criminal/2015/07/24/5e3ee074-2b1a-11e5-bd33-395c05608059_story.html",
-  "text": "I ordered that they use any means necessary, including illegal means, to accomplish this goal.... The president of the United States can never admit that.",
-  "chrome_user_id": "xzy",
-  "classification": "Truthfulness",
-  "grade": "True",
-  "category": "Politics",
-  "article": {
-    "author": "Carl Bernstein",
-    "date": "24/07/2015"
-  },
-  "quote": {
-    "author": "Richard Nixon",
-    "politician": true,
-    "date": "01/01/1973"
-  }
+ "domain": "kurir.rs",
+ "url": "https://www.kurir.rs/planeta/3272197/tramp-otkrio-plan-krvavog-napada-na-iran-hteli-smo-da-gadjamo-3-cilja-a-onda-su-mi-rekli-da-bi-poginulo-150-ljudi",
+ "text": "Američki predsednik je otkrio kako bi tekao plan američkog vojnog napada na Iran.",
+ "chrome_user_id": "xzy",
+ "classification": "Truthfulness",
+ "grade": "True",
+ "category": "Politics",
+ "date": 1561128329.148,
+ "article": {
+   "author": "Carl Bernstein",
+   "date": 1561128329.148
+ },
+ "quote": {
+   "author": "Richard Nixon",
+   "politician": true,
+   "date": 1561128329.148
+ }
 }
 ```
 
