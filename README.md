@@ -3,7 +3,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 
 
 ## Save Entry
-### POST  /api/entry/saveasda
+### POST  /api/entry/save
 #### Sample JSON Payload - Truthfulness
 ```json 
 {
