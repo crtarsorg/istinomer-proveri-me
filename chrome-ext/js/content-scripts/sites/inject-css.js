@@ -31,7 +31,7 @@ function styleFactCheckRequest(statement, grade) {
                 var str = $(this).text();
                 if (str.indexOf(statement) !== -1) {
                     $(this).html(
-                        $(this).html().replace(statement, "<span class=" + getHighlightClassBasedOnGrade(grade) + "> $& <span id='grade-logo-factchecker'></span></span> ")
+                        $(this).html().replace(statement, "<span class=" + getHighlightClassBasedOnGrade(grade) + "> $&</span><span id='grade-logo-factchecker'></span> ")
                     );
                 }
             });
