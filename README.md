@@ -78,7 +78,7 @@ Install the extension manually in your browser
     3. Click on the "Load unpacked extension..." button.
     4. Select the directory containing your unpacked extension /dev/istinomer-proveri-me/chrome-ext.
     5. Install the extension
-    6. Make sure you set you api-s to lcoal in the chrome-ext dir at the files containing apis (background.js, popup.js etc)
+    6. Make sure you set you api-s to lcoal in the chrome-ext dir at the files containing apis (background.js, popup.js and chrome-ext/js/content-scripts/sites/inject-css.js) by commenting the var containing the production ip and uncommenting the var containing the local ip.
     7. You can try and send requests from selecting text from sites mentioned in chrome-ext/sites.js
     
 ### For firefox
@@ -92,7 +92,7 @@ Install the extension manually in your browser
         $ zip -r -FS mozilla-ext.zip* --exclude *.git*
         1. Visit about:debugging:
         2. Click on Load Temporary add-on 
-        3. Make sure you set you api-s to lcoal in the mozilla-ext dir at the files containing apis (background.js, popup.js etc)
+        3. Make sure you set you api-s to lcoal in the mozilla-ext dir at the files containing apis (background.js, popup.js, mozilla-ext/js/content-scripts/sites/inject-css.js) by commenting the var containing the production ip and uncommenting the var containing the local ip.
         4. You can try and send requests from selecting text from sites mentioned in mozilla-ext/sites.js
 
 ## Save Entry
