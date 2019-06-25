@@ -72,22 +72,50 @@ Note: In oder to test the installed extension you need to install POSTMAN in you
 ### POST  /api/entry/save
 #### Sample JSON Payload - Truthfulness
 ```json 
+
 {
-  "domain": "washingtonpost.com",
-  "url": "https://www.washingtonpost.com/opinions/nixon-both-lofty-and-criminal/2015/07/24/5e3ee074-2b1a-11e5-bd33-395c05608059_story.html",
-  "text": "I ordered that they use any means necessary, including illegal means, to accomplish this goal.... The president of the United States can never admit that.",
-  "chrome_user_id": "xzy",
-  "classification": "Truthfulness",
-  "grade": "True",
-  "category": "Politics",
-  "article": {
-    "author": "Carl Bernstein",
-    "date": "24/07/2015"
+ "domain": "kurir.rs",
+ "url": "https://www.kurir.rs/planeta/3272197/tramp-otkrio-plan-krvavog-napada-na-iran-hteli-smo-da-gadjamo-3-cilja-a-onda-su-mi-rekli-da-bi-poginulo-150-ljudi",
+ "text": "Američki predsednik je otkrio kako bi tekao plan američkog vojnog napada na Iran.",
+ "chrome_user_id": "xzy",
+ "classification": "Truthfulness",
+ "grade": "True",
+ "category": "Politics",
+ "date": 1561128329.148,
+ "article": {
+   "author": "Carl Bernstein",
+   "date": 1561128329.148
+ },
+ "quote": {
+   "author": "Richard Nixon",
+   "politician": true,
+   "date": 1561128329.148
+ }
+}
+
+
+
+
+
+
+
+
+
+  "DOMAIN": "WASHINGTONPOST.COM",
+  "URL": "HTTPS://WWW.WASHINGTONPOST.COM/OPINIONS/NIXON-BOTH-LOFTY-AND-CRIMINAL/2015/07/24/5E3EE074-2B1A-11E5-BD33-395C05608059_STORY.HTML",
+  "TEXT": "I ORDERED THAT THEY USE ANY MEANS NECESSARY, INCLUDING ILLEGAL MEANS, TO ACCOMPLISH THIS GOAL.... THE PRESIDENT OF THE UNITED STATES CAN NEVER ADMIT THAT.",
+  "CHROME_USER_ID": "XZY",
+  "CLASSIFICATION": "TRUTHFULNESS",
+  "GRADE": "TRUE",
+  "CATEGORY": "POLITICS",
+  "ARTICLE": {
+    "AUTHOR": "CARL BERNSTEIN",
+    "DATE": "24/07/2015"
   },
-  "quote": {
-    "author": "Richard Nixon",
-    "politician": true,
-    "date": "01/01/1973"
+  "QUOTE": {
+    "AUTHOR": "RICHARD NIXON",
+    "POLITICIAN": TRUE,
+    "DATE": "01/01/1973"
   }
 }
 ```
