@@ -72,13 +72,13 @@ Note: In oder to test the installed extension you need to install POSTMAN in you
 
 # 3. Testing the extension in your browser
 Install the extension manually in your browser
-For chrome
-   1. Visit chrome://extensions (via omnibox or menu -> Tools -> Extensions).
-   2. Enable Developer mode by ticking the checkbox in the upper-right corner.
-   3. Click on the "Load unpacked extension..." button.
-   4. Select the directory containing your unpacked extension.
-   5. Install the extension
-   6. You can try and send requests from selecting text from sites mentioned in chrome-ext/sites.js
+### For chrome
+    1. Visit chrome://extensions (via omnibox or menu -> Tools -> Extensions).
+    2. Enable Developer mode by ticking the checkbox in the upper-right corner.
+    3. Click on the "Load unpacked extension..." button.
+    4. Select the directory containing your unpacked extension.
+    5. Install the extension
+    6. You can try and send requests from selecting text from sites mentioned in chrome-ext/sites.js
     
 ### For firefox
     Go to your dev directory
