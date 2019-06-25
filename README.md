@@ -70,7 +70,7 @@ Note: In oder to test the installed extension you need to install POSTMAN in you
 - login as admin to view the request
 
 
-### Testing the extension in your browser
+# 3. Testing the extension in your browser
 Install the extension manually in your browser
 For chrome
    1. Visit chrome://extensions (via omnibox or menu -> Tools -> Extensions).
