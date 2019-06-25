@@ -81,14 +81,14 @@ Note: In oder to test the installed extension you need to install POSTMAN in you
    6. You can try and send requests from selecting text from sites mentioned in chrome-ext/sites.js
     
    #for firefox
-- Go to your dev directory
-   $ cd dev
-   $ cd istinomer-proveri-me
-- Copy the mozilla-ext directory to your Desktop
-   $ cp -r mozilla-ext /home/<name>/Desktop
-   $ cd ~/Desktop
-- Built the add-on with this command
-   $ zip -r -FS mozilla-ext.zip* --exclude *.git*
+Go to your dev directory
+    $ cd dev
+    $ cd istinomer-proveri-me
+Copy the mozilla-ext directory to your Desktop
+    $ cp -r mozilla-ext /home/<name>/Desktop
+    $ cd ~/Desktop
+Built the add-on with this command
+    $ zip -r -FS mozilla-ext.zip* --exclude *.git*
    1. Visit about:debugging:
    2. Click on Load Temporary add-on 
    3. Set you api-s to lcoal 
