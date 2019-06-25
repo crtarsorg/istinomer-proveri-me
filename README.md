@@ -78,7 +78,8 @@ Install the extension manually in your browser
     3. Click on the "Load unpacked extension..." button.
     4. Select the directory containing your unpacked extension /dev/istinomer-proveri-me/chrome-ext.
     5. Install the extension
-    6. You can try and send requests from selecting text from sites mentioned in chrome-ext/sites.js
+    6. Make sure you set you api-s to lcoal in the chrome-ext dir at the files containing apis (background.js, popup.js etc)
+    7. You can try and send requests from selecting text from sites mentioned in chrome-ext/sites.js
     
 ### For firefox
     Go to your dev directory
@@ -91,7 +92,7 @@ Install the extension manually in your browser
         $ zip -r -FS mozilla-ext.zip* --exclude *.git*
         1. Visit about:debugging:
         2. Click on Load Temporary add-on 
-        3. Set you api-s to lcoal 
+        3. Make sure you set you api-s to lcoal in the mozilla-ext dir at the files containing apis (background.js, popup.js etc)
         4. You can try and send requests from selecting text from sites mentioned in mozilla-ext/sites.js
 
 ## Save Entry
