@@ -8,7 +8,7 @@ Technical Instructions
 
     Linux Distribution Example: Ubuntu 18.04 LTS t
     MongoDB 3.2.x
-    Python 2.X
+    Python 2.7.x
 
 Initial Setup
 # 2. Local Installation (UBUNTU)
