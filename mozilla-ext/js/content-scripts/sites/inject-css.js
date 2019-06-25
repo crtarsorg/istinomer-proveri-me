@@ -7,7 +7,7 @@ var currentTabUrl = window.location.href;
 
 var greenList = ['Half true', 'Mostly true', 'True', 'Consistent', 'In progress', 'Almost fulfilled', 'Fulfilled'];
 var yellowList = ['Stalled', 'In between'];
-var redList = ['Pants on fire', 'False', 'Not started', 'Unfulfilled', 'Inconsistent', 'Mostly false'];
+var redList = ['Pants on fire', 'False', 'Not started', 'Unfulfilled', 'Unbelievable', 'Abuse of facts', 'Inconsistent', 'Mostly false'];
 
 function getHighlightClassBasedOnGrade(value) {
     if ($.inArray(value, greenList) >= 0) {
