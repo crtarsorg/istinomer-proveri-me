@@ -30,6 +30,8 @@ class AdminForm(Form):
             ('Mostly false', 'Skoro neistina'),  # truthfulness
             ('False', 'Neistina'),  # truthfulness
             ('Pants on fire', 'Kratke noge'),  # truthfulness
+            ('Abuse of facts', u'Zloupotreba činjenica'),
+            ('Unbelievable', 'Neproverivo'),
             ('Fulfilled', 'Ispunjeno'),  # promise
             ('Almost fulfilled', 'Skoro ispunjeno'),  # promise
             ('In progress', 'Radi se na tome'),  # promise
