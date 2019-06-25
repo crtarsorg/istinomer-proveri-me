@@ -125,8 +125,8 @@ function buildHTML(respData) {
         'Mostly false': 'Skoro neistina',
         'False': 'Neistina',
         'Pants on fire': 'Kratke noge',
-		'Abuse of facts': 'Zloupotreba &#269;injenica', //Zloupotreba činjenica
-		'Unbelievable': 'Neproverivo', 
+	'Abuse of facts': 'Zloupotreba &#269;injenica', //Zloupotreba činjenica
+	'Unbelievable': 'Neproverivo', 
         'Fulfilled': 'Ispunjeno',
         'Almost fulfilled': 'Skoro ispunjeno',
         'In progress': 'Radi se na tome',
