@@ -80,7 +80,7 @@ For chrome
    5. Install the extension
    6. You can try and send requests from selecting text from sites mentioned in chrome-ext/sites.js
     
-For firefox
+### For firefox
     Go to your dev directory
         $ cd dev
         $ cd istinomer-proveri-me
