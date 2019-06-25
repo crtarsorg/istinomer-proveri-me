@@ -19,7 +19,7 @@ $ cd ~
 $ mkdir dev
 $ cd dev
 
-# Getting the project in your local machine:
+## Getting the project in your local machine:
 
 $ git clone https://github.com/crtarsorg/istinomer-proveri-me.git
 
