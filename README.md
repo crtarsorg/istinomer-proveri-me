@@ -15,21 +15,21 @@ Initial Setup
 
 First create a folder in your desktop called dev:
 
-$ cd ~
-$ mkdir dev
-$ cd dev
+    $ cd ~
+    $ mkdir dev
+    $ cd dev
 
 ## Getting the project in your local machine:
 
-$ git clone https://github.com/crtarsorg/istinomer-proveri-me.git
+    $ git clone https://github.com/crtarsorg/istinomer-proveri-me.git
 
-$ cd istinomer-proveri-me
+    $ cd istinomer-proveri-me
 
 create a config.cfg inside api directory and paste the contents of config-template.cfg to the new file that you created
 
-$ cd api 
-$ touch config.cfg 
-$ cat config-template.cfg > config.cfg 
+    $ cd api 
+    $ touch config.cfg 
+    $ cat config-template.cfg > config.cfg 
 
 open the config.cfg file and pass the following arguments to it 
 
@@ -50,14 +50,14 @@ PATH = /logs/errors.log
 LEVEL = ERROR 
 
 
-$ bash install.sh 
+    $ bash install.sh 
 
 (this script will check whether your system consists python 2.x, if it does (if it does not, it will install python 2.7.3) then it will create a virtualenvironment with python2.7.x and inside that virtualenvironment it will install the python dependecies that are required to setup the app)
 
-# Install and run the app:
+# Install the requirements and run the app:
 
-$ bash install.sh
-$ bash run-debug.sh
+    $ bash install.sh
+    $ bash run-debug.sh
 
 
 Note: In oder to test the installed extension you need to install POSTMAN in your system and make the POST request through it
