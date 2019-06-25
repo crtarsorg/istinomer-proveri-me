@@ -71,8 +71,8 @@ Note: In oder to test the installed extension you need to install POSTMAN in you
 
 
 ### Testing the extension in your browser
-- Install the extension manually in your browser
-   #for chrome
+Install the extension manually in your browser
+For chrome
    1. Visit chrome://extensions (via omnibox or menu -> Tools -> Extensions).
    2. Enable Developer mode by ticking the checkbox in the upper-right corner.
    3. Click on the "Load unpacked extension..." button.
@@ -80,19 +80,19 @@ Note: In oder to test the installed extension you need to install POSTMAN in you
    5. Install the extension
    6. You can try and send requests from selecting text from sites mentioned in chrome-ext/sites.js
     
-   #for firefox
-Go to your dev directory
-    $ cd dev
-    $ cd istinomer-proveri-me
-Copy the mozilla-ext directory to your Desktop
-    $ cp -r mozilla-ext /home/<name>/Desktop
-    $ cd ~/Desktop
-Built the add-on with this command
-    $ zip -r -FS mozilla-ext.zip* --exclude *.git*
-   1. Visit about:debugging:
-   2. Click on Load Temporary add-on 
-   3. Set you api-s to lcoal 
-   4. You can try and send requests from selecting text from sites mentioned in mozilla-ext/sites.js
+For firefox
+    Go to your dev directory
+        $ cd dev
+        $ cd istinomer-proveri-me
+    Copy the mozilla-ext directory to your Desktop
+        $ cp -r mozilla-ext /home/<name>/Desktop
+        $ cd ~/Desktop
+    Built the add-on with this command
+        $ zip -r -FS mozilla-ext.zip* --exclude *.git*
+    1. Visit about:debugging:
+    2. Click on Load Temporary add-on 
+    3. Set you api-s to lcoal 
+    4. You can try and send requests from selecting text from sites mentioned in mozilla-ext/sites.js
 
 ## Save Entry
 ### POST  /api/entry/save
