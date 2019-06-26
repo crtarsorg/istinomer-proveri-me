@@ -1,13 +1,14 @@
 /** Hightlight factcheck logic implementation for blic.rs **/
 
 
-var API_URL_GET_CHECKED_FACTS = "https://datacentar.io/app/istinomer-factchecker/api/get-page-fact-check-requests";
-// var API_URL_GET_CHECKED_FACTS = "http://0.0.0.0:5000/api/get-page-fact-check-requests";
+//var API_URL_GET_CHECKED_FACTS = "https://datacentar.io/app/istinomer-factchecker/api/get-page-fact-check-requests";
+var API_URL_GET_CHECKED_FACTS = "http://0.0.0.0:5000/api/get-page-fact-check-requests";
+
 var currentTabUrl = window.location.href;
 
 var greenList = ['Half true', 'Mostly true', 'True', 'Consistent', 'In progress', 'Almost fulfilled', 'Fulfilled'];
 var yellowList = ['Stalled', 'In between'];
-var redList = ['Pants on fire', 'False', 'Not started', 'Unfulfilled', 'Inconsistent', 'Mostly false'];
+var redList = ['Pants on fire', 'False', 'Not started', 'Unfulfilled', 'Inconsistent', 'Mostly false', 'Abuse of facts', 'Unbelievable'];
 
 function getHighlightClassBasedOnGrade(value) {
     if ($.inArray(value, greenList) >= 0) {
@@ -31,7 +32,7 @@ function styleFactCheckRequest(statement, grade) {
                 var str = $(this).text();
                 if (str.indexOf(statement) !== -1) {
                     $(this).html(
-                        $(this).html().replace(statement, "<span class=" + getHighlightClassBasedOnGrade(grade) + "> $& <span id='grade-logo-factchecker'></span></span> ")
+                        $(this).html().replace(statement, "<span class=" + getHighlightClassBasedOnGrade(grade) + "> $& </span><span id='grade-logo-factchecker'></span>")
                     );
                 }
             });

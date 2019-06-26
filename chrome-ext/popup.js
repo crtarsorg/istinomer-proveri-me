@@ -1,7 +1,8 @@
 /** Popup content provider logic. **/
 
-var API_URL_FETCH = "https://datacentar.io/app/istinomer-factchecker/api/entry/get";
-// var API_URL_FETCH = "http://0.0.0.0:5000/api/entry/get";
+//var API_URL_FETCH = "https://datacentar.io/app/istinomer-factchecker/api/entry/get";
+var API_URL_FETCH = "http://0.0.0.0:5000/api/entry/get";
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -124,6 +125,8 @@ function buildHTML(respData) {
         'Mostly false': 'Skoro neistina',
         'False': 'Neistina',
         'Pants on fire': 'Kratke noge',
+	    'Abuse of facts': 'Zloupotreba &#269;injenica', //Zloupotreba činjenica
+	    'Unbelievable': 'Neproverivo', 
         'Fulfilled': 'Ispunjeno',
         'Almost fulfilled': 'Skoro ispunjeno',
         'In progress': 'Radi se na tome',
