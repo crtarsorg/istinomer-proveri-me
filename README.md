@@ -88,8 +88,9 @@ Install the extension manually in your browser
     Copy the mozilla-ext directory to your Desktop
         $ cp -r mozilla-ext /home/<name>/Desktop
         $ cd ~/Desktop
+        $ cd mozilla-ext/
     Built the add-on with this command
-        $ zip -r -FS mozilla-ext.zip* --exclude *.git*
+        $ zip -r -FS ../mozilla-ext.zip * --exclude *.git*
         1. Visit about:debugging:
         2. Click on Load Temporary add-on 
         3. Make sure you set you api-s to lcoal in the mozilla-ext dir at the files containing apis (background.js, popup.js, mozilla-ext/js/content-scripts/sites/inject-css.js) by commenting the var containing the production ip and uncommenting the var containing the local ip.
