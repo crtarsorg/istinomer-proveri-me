@@ -1,0 +1,782 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3285CD0922C3696700BC156C /* proveri.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD0822C3696700BC156C /* proveri.entitlements */; };
+		3285CD0B22C3696700BC156C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285CD0A22C3696700BC156C /* AppDelegate.swift */; };
+		3285CD0E22C3696700BC156C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD0C22C3696700BC156C /* Main.storyboard */; };
+		3285CD1022C3696700BC156C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285CD0F22C3696700BC156C /* ViewController.swift */; };
+		3285CD1222C3696800BC156C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD1122C3696800BC156C /* Assets.xcassets */; };
+		3285CD1D22C3696800BC156C /* proveriTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285CD1C22C3696800BC156C /* proveriTests.swift */; };
+		3285CD2822C3696800BC156C /* proveriUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285CD2722C3696800BC156C /* proveriUITests.swift */; };
+		3285CD2F22C3696800BC156C /* proveri Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3285CD2E22C3696800BC156C /* proveri Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3285CD3422C3696800BC156C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3285CD3322C3696800BC156C /* Cocoa.framework */; };
+		3285CD3722C3696800BC156C /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285CD3622C3696800BC156C /* SafariExtensionHandler.swift */; };
+		3285CD3922C3696800BC156C /* SafariExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285CD3822C3696800BC156C /* SafariExtensionViewController.swift */; };
+		3285CD3C22C3696800BC156C /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD3A22C3696800BC156C /* SafariExtensionViewController.xib */; };
+		3285CD3F22C3696800BC156C /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD3E22C3696800BC156C /* script.js */; };
+		3285CD4122C3696800BC156C /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD4022C3696800BC156C /* ToolbarItemIcon.pdf */; };
+		3285CD5322C36A8300BC156C /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD5222C36A8300BC156C /* main.js */; };
+		3285CD5522C36A8E00BC156C /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD5422C36A8E00BC156C /* index.js */; };
+		3285CD5722C36A9500BC156C /* endscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD5622C36A9400BC156C /* endscript.js */; };
+		3285CD5922C36AAA00BC156C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD5822C36AAA00BC156C /* icon.png */; };
+		3285CD5B22C36ABB00BC156C /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD5A22C36ABB00BC156C /* style.css */; };
+		3285CD5D22C36AF000BC156C /* popover.html in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD5C22C36AF000BC156C /* popover.html */; };
+		3285CD5F22C36B0200BC156C /* global.html in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD5E22C36B0200BC156C /* global.html */; };
+		3285CD6122C36B2900BC156C /* js in Resources */ = {isa = PBXBuildFile; fileRef = 3285CD6022C36B2900BC156C /* js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3285CD1922C3696800BC156C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3285CCFD22C3696700BC156C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3285CD0422C3696700BC156C;
+			remoteInfo = proveri;
+		};
+		3285CD2422C3696800BC156C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3285CCFD22C3696700BC156C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3285CD0422C3696700BC156C;
+			remoteInfo = proveri;
+		};
+		3285CD3022C3696800BC156C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3285CCFD22C3696700BC156C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3285CD2D22C3696800BC156C;
+			remoteInfo = "proveri Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3285CD4822C3696800BC156C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3285CD2F22C3696800BC156C /* proveri Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3285CD0522C3696700BC156C /* proveri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = proveri.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3285CD0822C3696700BC156C /* proveri.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = proveri.entitlements; sourceTree = "<group>"; };
+		3285CD0A22C3696700BC156C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3285CD0D22C3696700BC156C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3285CD0F22C3696700BC156C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3285CD1122C3696800BC156C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3285CD1322C3696800BC156C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3285CD1822C3696800BC156C /* proveriTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = proveriTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3285CD1C22C3696800BC156C /* proveriTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = proveriTests.swift; sourceTree = "<group>"; };
+		3285CD1E22C3696800BC156C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3285CD2322C3696800BC156C /* proveriUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = proveriUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3285CD2722C3696800BC156C /* proveriUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = proveriUITests.swift; sourceTree = "<group>"; };
+		3285CD2922C3696800BC156C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3285CD2E22C3696800BC156C /* proveri Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "proveri Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3285CD3322C3696800BC156C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		3285CD3622C3696800BC156C /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
+		3285CD3822C3696800BC156C /* SafariExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionViewController.swift; sourceTree = "<group>"; };
+		3285CD3B22C3696800BC156C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
+		3285CD3D22C3696800BC156C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3285CD3E22C3696800BC156C /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
+		3285CD4022C3696800BC156C /* ToolbarItemIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarItemIcon.pdf; sourceTree = "<group>"; };
+		3285CD4222C3696800BC156C /* proveri_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = proveri_Extension.entitlements; sourceTree = "<group>"; };
+		3285CD5222C36A8300BC156C /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = main.js; path = ../../main.js; sourceTree = "<group>"; };
+		3285CD5422C36A8E00BC156C /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.js; path = ../../index.js; sourceTree = "<group>"; };
+		3285CD5622C36A9400BC156C /* endscript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = endscript.js; path = ../../endscript.js; sourceTree = "<group>"; };
+		3285CD5822C36AAA00BC156C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../icon.png; sourceTree = "<group>"; };
+		3285CD5A22C36ABB00BC156C /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = ../../style.css; sourceTree = "<group>"; };
+		3285CD5C22C36AF000BC156C /* popover.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = popover.html; path = ../../popover.html; sourceTree = "<group>"; };
+		3285CD5E22C36B0200BC156C /* global.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = global.html; path = ../../global.html; sourceTree = "<group>"; };
+		3285CD6022C36B2900BC156C /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; name = js; path = ../js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3285CD0222C3696700BC156C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3285CD1522C3696800BC156C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3285CD2022C3696800BC156C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3285CD2B22C3696800BC156C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3285CD3422C3696800BC156C /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3285CCFC22C3696700BC156C = {
+			isa = PBXGroup;
+			children = (
+				3285CD6022C36B2900BC156C /* js */,
+				3285CD0722C3696700BC156C /* proveri */,
+				3285CD1B22C3696800BC156C /* proveriTests */,
+				3285CD2622C3696800BC156C /* proveriUITests */,
+				3285CD3522C3696800BC156C /* proveri Extension */,
+				3285CD3222C3696800BC156C /* Frameworks */,
+				3285CD0622C3696700BC156C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3285CD0622C3696700BC156C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3285CD0522C3696700BC156C /* proveri.app */,
+				3285CD1822C3696800BC156C /* proveriTests.xctest */,
+				3285CD2322C3696800BC156C /* proveriUITests.xctest */,
+				3285CD2E22C3696800BC156C /* proveri Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3285CD0722C3696700BC156C /* proveri */ = {
+			isa = PBXGroup;
+			children = (
+				3285CD0822C3696700BC156C /* proveri.entitlements */,
+				3285CD0A22C3696700BC156C /* AppDelegate.swift */,
+				3285CD0C22C3696700BC156C /* Main.storyboard */,
+				3285CD0F22C3696700BC156C /* ViewController.swift */,
+				3285CD5822C36AAA00BC156C /* icon.png */,
+				3285CD1122C3696800BC156C /* Assets.xcassets */,
+				3285CD1322C3696800BC156C /* Info.plist */,
+			);
+			path = proveri;
+			sourceTree = "<group>";
+		};
+		3285CD1B22C3696800BC156C /* proveriTests */ = {
+			isa = PBXGroup;
+			children = (
+				3285CD1C22C3696800BC156C /* proveriTests.swift */,
+				3285CD1E22C3696800BC156C /* Info.plist */,
+			);
+			path = proveriTests;
+			sourceTree = "<group>";
+		};
+		3285CD2622C3696800BC156C /* proveriUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3285CD2722C3696800BC156C /* proveriUITests.swift */,
+				3285CD2922C3696800BC156C /* Info.plist */,
+			);
+			path = proveriUITests;
+			sourceTree = "<group>";
+		};
+		3285CD3222C3696800BC156C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3285CD3322C3696800BC156C /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3285CD3522C3696800BC156C /* proveri Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3285CD3622C3696800BC156C /* SafariExtensionHandler.swift */,
+				3285CD3822C3696800BC156C /* SafariExtensionViewController.swift */,
+				3285CD5A22C36ABB00BC156C /* style.css */,
+				3285CD3A22C3696800BC156C /* SafariExtensionViewController.xib */,
+				3285CD3D22C3696800BC156C /* Info.plist */,
+				3285CD5C22C36AF000BC156C /* popover.html */,
+				3285CD5422C36A8E00BC156C /* index.js */,
+				3285CD5222C36A8300BC156C /* main.js */,
+				3285CD3E22C3696800BC156C /* script.js */,
+				3285CD5E22C36B0200BC156C /* global.html */,
+				3285CD5622C36A9400BC156C /* endscript.js */,
+				3285CD4022C3696800BC156C /* ToolbarItemIcon.pdf */,
+				3285CD4222C3696800BC156C /* proveri_Extension.entitlements */,
+			);
+			path = "proveri Extension";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3285CD0422C3696700BC156C /* proveri */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3285CD4922C3696800BC156C /* Build configuration list for PBXNativeTarget "proveri" */;
+			buildPhases = (
+				3285CD0122C3696700BC156C /* Sources */,
+				3285CD0222C3696700BC156C /* Frameworks */,
+				3285CD0322C3696700BC156C /* Resources */,
+				3285CD4822C3696800BC156C /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3285CD3122C3696800BC156C /* PBXTargetDependency */,
+			);
+			name = proveri;
+			productName = proveri;
+			productReference = 3285CD0522C3696700BC156C /* proveri.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3285CD1722C3696800BC156C /* proveriTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3285CD4C22C3696800BC156C /* Build configuration list for PBXNativeTarget "proveriTests" */;
+			buildPhases = (
+				3285CD1422C3696800BC156C /* Sources */,
+				3285CD1522C3696800BC156C /* Frameworks */,
+				3285CD1622C3696800BC156C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3285CD1A22C3696800BC156C /* PBXTargetDependency */,
+			);
+			name = proveriTests;
+			productName = proveriTests;
+			productReference = 3285CD1822C3696800BC156C /* proveriTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3285CD2222C3696800BC156C /* proveriUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3285CD4F22C3696800BC156C /* Build configuration list for PBXNativeTarget "proveriUITests" */;
+			buildPhases = (
+				3285CD1F22C3696800BC156C /* Sources */,
+				3285CD2022C3696800BC156C /* Frameworks */,
+				3285CD2122C3696800BC156C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3285CD2522C3696800BC156C /* PBXTargetDependency */,
+			);
+			name = proveriUITests;
+			productName = proveriUITests;
+			productReference = 3285CD2322C3696800BC156C /* proveriUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		3285CD2D22C3696800BC156C /* proveri Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3285CD4522C3696800BC156C /* Build configuration list for PBXNativeTarget "proveri Extension" */;
+			buildPhases = (
+				3285CD2A22C3696800BC156C /* Sources */,
+				3285CD2B22C3696800BC156C /* Frameworks */,
+				3285CD2C22C3696800BC156C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "proveri Extension";
+			productName = "proveri Extension";
+			productReference = 3285CD2E22C3696800BC156C /* proveri Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3285CCFD22C3696700BC156C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = team;
+				TargetAttributes = {
+					3285CD0422C3696700BC156C = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					3285CD1722C3696800BC156C = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 3285CD0422C3696700BC156C;
+					};
+					3285CD2222C3696800BC156C = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 3285CD0422C3696700BC156C;
+					};
+					3285CD2D22C3696800BC156C = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 3285CD0022C3696700BC156C /* Build configuration list for PBXProject "proveri" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3285CCFC22C3696700BC156C;
+			productRefGroup = 3285CD0622C3696700BC156C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3285CD0422C3696700BC156C /* proveri */,
+				3285CD1722C3696800BC156C /* proveriTests */,
+				3285CD2222C3696800BC156C /* proveriUITests */,
+				3285CD2D22C3696800BC156C /* proveri Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3285CD0322C3696700BC156C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3285CD5922C36AAA00BC156C /* icon.png in Resources */,
+				3285CD0922C3696700BC156C /* proveri.entitlements in Resources */,
+				3285CD1222C3696800BC156C /* Assets.xcassets in Resources */,
+				3285CD0E22C3696700BC156C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3285CD1622C3696800BC156C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3285CD2122C3696800BC156C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3285CD2C22C3696800BC156C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3285CD5522C36A8E00BC156C /* index.js in Resources */,
+				3285CD4122C3696800BC156C /* ToolbarItemIcon.pdf in Resources */,
+				3285CD5D22C36AF000BC156C /* popover.html in Resources */,
+				3285CD5B22C36ABB00BC156C /* style.css in Resources */,
+				3285CD3C22C3696800BC156C /* SafariExtensionViewController.xib in Resources */,
+				3285CD6122C36B2900BC156C /* js in Resources */,
+				3285CD3F22C3696800BC156C /* script.js in Resources */,
+				3285CD5F22C36B0200BC156C /* global.html in Resources */,
+				3285CD5322C36A8300BC156C /* main.js in Resources */,
+				3285CD5722C36A9500BC156C /* endscript.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3285CD0122C3696700BC156C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3285CD1022C3696700BC156C /* ViewController.swift in Sources */,
+				3285CD0B22C3696700BC156C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3285CD1422C3696800BC156C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3285CD1D22C3696800BC156C /* proveriTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3285CD1F22C3696800BC156C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3285CD2822C3696800BC156C /* proveriUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3285CD2A22C3696800BC156C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3285CD3922C3696800BC156C /* SafariExtensionViewController.swift in Sources */,
+				3285CD3722C3696800BC156C /* SafariExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3285CD1A22C3696800BC156C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3285CD0422C3696700BC156C /* proveri */;
+			targetProxy = 3285CD1922C3696800BC156C /* PBXContainerItemProxy */;
+		};
+		3285CD2522C3696800BC156C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3285CD0422C3696700BC156C /* proveri */;
+			targetProxy = 3285CD2422C3696800BC156C /* PBXContainerItemProxy */;
+		};
+		3285CD3122C3696800BC156C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3285CD2D22C3696800BC156C /* proveri Extension */;
+			targetProxy = 3285CD3022C3696800BC156C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3285CD0C22C3696700BC156C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3285CD0D22C3696700BC156C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3285CD3A22C3696800BC156C /* SafariExtensionViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3285CD3B22C3696800BC156C /* Base */,
+			);
+			name = SafariExtensionViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3285CD4322C3696800BC156C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3285CD4422C3696800BC156C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		3285CD4622C3696800BC156C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "proveri Extension/proveri_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "proveri Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "opendatakosovo.proveri-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3285CD4722C3696800BC156C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "proveri Extension/proveri_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "proveri Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "opendatakosovo.proveri-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		3285CD4A22C3696800BC156C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = proveri/proveri.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = proveri/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = opendatakosovo.proveri;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3285CD4B22C3696800BC156C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = proveri/proveri.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = proveri/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = opendatakosovo.proveri;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		3285CD4D22C3696800BC156C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = proveriTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = opendatakosovo.proveriTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/proveri.app/Contents/MacOS/proveri";
+			};
+			name = Debug;
+		};
+		3285CD4E22C3696800BC156C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = proveriTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = opendatakosovo.proveriTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/proveri.app/Contents/MacOS/proveri";
+			};
+			name = Release;
+		};
+		3285CD5022C3696800BC156C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = proveriUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = opendatakosovo.proveriUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = proveri;
+			};
+			name = Debug;
+		};
+		3285CD5122C3696800BC156C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = proveriUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = opendatakosovo.proveriUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = proveri;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3285CD0022C3696700BC156C /* Build configuration list for PBXProject "proveri" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3285CD4322C3696800BC156C /* Debug */,
+				3285CD4422C3696800BC156C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3285CD4522C3696800BC156C /* Build configuration list for PBXNativeTarget "proveri Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3285CD4622C3696800BC156C /* Debug */,
+				3285CD4722C3696800BC156C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3285CD4922C3696800BC156C /* Build configuration list for PBXNativeTarget "proveri" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3285CD4A22C3696800BC156C /* Debug */,
+				3285CD4B22C3696800BC156C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3285CD4C22C3696800BC156C /* Build configuration list for PBXNativeTarget "proveriTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3285CD4D22C3696800BC156C /* Debug */,
+				3285CD4E22C3696800BC156C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3285CD4F22C3696800BC156C /* Build configuration list for PBXNativeTarget "proveriUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3285CD5022C3696800BC156C /* Debug */,
+				3285CD5122C3696800BC156C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3285CCFD22C3696700BC156C /* Project object */;
+}
