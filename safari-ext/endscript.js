@@ -1,7 +1,7 @@
 
 var greenList = ['Half true', 'Mostly true', 'True', 'Consistent', 'In progress', 'Almost fulfilled', 'Fulfilled'];
 var yellowList = ['Stalled','In between'];
-var redList = ['Pants on fire','False', 'Not started', 'Unfulfilled', 'Inconsistent', 'Mostly false'];
+var redList = ['Pants on fire','False', 'Not started', 'Unfulfilled', 'Inconsistent', 'Mostly false', 'Abuse of facts', 'Unbelievable'];
 
 if (window.top === window) {
     safari.self.addEventListener("message", handleMessage, false);
@@ -45,7 +45,7 @@ function styleFactCheckRequest(site, statement, grade) {
     Array.prototype.forEach.call(elems, function(el, i) {
         var str = el.textContent;
         if (str.indexOf(statement) !== -1) {
-            el.innerHTML = el.innerHTML.replace(statement, "<span class=" + getHighlightClassBasedOnGrade(grade) + "> $& <span id='grade-logo-factchecker'></span></span> ");
+            el.innerHTML = el.innerHTML.replace(statement, "<span class=" + getHighlightClassBasedOnGrade(grade) + "> $& </span><span id='grade-logo-factchecker'></span> ");
         }
     });
 }
