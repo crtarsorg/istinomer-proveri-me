@@ -1,8 +1,8 @@
 /** Hightlight factcheck logic implementation for blic.rs **/
 
 
-//var API_URL_GET_CHECKED_FACTS = "https://datacentar.io/app/istinomer-factchecker/api/get-page-fact-check-requests";
-var API_URL_GET_CHECKED_FACTS = "http://0.0.0.0:5000/api/get-page-fact-check-requests";
+var API_URL_GET_CHECKED_FACTS = "https://datacentar.io/app/istinomer-factchecker/api/get-page-fact-check-requests";
+//var API_URL_GET_CHECKED_FACTS = "http://0.0.0.0:5000/api/get-page-fact-check-requests";
 
 var currentTabUrl = window.location.href;
 
