@@ -93,8 +93,8 @@ Install the extension manually in your browser
         $ zip -r -FS ../mozilla-ext.zip * --exclude *.git*
         1. Make sure you comment the local api in the chrome-ext dir at the files containing api-s (background.js, popup.js and chrome-ext/js/content-scripts/sites/inject-css.js) and uncomment the production api-s.
         2. Visit about:debugging:
-        3. Click on Load Temporary add-on 
-        4. You can try and send requests from selecting text from sites mentioned in mozilla-ext/sites.js
+        3. Click on Load Temporary add-on and select the zip/xpi folder that will be created on your system
+        4. You can try and send requests from selecting text from sites mentioned in mozilla-ext/sites.js.
       #NOTE: for testing the installation and getting the requests in your local machine uncomment the local api-s and comment the production ones.
 ## Save Entry
 ### POST  /api/entry/save
