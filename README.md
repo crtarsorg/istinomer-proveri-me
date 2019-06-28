@@ -42,13 +42,13 @@ create a config.cfg inside api directory and paste the contents of config-templa
     $ touch config.cfg 
     $ cat config-template.cfg > config.cfg 
 
-open the config.cfg file and pass the following arguments to it 
+Open the config.cfg file and pass the following arguments to it 
 
 [Application]
 #put any port that you wish which is not in use example 8000
 SERVER_PORT = 8000
 
-#put any string that you wish as a secret key, example: 'mySecretKey'
+#put any text that you wish as a secret key, example: 'mySecretKey'
 SECRET_KEY = 'mySecretKey'
 
 [Mongo]
@@ -57,7 +57,7 @@ DB_NAME = 'Mongodb'
 
 [Logging]
 #this will create a directory named log and a logfile errors.log in the app directory 
-PATH = /logs/errors.log 
+PATH = logs/errors.log 
 LEVEL = ERROR 
 
 
