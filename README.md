@@ -15,10 +15,10 @@ Technical Instructions
     proveri me install it and it will be loaded on your Firefox browser.
 
 
-    Initial Setup
+   
 # 2. Local Installation (UBUNTU)
 
-    #Requirements
+## Requirements
     
     Linux Distribution Example: Ubuntu 18.04 LTS t
     MongoDB 3.2.x
