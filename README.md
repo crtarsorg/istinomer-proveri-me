@@ -8,11 +8,11 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 
 # 1. Installing it from your browser
 
-    For Google Chrome visit the chrome extension web store https://chrome.google.com/webstore/category/extensions
-    At the search bar type Istinomer proveri me and add it to your Chrome Browser
+    - For Google Chrome visit the chrome extension web store https://chrome.google.com/webstore/category/extensions
+      At the search bar type Istinomer proveri me and add it to your Chrome Browser
     
-    For Mozilla Firefox go to the open menu at the top right of your browser, select add-ons, at the search bar type istinomer
-    proveri me install it and it will be loaded on your Firefox browser.
+    - For Mozilla Firefox go to the open menu at the top right of your browser, select add-ons, at the search bar type istinomer
+      proveri me install it and it will be loaded on your Firefox browser.
 
 
    
