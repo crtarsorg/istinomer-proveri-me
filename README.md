@@ -44,30 +44,30 @@ create a config.cfg inside api directory and paste the contents of config-templa
 
 Open the config.cfg file and pass the following arguments to it 
 
-[Application]
-#put any port that you wish which is not in use example 8000
-SERVER_PORT = 8000
+    [Application]
+    #put any port that you wish which is not in use example 8000
+    SERVER_PORT = 8000
 
-#put any text that you wish as a secret key, example: 'mySecretKey'
-SECRET_KEY = 'mySecretKey'
+    #put any text that you wish as a secret key, example: 'mySecretKey'
+    SECRET_KEY = 'mySecretKey'
 
-[Mongo]
+    [Mongo]
 
-DB_NAME = 'Mongodb'
+    DB_NAME = 'Mongodb'
 
-[Logging]
-#this will create a directory named log and a logfile errors.log in the app directory 
-PATH = logs/errors.log 
-LEVEL = ERROR 
+    [Logging]
+    #this will create a directory named log and a logfile errors.log in the app directory 
+    PATH = logs/errors.log 
+    LEVEL = ERROR 
 
+Run the install.sh in your command line
 
     $ bash install.sh 
 
-(this script will check whether your system consists python 2.x, if it does (if it does not, it will install python 2.7.3) then it will create a virtualenvironment with python2.7.x and inside that virtualenvironment it will install the python dependecies that are required to setup the app)
+(This script will check whether your system consists python 2.x, if it does (if it does not, it will install python 2.7.3) then it will create a virtualenvironment with python2.7.x and inside that virtualenvironment it will install the python dependecies that are required to setup the app)
 
 # Install the requirements and run the app:
-
-    $ bash install.sh
+    
     $ bash run-debug.sh
 
 
