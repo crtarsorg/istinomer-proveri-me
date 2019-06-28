@@ -68,9 +68,9 @@ Run the install.sh script in your command line
 
 (This script will check whether your system consists python 2.x, if it does (if it does not, it will install python 2.7.3) then it will create a virtualenvironment with python2.7.x and inside that virtualenvironment it will install the python dependecies that are required to setup the app)
 
-# Install the requirements and run the app:
+### Run the app:
     
-    $ bash run-debug.sh
+    $ bash run.sh
 
 
 Note: In oder to test the installed extension you need to install POSTMAN in your system and make the POST request through it
