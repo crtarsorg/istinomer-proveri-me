@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Istinomer Proveri me!",
   "description": "Dodatak za Chrome kojim se čitaoci informativnih web portala pozivaju da pošalju Istinomeru činjenice na proveru.",
-  "version": "2.4",
+  "version": "2.4.0",
   "browser_action": {
     "default_icon": "icons/icon-19.png",
     "default_popup": "popup.html"
