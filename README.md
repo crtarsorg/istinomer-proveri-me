@@ -22,7 +22,7 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
     
     Linux Distribution Example: Ubuntu 18.04 LTS t
     MongoDB 3.2.x
-    Python 2.7.x
+    Python 2.7.x 
 
 First create a folder in your desktop called dev:
 
