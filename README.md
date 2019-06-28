@@ -4,7 +4,7 @@ Project Description
 
 A chrome extension to have the people over at istinomer.rs fact check text that has been highlighted on a website
 
-Technical Instructions
+  ### Technical Instructions
 
 # 1. Installing it from your browser
 
