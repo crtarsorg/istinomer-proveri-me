@@ -24,6 +24,8 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
     MongoDB 3.2.x
     Python 2.7.x 
 
+## Installation
+
 First create a folder in your desktop called dev:
 
     $ cd ~
@@ -60,7 +62,7 @@ Open the config.cfg file and pass the following arguments to it
     PATH = logs/errors.log 
     LEVEL = ERROR 
 
-Run the install.sh in your command line
+Run the install.sh script in your command line
 
     $ bash install.sh 
 
