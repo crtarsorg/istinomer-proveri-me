@@ -181,7 +181,9 @@ Install the extension manually in your browser
  - Mostly true (Skoro istina)
  - Pants on fire (Kratke noge)
  - True (Istina)
-
+ - Abuse of facts (Zloupotreba činjenica)
+ - Unbelievable (Neproverivo)
+ 
 ###### Promise (Obecanja)
 
  - Almost fulfilled (Skoro ispunjeno)
