@@ -70,15 +70,15 @@ Note: In oder to test the installed extension you need to install POSTMAN in you
 - login as admin to view the request
 
 
-# 3. Loading the extension and testing it in your browser
+# 3. Build from source
 Install the extension manually in your browser
 ### For chrome
-    1. Visit chrome://extensions (via omnibox or menu -> Tools -> Extensions).
-    2. Enable Developer mode by ticking the checkbox in the upper-right corner.
-    3. Click on the "Load unpacked extension..." button.
-    4. Select the directory containing your unpacked extension /dev/istinomer-proveri-me/chrome-ext.
-    5. Install the extension
-    6. Make sure you set you api-s to lcoal in the chrome-ext dir at the files containing apis (background.js, popup.js and chrome-ext/js/content-scripts/sites/inject-css.js) by commenting the var containing the production ip and uncommenting the var containing the local ip.
+    1. Make sure you comment the local api in the chrome-ext dir at the files containing api-s (background.js, popup.js and chrome-ext/js/content-scripts/sites/inject-css.js) and uncomment the production api-s.
+    2. Visit chrome://extensions (via omnibox or menu -> Tools -> Extensions).
+    3. Enable Developer mode by ticking the checkbox in the upper-right corner.
+    4. Click on the "Load unpacked extension..." button.
+    5. Select the directory containing your unpacked extension /dev/istinomer-proveri-me/chrome-ext.
+    6. Install the extension
     7. You can try and send requests from selecting text from sites mentioned in chrome-ext/sites.js
     
 ### For firefox
@@ -91,11 +91,11 @@ Install the extension manually in your browser
         $ cd mozilla-ext/
     Built the add-on with this command
         $ zip -r -FS ../mozilla-ext.zip * --exclude *.git*
-        1. Visit about:debugging:
-        2. Click on Load Temporary add-on 
-        3. Make sure you set you api-s to lcoal in the mozilla-ext dir at the files containing apis (background.js, popup.js, mozilla-ext/js/content-scripts/sites/inject-css.js) by commenting the var containing the production ip and uncommenting the var containing the local ip.
-        4. You can try and send requests from selecting text from sites mentioned in mozilla-ext/sites.js
-
+        1. Make sure you comment the local api in the chrome-ext dir at the files containing api-s (background.js, popup.js and chrome-ext/js/content-scripts/sites/inject-css.js) and uncomment the production api-s.
+        2. Visit about:debugging:
+        3. Click on Load Temporary add-on and select the zip/xpi folder that will be created on your system
+        4. You can try and send requests from selecting text from sites mentioned in mozilla-ext/sites.js.
+      #NOTE: for testing the installation and getting the requests in your local machine uncomment the local api-s and comment the production ones.
 ## Save Entry
 ### POST  /api/entry/save
 #### Sample JSON Payload - Truthfulness
