@@ -6,12 +6,23 @@ A chrome extension to have the people over at istinomer.rs fact check text that 
 
 Technical Instructions
 
+# 1. Installing it from your browser
+
+    For Google Chrome visit the chrome extension web store https://chrome.google.com/webstore/category/extensions
+    At the search bar type Istinomer proveri me and add it to your Chrome Browser
+    
+    For Mozilla Firefox go to the open menu at the top right of your browser, select add-ons, at the search bar type istinomer
+    proveri me install it and it will be loaded on your Firefox browser.
+
+
+    Initial Setup
+# 2. Local Installation (UBUNTU)
+
+    #Requirements
+    
     Linux Distribution Example: Ubuntu 18.04 LTS t
     MongoDB 3.2.x
     Python 2.7.x
-
-Initial Setup
-# 2. Local Installation (UBUNTU)
 
 First create a folder in your desktop called dev:
 
