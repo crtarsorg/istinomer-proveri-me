@@ -1,6 +1,5 @@
 var API_URL_FETCH = "https://datacentar.io/app/istinomer-factchecker/api/entry/get";
-
-
+// var API_URL_FETCH = "http://0.0.0.0:5000/api/entry/get";
 
 var notify = function (msg) {
     // Check for notification compatibility.

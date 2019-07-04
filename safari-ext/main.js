@@ -1,5 +1,7 @@
 var API_URL_SUBMIT = "https://datacentar.io/app/istinomer-factchecker/api/entry/submit";
 var API_URL_GET_CHECKED_FACTS = "https://datacentar.io/app/istinomer-factchecker/api/get-page-fact-check-requests";
+// var API_URL_SUBMIT = "http://0.0.0.0:5000/api/entry/submit";
+// var API_URL_GET_CHECKED_FACTS = "http://0.0.0.0:5000/api/get-page-fact-check-requests";
 
 var sites = [
     { name: 'Blic', domain: 'blic.rs', css_classes: ['.article-body', '.article-item'], css_elements: ['p', 'h1'] },
