@@ -162,7 +162,7 @@ function buildHTML(respData){
         'Consistent': 'Dosledno',
         'Inconsistent': 'Ne&#353;to izme&#273;u', //Nešto između
         'In between': 'Nedosledno'
-           };
+        };
 
     $.each(respData, function(index, item){
         var grade;
