@@ -1,4 +1,4 @@
-var API_URL_FETCH = "http://0.0.0.0:3000/api/entry/get";
+var API_URL_FETCH = "https://datacentar.io/app/istinomer-factchecker/api/entry/get";
 
 
 
@@ -44,7 +44,7 @@ var notify = function (msg) {
 
 var user_factcheck_requests = JSON.parse(localStorage.getItem('userData'));
     if (user_factcheck_requests && user_factcheck_requests.length > 0){
-    // Call the function to build HTML DOM on data fetch from LS
+    // Call the function to bui ld HTML DOM on data fetch from LS
         buildHTML(user_factcheck_requests);
         $.each(user_factcheck_requests,function(key, item){
             user_factcheck_requests[key]['new_update'] = false

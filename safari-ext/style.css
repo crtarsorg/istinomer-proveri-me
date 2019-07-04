@@ -14,25 +14,6 @@ span.red{
     background-color: red;
 }
 
-/*  */
-
-/** Created by egzontina on 16-04-06. */
-span.light-grey{
-    background-color: lightgray;
-}
-
-span.light-green{
-    background-color: lightgreen;
-}
-
-span.yellow{
-    background-color: yellow;
-}
-
-span.red{
-    background-color: red;
-}
-
 #grade-logo-factchecker
 {
     background:url('icons/icon-16.png') left top;
