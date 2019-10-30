@@ -1,4 +1,4 @@
-Flask==0.10.1
+Flask==1.0
 pymongo==2.8.0
 Flask-PyMongo==0.3.1
 Flask-Cors==2.1.2
