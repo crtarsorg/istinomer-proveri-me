@@ -83,7 +83,7 @@ Note: In oder to test the installed extension you need to install POSTMAN in you
 - login as admin to view the request
 
 
-# 3. Build from source
+# 3. Setting up the frontend
 Install the extension manually in your browser
 ### For chrome
     1. Make sure you comment the local api in the chrome-ext dir at the files containing api-s (background.js, popup.js and chrome-ext/js/content-scripts/sites/inject-css.js) and uncomment the production api-s.
